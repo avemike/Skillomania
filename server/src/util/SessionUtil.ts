@@ -1,25 +1,23 @@
-import { Request, Response } from 'express';
+import { Request, Response } from "express";
 
-import HttpStatusCodes from '@src/constants/HttpStatusCodes';
-import { RouteError } from '@src/other/classes';
-import jsonwebtoken from 'jsonwebtoken';
+import HttpStatusCodes from "@src/constants/HttpStatusCodes";
+import jsonwebtoken from "jsonwebtoken";
 
-import EnvVars from '../constants/EnvVars';
-
+import EnvVars from "../constants/EnvVars";
+import { RouteError } from "./RouteError";
 
 // **** Variables **** //
 
 // Errors
 const Errors = {
-  ParamFalsey: 'Param is falsey',
-  Validation: 'JSON-web-token validation failed.',
+  ParamFalsey: "Param is falsey",
+  Validation: "JSON-web-token validation failed.",
 } as const;
 
 // Options
 const Options = {
   expiresIn: EnvVars.Jwt.Exp,
 };
-
 
 // **** Functions **** //
 
@@ -39,8 +37,10 @@ function _decode<T>(jwt: string): Promise<string | undefined | T> {
   return new Promise((res, rej) => {
     jsonwebtoken.verify(jwt, EnvVars.Jwt.Secret, (err, decoded) => {
       if (!!err) {
-        const err = new RouteError(HttpStatusCodes.UNAUTHORIZED, 
-          Errors.Validation);
+        const err = new RouteError(
+          HttpStatusCodes.UNAUTHORIZED,
+          Errors.Validation
+        );
         return rej(err);
       } else {
         return res(decoded as T);
@@ -50,11 +50,11 @@ function _decode<T>(jwt: string): Promise<string | undefined | T> {
 }
 
 /**
- * Add a JWT to the response 
+ * Add a JWT to the response
  */
 async function addSessionData(
   res: Response,
-  data: string | object,
+  data: string | object
 ): Promise<Response> {
   if (!res || !data) {
     throw new RouteError(HttpStatusCodes.BAD_REQUEST, Errors.ParamFalsey);
@@ -72,7 +72,7 @@ async function addSessionData(
 function _sign(data: string | object | Buffer): Promise<string> {
   return new Promise((res, rej) => {
     jsonwebtoken.sign(data, EnvVars.Jwt.Secret, Options, (err, token) => {
-      return (err ? rej(err) : res(token ?? ''));
+      return err ? rej(err) : res(token ?? "");
     });
   });
 }
@@ -84,7 +84,6 @@ function clearCookie(res: Response): Response {
   const { Key, Options } = EnvVars.CookieProps;
   return res.clearCookie(Key, Options);
 }
-
 
 // **** Export default **** //
 
