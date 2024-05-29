@@ -8,21 +8,24 @@ function App() {
 
   return (
     <>
-      <div className="absolute left-4 top-4 w-16 h-16 bg-gradient-to-r from-pink-500 to-violet-500 rounded-lg flex items-center justify-center text-white font-bold  text-2xl">
-        S
+      <div className="absolute right-28 top-10 flex gap-20">
+        <h3 className="font-bold">Home</h3>
+        <h3 className="font-bold">About</h3>
+        <h3 className="font-bold">Contacts</h3>
       </div>
-      <div className="flex flex-col items-start absolute left-36 top-1/3">
-        <h1 className="font-bold text-7xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500">
-          WELCOME
-        </h1>
-        <h2 className="text-2xl mx-3 mb-2">
-          TO THE <b>SKILLOMANIA</b>
+      <div className="flex flex-col items-start absolute left-60 top-1/3">
+        <h1 className="font-bold text-7xl bg-clip-text text-black">Welcome</h1>
+        <h2 className="text-2xl my-4 text-gray-500">
+          To the <b>skillomania</b>
         </h2>
-        <p className="mx-3">On this webside we upgrade our skills.</p>
-        <p className="mx-3 mb-4">If you would be intrested.</p>
-        <button className="mx-3 hover:shadow-indigo-300/50 shadow-lg shadow-indigo-400/50 text-white bg-gradient-to-r from-pink-500 to-violet-500">
+        <p className="text-gray-500">On this webside we upgrade our skills.</p>
+        <p className="text-gray-500 mb-6">If you would be intrested.</p>
+        <button className=" hover:shadow-indigo-100/50 shadow-lg shadow-indigo-100/50 text-white bg-black">
           Check us out!
         </button>
+      </div>
+      <div className="absolute flex bottom-16 left-20 border-t-gray-100 border-t-2 w-11/12">
+        <p className="text-gray-400 pt-14 ml-12  ">Skillomania</p>
       </div>
     </>
   );
