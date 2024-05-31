@@ -2,7 +2,6 @@
  * Renders the Home component.
  * @remarks
  * WIP: Currently function as a placeholder for the homepage.
- * @return {JSX.Element} The rendered Home component.
  */
 export function Error() {
   return (

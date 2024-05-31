@@ -1,16 +1,12 @@
-import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { StandardLayout } from "./layouts/StandardLayout";
 import { WelcomePage } from "./pages/WelcomePage";
 import { About } from "./pages/About";
 import { Error } from "./pages/Error";
-/**
- * @param {Object} props
+import { ReactNode } from "react";
 
- * @return {JSX.Element}
- */
-function StandardPage({ page }) {
+function StandardPage({ page }: { page: ReactNode }) {
   return <StandardLayout>{page}</StandardLayout>;
 }
 

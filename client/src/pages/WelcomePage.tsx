@@ -2,12 +2,10 @@
  * Renders the Home component.
  * @remarks
  * WIP: Currently function as a placeholder for the homepage.
- * @return {JSX.Element} The rendered Home component.
  */
 export function WelcomePage() {
   return (
     <>
-      {" "}
       <div className="bg-[url('./assets/welcome_website.svg')] bg-center bg-cover h-dvh w-svw absolute top-0 left-0">
         <div className="absolute right-28 top-10 flex gap-20">
           <a className="font-bold " href="/WelcomePage">
