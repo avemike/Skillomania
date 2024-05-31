@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { StandardLayout } from "./layouts/StandardLayout";
 import { WelcomePage } from "./pages/WelcomePage";
@@ -9,10 +8,6 @@ import { ReactNode } from "react";
 function StandardPage({ page }: { page: ReactNode }) {
   return <StandardLayout>{page}</StandardLayout>;
 }
-
-StandardPage.propTypes = {
-  page: PropTypes.element.isRequired,
-};
 
 const router = createBrowserRouter([
   {
