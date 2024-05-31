@@ -1,13 +1,15 @@
-import './pre-start'; // Must be the first import
-import logger from 'jet-logger';
+import express from "express";
+import dotenv from "dotenv";
 
-import EnvVars from '@src/constants/EnvVars';
-import server from './server';
+dotenv.config();
 
+const app = express();
+const port = process.env.PORT;
 
-// **** Run **** //
+app.get("/", (_req, res) => {
+  res.send("Express + TypeScript Server");
+});
 
-const SERVER_START_MSG = ('Express server started on port: ' + 
-  EnvVars.Port.toString());
-
-server.listen(EnvVars.Port, () => logger.info(SERVER_START_MSG));
+app.listen(port, () => {
+  console.log(`[server]: Server is running at http://localhost:${port}`);
+});
