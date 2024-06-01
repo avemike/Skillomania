@@ -35,10 +35,10 @@ export function WelcomePage() {
           <p className="text-gray-400 pt-14 ml-12  ">Skillomania</p>
         </div>
       </div>
-      <div className="z-10 h-dvh w-svw absolute top-0 left-0 bg-black/60">
-        <div className="absolute z-20 h-2/3 w-2/5 bg-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex ">
+      <div className="z-10 h-dvh w-svw absolute top-0 left-0 backdrop-blur backdrop-brightness-50">
+        <div className="absolute z-20 h-2/3 w-2/5 bg-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex shadow-gray-600 shadow-lg ">
           <div className="h-full w-1/2 ">
-            <div className="flex flex-col m-10 mt-20">
+            <div className="flex flex-col m-10 mt-16">
               <h2 className=" text-2xl font-bold">Hi!</h2>
               <p className=" text-mid my-2">
                 Enter your informations to go further!
@@ -69,15 +69,22 @@ export function WelcomePage() {
                 </label>
               </div>
               <button className="bg-indigo-600 text-white">Log in</button>
+              <p className="text-xs text-gray-600 my-3 text-center">
+                Or log in with
+              </p>
+              <button className="bg-white text-black text-sm border-gray-300 mb-2 flex gap-2 justify-center items-center ">
+                <div className="bg-[url('./assets/google.svg')] h-5 w-5"></div>
+                <p>Sign up with Google</p>
+              </button>
               <div className="flex mt-3 justify-between px-11">
                 <p className="text-xs font-bold">Don't have an account?</p>
-                <a href="" className="text-xs font-bold underline">
+                <a href="/Register" className="text-xs font-bold underline">
                   Register here
                 </a>
               </div>
             </div>
           </div>
-          <div className="bg-indigo-600 h-full w-1/2"></div>
+          <div className="bg-[url('./assets/login.svg')] h-full w-1/2 bg-center bg-cover"></div>
         </div>
       </div>
     </>
