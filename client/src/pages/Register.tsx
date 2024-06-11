@@ -1,3 +1,5 @@
+import { useContext } from "react";
+
 /**
  * Renders the Home component.
  * @remarks

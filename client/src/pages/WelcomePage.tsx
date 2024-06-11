@@ -21,7 +21,9 @@ export function WelcomePage() {
           <a className="font-bold" href="/About">
             About
           </a>
-          <a className="font-bold">Contacts</a>
+          <a className="font-bold" href="/Contacts">
+            Contacts
+          </a>
         </div>
         <div className="flex flex-col items-start absolute left-60 top-1/3">
           <h1 className="font-bold text-7xl bg-clip-text text-black">
@@ -51,7 +53,10 @@ export function WelcomePage() {
           className="z-10 h-dvh w-svw absolute top-0 left-0 backdrop-blur backdrop-brightness-50"
           onClick={toggle}
         >
-          <div className="absolute z-20 h-2/3 w-2/5 bg-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex shadow-gray-600 shadow-lg ">
+          <div
+            className="absolute z-20 h-2/3 w-2/5 bg-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex shadow-gray-600 shadow-lg "
+            onClick={(event) => event.stopPropagation()}
+          >
             <div className="h-full w-1/2 ">
               <div className="flex flex-col m-10 mt-16">
                 <h2 className=" text-2xl font-bold">Hi!</h2>

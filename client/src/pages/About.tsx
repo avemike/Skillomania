@@ -8,14 +8,20 @@ export function About() {
     <>
       {" "}
       <div className="bg-[url('./assets/welcome_website.svg')] bg-center bg-cover h-dvh w-svw absolute top-0 left-0 flex flex-col text-center items-center justify-center">
-        <div className="bg-white/50 p-10">
+        <div className="bg-white/50 p-10 round">
           <h1 className=" text-4xl">Hi!</h1>
           <h2 className=" text-2xl">
             This is skillomania, a page on which we learn or upgrade our skills!
           </h2>
           <p className="text-xl">
-            It's really easy, just register or log in if you have an accout
+            It's really easy, just register or log in (if you have an accout).
+            <br />
+            If you're feeling lost that's okay click the link bellow for a
+            tutorial.
           </p>
+          <a href="" className=" text-lg ">
+            Show me how to use this website!
+          </a>
         </div>
       </div>
     </>

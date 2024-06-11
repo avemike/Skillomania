@@ -5,6 +5,8 @@ import { About } from "./pages/About";
 import { Error } from "./pages/Error";
 import { ReactNode } from "react";
 import { Register } from "./pages/Register";
+import { Contacts } from "./pages/Contacts";
+import { Home } from "./pages/Home";
 
 function StandardPage({ page }: { page: ReactNode }) {
   return <StandardLayout>{page}</StandardLayout>;
@@ -26,6 +28,14 @@ const router = createBrowserRouter([
   {
     path: "/Register",
     element: <StandardPage page={<Register />} />,
+  },
+  {
+    path: "/Contacts",
+    element: <StandardPage page={<Contacts />} />,
+  },
+  {
+    path: "/Home",
+    element: <StandardPage page={<Home />} />,
   },
 ]);
 
