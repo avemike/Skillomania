@@ -7,12 +7,16 @@ export function Home() {
   return (
     <>
       {" "}
-      <div className="bg-center bg-cover h-dvh w-svw absolute top-0 left-0 ">
-        <div className="">
-          <div className="bg-white border-8 border-purple-400 w-72 h-96 rounded-lg top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 absolute flex items-center justify-center  text-9xl text-purple-400">
-            +
-          </div>
+      <div className="bg-center bg-cover h-dvh w-svw absolute top-0 left-0 overflow-hidden">
+        <div className=" bg-[url('./assets/zebra.svg')] bg-center bg-cover h-dvh  w-1/2  absolute -top-96 -right-72  "></div>
+        <div className="absolute top-1/3 left-1/4 transform -translate-x-1/2 z-10 ">
+          <h2 className="text-5xl font-bold">Welcome to Skillomania</h2>
+          <p className="text-xl my-3 ">Maybe new challenge for today?</p>
+          <button className="bg-indigo-600 text-white mt-5 mb-3 px-10">
+            Daily
+          </button>
         </div>
+        <div className="bg-[url('./assets/arrows.svg')] bg-center bg-cover w-1/5 h-1/3 rounded-full absolute top-1/3 left-1/4 transform -translate-x-full   "></div>
       </div>
     </>
   );
