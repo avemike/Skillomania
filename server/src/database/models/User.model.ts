@@ -3,15 +3,16 @@ import {
   Column,
   PrimaryGeneratedColumn,
   OneToMany,
-  JoinTable,
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
 } from "typeorm";
-import { Challenge } from "./Challenge.model";
-import { ChallengeSeries } from "./ChallengeSeries.model";
+import { Challenge } from "./challenge.model";
+import { ChallengeSeries } from "./challengeSeries.model";
 
-@Entity()
+@Entity({
+  name: "app_user",
+})
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
@@ -21,23 +22,33 @@ export class User {
   })
   email: string;
 
-  @OneToMany(() => Challenge, (challenge) => challenge.author_id)
-  @JoinTable({ name: "user_challenge" })
+  @OneToMany(() => Challenge, (challenge) => challenge.author)
   challenges: Challenge[];
 
-  @OneToMany(
-    () => ChallengeSeries,
-    (challengeSeries) => challengeSeries.author_id
-  )
-  @JoinTable({ name: "user_challenge_series" })
+  @OneToMany(() => ChallengeSeries, (challengeSeries) => challengeSeries.author)
   challengeSeries: ChallengeSeries[];
 
-  @CreateDateColumn()
-  created_at: Date;
+  @OneToMany(
+    () => Challenge,
+    (challengeSeries) => challengeSeries.versionAuthor
+  )
+  modifiedSeries: ChallengeSeries[];
 
-  @UpdateDateColumn()
-  updated_at: Date;
+  @OneToMany(() => Challenge, (challenge) => challenge.versionAuthor)
+  modifiedChallenges: Challenge[];
 
-  @DeleteDateColumn()
-  deleted_at: Date;
+  @CreateDateColumn({
+    name: "created_at",
+  })
+  createdAt: Date;
+
+  @UpdateDateColumn({
+    name: "updated_at",
+  })
+  updatedAt: Date;
+
+  @DeleteDateColumn({
+    name: "deleted_at",
+  })
+  deletedAt: Date;
 }

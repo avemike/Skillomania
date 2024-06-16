@@ -9,9 +9,10 @@ import {
   DeleteDateColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  JoinColumn,
 } from "typeorm";
-import { ChallengeSeries } from "./ChallengeSeries.model";
-import { User } from "./User.model";
+import { ChallengeSeries } from "./challengeSeries.model";
+import { User } from "./user.model";
 
 @Entity()
 export class Challenge {
@@ -28,35 +29,49 @@ export class Challenge {
   })
   description: string;
 
-  @Column()
-  author_id: number;
-
-  @ManyToOne(() => User)
-  @JoinTable({ name: "user_challenge" })
+  @ManyToOne(() => User, (user) => user.challenges)
+  @JoinColumn({
+    name: "author_id",
+  })
+  // @JoinTable({ name: "user_challenge" })
   author: User;
 
   @ManyToMany(
-    (_challengeSeries) => ChallengeSeries,
+    () => ChallengeSeries,
     (challengeSeries) => challengeSeries.challenges
   )
-  @JoinTable({ name: "challenge_challenge_series" })
+  @JoinTable({
+    name: "challenge_challenge_series",
+    joinColumn: { name: "challenge_id" },
+    inverseJoinColumn: { name: "challenge_series_id" },
+  })
   series: ChallengeSeries[];
 
   @VersionColumn()
   version: number;
 
-  @Column("timestamp with time zone")
-  version_created_at: Date;
+  @Column("timestamp with time zone", {
+    name: "version_created_at",
+    default: () => "CURRENT_TIMESTAMP",
+  })
+  versionCreatedAt: Date;
 
-  @Column()
-  version_author_id: number;
+  @ManyToOne(() => User, (user) => user.modifiedSeries)
+  @JoinColumn({ name: "version_author_id" })
+  versionAuthor: User;
 
-  @CreateDateColumn()
-  created_at: Date;
+  @CreateDateColumn({
+    name: "created_at",
+  })
+  createdAt: Date;
 
-  @UpdateDateColumn()
-  updated_at: Date;
+  @UpdateDateColumn({
+    name: "updated_at",
+  })
+  updatedAt: Date;
 
-  @DeleteDateColumn()
-  deleted_at: Date;
+  @DeleteDateColumn({
+    name: "deleted_at",
+  })
+  deletedAt: Date;
 }
