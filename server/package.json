@@ -10,7 +10,11 @@
     "watch:node": "nodemon dist/index.js",
     "watch:ts": "tsc --watch --project tsconfig.json",
     "watch-debug": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run watch:ts\" \"npm run serve:debug\"",
-    "watch-debug:node": "nodemon --inspect dist/server.js"
+    "watch-debug:node": "nodemon --inspect dist/server.js",
+    "----DATABASE-OPERATIONS-BELOW----": "",
+    "db:migration:create": "node scripts/createMigration.js",
+    "db:migration:run": "ts-node  ./node_modules/typeorm/cli.js migration:run -d ./src/database/dataSource.ts",
+    "db:migration:revert": "ts-node  ./node_modules/typeorm/cli.js migration:revert -d ./src/database/dataSource.ts"
   },
   "dependencies": {
     "dotenv": "^16.4.5",

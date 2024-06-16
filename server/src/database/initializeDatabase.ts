@@ -1,19 +1,6 @@
-import { DataSource } from "typeorm";
-import { Challenge } from "./models/Challenge.model";
-import { ChallengeSeries } from "./models/ChallengeSeries.model";
-import { User } from "./models/User.model";
+import { AppDataSource } from "./dataSource";
 
 export async function initializeDatabase() {
-  const AppDataSource = new DataSource({
-    type: "postgres",
-    host: process.env.DB_HOST,
-    port: Number(process.env.DB_PORT),
-    username: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE,
-    entities: [Challenge, ChallengeSeries, User],
-  });
-
   try {
     const db = await AppDataSource.initialize();
 
