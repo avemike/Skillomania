@@ -32,13 +32,14 @@ export class Challenge {
   author_id: number;
 
   @ManyToOne(() => User)
+  @JoinTable({ name: "user_challenge" })
   author: User;
 
   @ManyToMany(
     (_challengeSeries) => ChallengeSeries,
     (challengeSeries) => challengeSeries.challenges
   )
-  @JoinTable()
+  @JoinTable({ name: "challenge_challenge_series" })
   series: ChallengeSeries[];
 
   @VersionColumn()
