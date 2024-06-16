@@ -1,11 +1,12 @@
+import "reflect-metadata";
 import "dotenv/config";
 
 import express from "express";
-import { challengesRouter } from "./modules/challenges/challenges.controller";
+// import { challengesRouter } from "./modules/challenges/challenges.controller";
 import { setupContext } from "./setupContext";
 
 const app = express();
-const port = process.env.PORT;
+const port = process.env.SERVER_PORT;
 
 // Setup context
 app.use(async (req, _res, next) => {
