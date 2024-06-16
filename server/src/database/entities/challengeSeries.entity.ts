@@ -5,17 +5,17 @@ import {
   ManyToMany,
   JoinTable,
   ManyToOne,
-  VersionColumn,
   DeleteDateColumn,
-  CreateDateColumn,
   UpdateDateColumn,
+  VersionColumn,
+  CreateDateColumn,
   JoinColumn,
 } from "typeorm";
-import { ChallengeSeries } from "./challengeSeries.model";
-import { User } from "./user.model";
+import { Challenge } from "./challenge.entity";
+import { User } from "./user.entity";
 
 @Entity()
-export class Challenge {
+export class ChallengeSeries {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -24,35 +24,29 @@ export class Challenge {
   })
   title: string;
 
-  @Column({
-    length: 500,
-  })
+  @Column("text")
   description: string;
 
-  @ManyToOne(() => User, (user) => user.challenges)
+  @ManyToOne(() => User, (user) => user.challengeSeries)
   @JoinColumn({
     name: "author_id",
   })
-  // @JoinTable({ name: "user_challenge" })
   author: User;
 
-  @ManyToMany(
-    () => ChallengeSeries,
-    (challengeSeries) => challengeSeries.challenges
-  )
+  @ManyToMany(() => Challenge, (challenge) => challenge.series)
   @JoinTable({
     name: "challenge_challenge_series",
-    joinColumn: { name: "challenge_id" },
-    inverseJoinColumn: { name: "challenge_series_id" },
+    joinColumn: { name: "challenge_series_id" },
+    inverseJoinColumn: { name: "challenge_id" },
   })
-  series: ChallengeSeries[];
+  challenges: Challenge[];
 
   @VersionColumn()
   version: number;
 
   @Column("timestamp with time zone", {
-    name: "version_created_at",
     default: () => "CURRENT_TIMESTAMP",
+    name: "version_created_at",
   })
   versionCreatedAt: Date;
 

@@ -1,8 +1,15 @@
+import { DataSource } from "typeorm";
 import { AppDataSource } from "./dataSource";
 
+let db: DataSource;
+
 export async function initializeDatabase() {
+  if (db) {
+    return db;
+  }
+
   try {
-    const db = await AppDataSource.initialize();
+    db = await AppDataSource.initialize();
 
     return db;
   } catch (error) {

@@ -7,8 +7,8 @@ import {
   UpdateDateColumn,
   DeleteDateColumn,
 } from "typeorm";
-import { Challenge } from "./challenge.model";
-import { ChallengeSeries } from "./challengeSeries.model";
+import { Challenge } from "./challenge.entity";
+import { ChallengeSeries } from "./challengeSeries.entity";
 
 @Entity({
   name: "app_user",

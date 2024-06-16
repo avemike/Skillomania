@@ -1,8 +1,8 @@
 import { Seeder } from "typeorm-extension";
 import { DataSource } from "typeorm";
-import { Challenge } from "../models/challenge.model";
-import { User } from "../models/user.model";
-import { ChallengeSeries } from "../models/challengeSeries.model";
+import { Challenge } from "../entities/challenge.entity";
+import { User } from "../entities/user.entity";
+import { ChallengeSeries } from "../entities/challengeSeries.entity";
 
 const playingGuitarChallengeSeries = {
   title: "Playing Guitar",
