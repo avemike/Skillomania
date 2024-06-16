@@ -1,8 +1,8 @@
-import { getDatabase } from "./database/db";
+import { initializeDatabase } from "./database/initializeDatabase";
 import { ServerContext } from "./types/custom";
 
 export async function setupContext(): Promise<ServerContext> {
-  const db = await getDatabase();
+  const db = await initializeDatabase();
 
   return {
     db,

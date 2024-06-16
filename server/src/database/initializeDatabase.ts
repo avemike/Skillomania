@@ -1,7 +1,9 @@
-import "reflect-metadata";
 import { DataSource } from "typeorm";
+import { Challenge } from "./models/Challenge.model";
+import { ChallengeSeries } from "./models/ChallengeSeries.model";
+import { User } from "./models/User.model";
 
-export async function getDatabase() {
+export async function initializeDatabase() {
   const AppDataSource = new DataSource({
     type: "postgres",
     host: process.env.DB_HOST,
@@ -9,6 +11,7 @@ export async function getDatabase() {
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
+    entities: [Challenge, ChallengeSeries, User],
   });
 
   try {
