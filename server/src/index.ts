@@ -4,6 +4,7 @@ import "dotenv/config";
 import express from "express";
 // import { challengesRouter } from "./modules/challenges/challenges.controller";
 import { setupContext } from "./setupContext";
+import { challengesRouter } from "./modules/challenges/challenges.controller";
 
 const app = express();
 const port = process.env.SERVER_PORT;
@@ -24,3 +25,5 @@ app.get("/", (_req, res) => {
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
 });
+
+app.use("/challenges", challengesRouter);
