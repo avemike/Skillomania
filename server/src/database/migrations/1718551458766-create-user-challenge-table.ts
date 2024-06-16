@@ -9,7 +9,7 @@ export class CreateUserChallengeTable1718551458766
                 user_id INTEGER NOT NULL,
                 challenge_id INTEGER NOT NULL,
                 PRIMARY KEY (user_id, challenge_id),
-                FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
+                FOREIGN KEY (user_id) REFERENCES app_user(id) ON DELETE CASCADE,
                 FOREIGN KEY (challenge_id) REFERENCES challenge(id) ON DELETE CASCADE
             );
         `);
