@@ -13,9 +13,10 @@ import {
 } from "typeorm";
 import { Challenge } from "./challenge.entity";
 import { User } from "./user.entity";
+import { IChallengeSeries } from "../../models/IChallengeSeries";
 
 @Entity()
-export class ChallengeSeries {
+export class ChallengeSeries implements IChallengeSeries {
   @PrimaryGeneratedColumn()
   id: number;
 

@@ -9,11 +9,12 @@ import {
 } from "typeorm";
 import { Challenge } from "./challenge.entity";
 import { ChallengeSeries } from "./challengeSeries.entity";
+import { IUser } from "../../models/IUser";
 
 @Entity({
   name: "app_user",
 })
-export class User {
+export class User implements IUser {
   @PrimaryGeneratedColumn()
   id: number;
 
