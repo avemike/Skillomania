@@ -7,7 +7,7 @@ import { ReactNode } from "react";
 import { Register } from "./pages/Register";
 import { Contacts } from "./pages/Contacts";
 import { Home } from "./pages/Home";
-import { Challenges } from "./pages/Challenges";
+import { ChallengeSeriesPage } from "./pages/ChallengeSeriesPage";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 function StandardPage({ page }: { page: ReactNode }) {
@@ -41,7 +41,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/Challenges",
-    element: <StandardPage page={<Challenges />} />,
+    element: <StandardPage page={<ChallengeSeriesPage />} />,
   },
 ]);
 

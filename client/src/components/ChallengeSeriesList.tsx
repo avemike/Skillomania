@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { useChallengeSeries } from "../api/useChallenges";
+import { ChallengeCreationModal } from "./ChallengeCreationModal";
 
-export function Challenges() {
+export function ChallengeSeriesList() {
   const { data, isLoading, isError } = useChallengeSeries();
 
   const commonStyles =
@@ -32,7 +34,10 @@ export function Challenges() {
 
   return (
     <div className={commonStyles}>
-      <div className="w-full h-full flex justify-center items-center">
+      <div className="w-full h-full flex flex-col items-center justify-center space-y-4">
+        <div className="w-full flex justify-end px-8">
+          <ChallengeCreateButton />
+        </div>
         <div className="bg-[rgba(0,100,190,0.05)] backdrop-filter backdrop-blur-sm flex flex-col text-center items-center justify-center w-3/5 p-8 rounded-xl space-y-6">
           <div className="text-black text-3xl font-bold">Challenges</div>
           <div className="text-black text-lg font-semibold space-y-6">
@@ -59,5 +64,26 @@ export function Challenges() {
         </div>
       </div>
     </div>
+  );
+}
+
+function ChallengeCreateButton() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => setIsModalOpen(true);
+
+  return (
+    <>
+      <button
+        onClick={handleOpenModal}
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Create Challenge
+      </button>
+      <ChallengeCreationModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
+    </>
   );
 }
