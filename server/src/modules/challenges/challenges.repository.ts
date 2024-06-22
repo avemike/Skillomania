@@ -32,11 +32,11 @@ async function getLooseChallenges({ db }: ServerContext) {
 }
 
 interface GetSeriesWithChallengesArgs extends ServerContext {
-  ids: number[];
+  ids?: number[];
 }
 
 async function getSeriesWithChallenges({
-  ids,
+  ids = [],
   db,
 }: GetSeriesWithChallengesArgs) {
   const challengeSeriesRepository = db.getRepository(ChallengeSeries);

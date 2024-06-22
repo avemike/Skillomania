@@ -1,53 +1,67 @@
 import { ServerContext } from "../../types/custom";
 import { challengesRepository } from "./challenges.repository";
 
-// interface CreateChallengeArgs {
-//   title: string;
-//   description: string;
-//   level: "easy" | "medium" | "hard";
-//   seriesId?: string;
-// }
+interface GetSeriesArgs extends ServerContext {
+  ids?: number[];
+}
 
-// interface CreateChallengeSeriesArgs {
-//   title: string;
-//   description: string;
-// }
-
-async function getSeries({ db }: ServerContext) {
-  return await challengesRepository.getSeriesWithChallenges({ db });
+async function getSeries({ ids, db }: GetSeriesArgs) {
+  return await challengesRepository.getSeriesWithChallenges({ ids, db });
 }
 
 async function getLooseChallenges({ db }: ServerContext) {
   return await challengesRepository.getLooseChallenges({ db });
 }
 
-// async function createChallenge({
-//   title,
-//   description,
-//   level,
-//   seriesId,
-// }: CreateChallengeArgs) {
-//   return await challengesRepository.insertChallenge({
-//     title,
-//     description,
-//     level,
-//     seriesId,
-//   });
-// }
+interface GetChallengeArgs extends ServerContext {
+  id: number;
+}
 
-// async function createChallengeSeries({
-//   title,
-//   description,
-// }: CreateChallengeSeriesArgs) {
-//   return await challengesRepository.insertChallengeSeries({
-//     title,
-//     description,
-//   });
-// }
+async function getChallenge({ id, db }: GetChallengeArgs) {
+  return await challengesRepository.getChallenge({ db, id });
+}
+
+interface CreateChallengeArgs extends ServerContext {
+  title: string;
+  description: string;
+  seriesId?: number;
+}
+
+async function createChallenge({
+  db,
+  title,
+  description,
+  seriesId,
+}: CreateChallengeArgs) {
+  return await challengesRepository.insertChallenge({
+    db,
+    title,
+    description,
+    seriesId,
+  });
+}
+
+interface CreateChallengeSeriesArgs extends ServerContext {
+  title: string;
+  description: string;
+}
+
+async function createChallengeSeries({
+  db,
+  title,
+  description,
+}: CreateChallengeSeriesArgs) {
+  return await challengesRepository.insertChallengeSeries({
+    db,
+    title,
+    description,
+  });
+}
 
 export const challengesService = {
   getSeries,
   getLooseChallenges,
-  // createChallenge,
-  // createChallengeSeries,
+  getChallenge,
+  createChallenge,
+  createChallengeSeries,
 };

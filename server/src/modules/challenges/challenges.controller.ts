@@ -12,6 +12,15 @@ challengesRouter.get("/", async (req: Request, res: Response) => {
   return res.json(challenges);
 });
 
+challengesRouter.get("/:id", async (req: Request, res: Response) => {
+  const challenge = await challengesService.getChallenge({
+    id: Number(req.params.id),
+    ...extractContextFromRequest(req),
+  });
+
+  return res.json(challenge);
+});
+
 challengesRouter.get("/series", async (req: Request, res: Response) => {
   const series = await challengesService.getSeries(
     extractContextFromRequest(req)
@@ -20,28 +29,32 @@ challengesRouter.get("/series", async (req: Request, res: Response) => {
   return res.json(series);
 });
 
-// challengesRouter.post("/", async (req: Request, res: Response) => {
-//   const { title, description, level, seriesId } = req.body as ParsedQs;
+challengesRouter.post("/series/:id", async (req: Request, res: Response) => {
+  const challenge = await challengesService.createChallenge({
+    ...req.body,
+    seriesId: Number(req.params.id),
+    ...extractContextFromRequest(req),
+  });
 
-//   const challenge = await challengesService.createChallenge({
-//     title: title as string,
-//     description: description as string,
-//     level: level as "easy" | "medium" | "hard",
-//     seriesId: seriesId as string,
-//   });
+  return res.json(challenge);
+});
 
-//   return res.json(challenge);
-// });
+challengesRouter.post("/challenge", async (req: Request, res: Response) => {
+  const challenge = await challengesService.createChallenge({
+    ...req.body,
+    ...extractContextFromRequest(req),
+  });
 
-// challengesRouter.post("/series", async (req: Request, res: Response) => {
-//   const { title, description } = req.body as ParsedQs;
+  return res.json(challenge);
+});
 
-//   const series = await challengesService.createChallengeSeries({
-//     title: title as string,
-//     description: description as string,
-//   });
+challengesRouter.post("/series", async (req: Request, res: Response) => {
+  const series = await challengesService.createChallengeSeries({
+    ...req.body,
+    ...extractContextFromRequest(req),
+  });
 
-//   return res.json(series);
-// });
+  return res.json(series);
+});
 
 export { challengesRouter };
