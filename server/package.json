@@ -19,6 +19,7 @@
     "db:purge:dangerous": "ts-node ./src/database/purge.ts"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "pg": "^8.12.0",
@@ -27,6 +28,7 @@
     "typeorm-extension": "^3.5.1"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.21",
     "@types/node": "^20.12.13",

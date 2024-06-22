@@ -2,11 +2,14 @@ import "reflect-metadata";
 import "dotenv/config";
 
 import express from "express";
-// import { challengesRouter } from "./modules/challenges/challenges.controller";
 import { setupContext } from "./setupContext";
 import { challengesRouter } from "./modules/challenges/challenges.controller";
+import cors from "cors";
 
 const app = express();
+
+app.use(cors());
+
 const port = process.env.SERVER_PORT;
 
 // Setup context
