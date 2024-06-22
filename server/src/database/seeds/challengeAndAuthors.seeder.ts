@@ -16,47 +16,50 @@ const runningChallengeSeries = {
 
 const playingGuitarChallenge1 = {
   title: "Play a G major chord",
-  description: "Play a G major chord on the guitar",
+  description:
+    "G major chord is a great chord to start with! Many songs use it!",
 };
 
 const playingGuitarChallenge2 = {
   title: "Play a C major chord",
-  description: "Play a C major chord on the guitar",
+  description:
+    "C major chord is one of the most common chords in music! Learn it!",
 };
 
 const playingGuitarChallenge3 = {
   title: "Play a D major chord",
-  description: "Play a D major chord on the guitar",
+  description: "Time to learn the D major chord! It's a great chord to know!",
 };
 
 const playingGuitarChallenge4 = {
   title: "Learn the A minor pentatonic scale",
-  description: "Learn the A minor pentatonic scale on the guitar",
+  description:
+    "It's a big deal to learn the A minor pentatonic scale! It's a great scale and widely used!",
 };
 
 const playingGuitarChallenge5 = {
   title: "Learn how to play a Wonderwall by Oasis",
-  description: "Learn how to play a Wonderwall by Oasis on the guitar",
+  description: "Wonderwall is a great song to learn! It's a classic!",
 };
 
 const runningChallenge1 = {
   title: "Run 1 mile",
-  description: "Run 1 mile",
+  description: "It's time to run 1 mile! First step to a healthier you!",
 };
 
 const runningChallenge2 = {
   title: "Run 1.5 miles",
-  description: "Run 1.5 miles",
+  description: "Running 1.5 miles is a great way to improve your stamina",
 };
 
 const runningChallenge3 = {
   title: "Run 2 miles",
-  description: "Run 2 miles",
+  description: "Whoa! You're running 2 miles! Keep it up!",
 };
 
 const runningChallenge4 = {
   title: "Run 3 miles",
-  description: "Run 3 miles",
+  description: "3 miles is a great distance to run! Keep it up!",
 };
 
 const yoMamaChallenge = {
