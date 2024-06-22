@@ -4,21 +4,21 @@ import { Challenge } from "../../database/entities/challenge.entity";
 import { ChallengeSeries } from "../../database/entities/challengeSeries.entity";
 import { ServerContext } from "../../types/custom";
 
-// type InsertChallengeArgs = {
-//   title: string;
-//   description: string;
-//   authorId?: string | null;
-//   level: ChallengeLevel;
-//   seriesId?: string | null;
-//   order?: number;
-// };
+interface GetChallengeArgs extends ServerContext {
+  id: number;
+}
 
-// type InsertChallengeSeriesArgs = {
-//   title: string;
-//   description: string;
-//   authorId?: string | null;
-// };
+async function getChallenge({ db, id }: GetChallengeArgs) {
+  const challengeRepository = db.getRepository(Challenge);
+  const challenge = await challengeRepository.findOne({
+    where: { id },
+    relations: ["series"],
+  });
 
+  return challenge;
+}
+
+/** Challenges without any series associated with them */
 async function getLooseChallenges({ db }: ServerContext) {
   const challengeRepository = db.getRepository(Challenge);
 
@@ -31,58 +31,76 @@ async function getLooseChallenges({ db }: ServerContext) {
   return challenges;
 }
 
-async function getSeriesWithChallenges({ db }: ServerContext) {
-  const challengeSeries = await db.getRepository(ChallengeSeries).find({
+interface GetSeriesWithChallengesArgs extends ServerContext {
+  ids: number[];
+}
+
+async function getSeriesWithChallenges({
+  ids,
+  db,
+}: GetSeriesWithChallengesArgs) {
+  const challengeSeriesRepository = db.getRepository(ChallengeSeries);
+  const challengeSeries = await challengeSeriesRepository.find({
     relations: ["challenges"],
+    where: ids.length ? ids.map((id) => ({ id })) : {},
   });
 
   return challengeSeries;
 }
 
-// async function insertChallenge({
-//   title,
-//   description,
-//   authorId = null,
-//   level,
-//   seriesId = null,
-// }: InsertChallengeArgs) {
-//   const result = await (
-//     await db
-//   ).run(
-//     "INSERT INTO challenges (title, description, author_id, level, series_id) VALUES (?, ?, ?, ?, ?) RETURNING *",
-//     [title, description, authorId, level, seriesId]
-//   );
+interface InsertChallengeArgs extends ServerContext {
+  title: string;
+  description: string;
+  seriesId?: number;
+}
 
-//   return {
-//     id: result.lastID,
-//     title,
-//     description,
-//     author_id: authorId,
-//     level,
-//     series_id: seriesId,
-//   };
-// }
+async function insertChallenge({
+  db,
+  title,
+  description,
+  seriesId,
+}: InsertChallengeArgs) {
+  const challengeRepository = db.getRepository(Challenge);
+  const challenge = challengeRepository.create({
+    title,
+    description,
+    ...(seriesId && {
+      series: [{ id: seriesId }],
+    }),
+  });
 
-// async function insertChallengeSeries({
-//   title,
-//   description,
-//   authorId = null,
-// }: InsertChallengeSeriesArgs) {
-//   const result = await (
-//     await db
-//   ).run(
-//     "INSERT INTO challenge_series (title, description, author_id) VALUES (?, ?, ?) RETURNING *",
-//     [title, description, authorId]
-//   );
+  await challengeRepository.save(challenge);
 
-//   return { id: result.lastID, title, description, authorId, challenges: [] };
-// }
+  return challenge;
+}
+
+interface InsertChallengeSeriesArgs extends ServerContext {
+  title: string;
+  description: string;
+}
+
+async function insertChallengeSeries({
+  db,
+  title,
+  description,
+}: InsertChallengeSeriesArgs) {
+  const challengeSeriesRepository = db.getRepository(ChallengeSeries);
+  const challengeSeries = challengeSeriesRepository.create({
+    title,
+    description,
+  });
+
+  await challengeSeriesRepository.save(challengeSeries);
+
+  return challengeSeries;
+}
 
 const challengesRepository = {
+  getChallenge,
   getLooseChallenges,
   getSeriesWithChallenges,
-  // insertChallenge,
-  // insertChallengeSeries,
+  insertChallenge,
+  insertChallengeSeries,
 };
 
 export { challengesRepository };
