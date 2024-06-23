@@ -1,6 +1,11 @@
 import express, { Request, Response } from "express";
 import { challengesService } from "./challenges.service";
 import { extractContextFromRequest } from "../../helpers/extractContextFromRequest";
+import {
+  createChallengeSeriesValidator,
+  createChallengeValidator,
+} from "./challenges.validation";
+import { IChallenge } from "../../models/IChallenge";
 
 const challengesRouter = express.Router();
 
@@ -39,22 +44,30 @@ challengesRouter.post("/series/:id", async (req: Request, res: Response) => {
   return res.json(challenge);
 });
 
-challengesRouter.post("/challenge", async (req: Request, res: Response) => {
-  const challenge = await challengesService.createChallenge({
-    ...req.body,
-    ...extractContextFromRequest(req),
-  });
+challengesRouter.post(
+  "/challenge",
+  createChallengeValidator,
+  async (req: Request, res: Response) => {
+    const challenge = await challengesService.createChallenge({
+      ...req.body,
+      ...extractContextFromRequest(req),
+    });
 
-  return res.json(challenge);
-});
+    return res.json(challenge);
+  }
+);
 
-challengesRouter.post("/series", async (req: Request, res: Response) => {
-  const series = await challengesService.createChallengeSeries({
-    ...req.body,
-    ...extractContextFromRequest(req),
-  });
+challengesRouter.post(
+  "/series",
+  createChallengeSeriesValidator,
+  async (req: Request, res: Response) => {
+    const series = await challengesService.createChallengeSeries({
+      ...req.body,
+      ...extractContextFromRequest(req),
+    });
 
-  return res.json(series);
-});
+    return res.json(series);
+  }
+);
 
 export { challengesRouter };

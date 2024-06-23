@@ -19,6 +19,7 @@
     "db:purge:dangerous": "ts-node ./src/database/purge.ts"
   },
   "dependencies": {
+    "class-validator": "^0.14.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",

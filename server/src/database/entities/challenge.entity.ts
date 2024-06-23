@@ -34,7 +34,6 @@ export class Challenge implements IChallenge {
   @JoinColumn({
     name: "author_id",
   })
-  // @JoinTable({ name: "user_challenge" })
   author: User;
 
   @ManyToMany(
