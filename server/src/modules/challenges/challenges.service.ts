@@ -14,7 +14,7 @@ async function getLooseChallenges({ db }: ServerContext) {
 }
 
 interface GetChallengeArgs extends ServerContext {
-  id: number;
+  id?: number;
 }
 
 async function getChallenge({ id, db }: GetChallengeArgs) {

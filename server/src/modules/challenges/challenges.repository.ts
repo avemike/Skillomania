@@ -5,7 +5,7 @@ import { ChallengeSeries } from "../../database/entities/challengeSeries.entity"
 import { ServerContext } from "../../types/custom";
 
 interface GetChallengeArgs extends ServerContext {
-  id: number;
+  id?: number;
 }
 
 async function getChallenge({ db, id }: GetChallengeArgs) {

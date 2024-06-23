@@ -5,7 +5,6 @@ import {
   createChallengeSeriesValidator,
   createChallengeValidator,
 } from "./challenges.validation";
-import { IChallenge } from "../../models/IChallenge";
 
 const challengesRouter = express.Router();
 
@@ -15,15 +14,6 @@ challengesRouter.get("/", async (req: Request, res: Response) => {
   );
 
   return res.json(challenges);
-});
-
-challengesRouter.get("/:id", async (req: Request, res: Response) => {
-  const challenge = await challengesService.getChallenge({
-    id: Number(req.params.id),
-    ...extractContextFromRequest(req),
-  });
-
-  return res.json(challenge);
 });
 
 challengesRouter.get("/series", async (req: Request, res: Response) => {
