@@ -1,38 +1,60 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, forwardRef } from "react";
 import { BaseInput } from "./BaseInput";
 import { BaseInputWrapper } from "./BaseInputWrapper";
 import { BaseInputLabel } from "./BaseInputLabel";
 
 interface SelectProps {
   label: string;
-  value: string;
+  value: string | number | undefined;
   options: { value: number | string; label: string }[];
   onChange: (value: number | string) => void;
+  name?: string;
+  error?: string;
+  placeholder?: string;
 }
 
-export function Select(props: SelectProps) {
-  const id = `${props.label}-input`;
+export const Select = forwardRef<HTMLSelectElement, SelectProps>(
+  (props, ref) => {
+    const {
+      label,
+      value,
+      options,
+      onChange,
+      name,
+      error,
+      placeholder = "None",
+    } = props;
+    const id = `${label}-input`;
 
-  return (
-    <BaseInputWrapper>
-      <BaseInputLabel label={props.label} htmlFor={id} />
-      <BaseInput
-        as="select"
-        id={id}
-        value={props.value}
-        onChange={(e: ChangeEvent<HTMLSelectElement>) =>
-          props.onChange(e.target.value)
-        }
-      >
-        <option value="" className="text-base">
-          Select series
-        </option>
-        {props.options.map((option) => (
-          <option className="text-base" key={option.value} value={option.value}>
-            {option.label}
+    return (
+      <BaseInputWrapper error={error}>
+        <BaseInputLabel label={label} htmlFor={id} />
+        <BaseInput
+          as="select"
+          id={id}
+          value={value}
+          onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+            onChange(e.target.value)
+          }
+          name={name}
+          ref={ref}
+        >
+          <option value="" disabled selected>
+            -- {placeholder} --
           </option>
-        ))}
-      </BaseInput>
-    </BaseInputWrapper>
-  );
-}
+          {options.map((option) => (
+            <option
+              className="text-base"
+              key={option.value}
+              value={option.value}
+            >
+              {option.label}
+            </option>
+          ))}
+        </BaseInput>
+      </BaseInputWrapper>
+    );
+  }
+);
+
+Select.displayName = "Select";

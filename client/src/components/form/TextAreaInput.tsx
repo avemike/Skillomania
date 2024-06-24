@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import React, { ChangeEvent, forwardRef } from "react";
 import { BaseInput } from "./BaseInput";
 import { BaseInputWrapper } from "./BaseInputWrapper";
 import { BaseInputLabel } from "./BaseInputLabel";
@@ -6,25 +6,35 @@ import { BaseInputLabel } from "./BaseInputLabel";
 interface TextAreaInputProps {
   label: string;
   placeholder: string;
-  value: string;
-  onChange: (value: string) => void;
+  onChange: (value: ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (event: ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
+  name?: string;
+  error?: string;
 }
 
-export function TextAreaInput(props: TextAreaInputProps) {
+export const TextAreaInput = forwardRef<
+  HTMLTextAreaElement,
+  TextAreaInputProps
+>((props, ref) => {
+  const { label, placeholder, value, onChange, onBlur, name, error } = props;
   const id = `${props.label}-input`;
 
   return (
-    <BaseInputWrapper>
-      <BaseInputLabel label={props.label} htmlFor={id} />
+    <BaseInputWrapper error={error}>
+      <BaseInputLabel label={label} htmlFor={id} />
       <BaseInput
         as="textarea"
         id={id}
-        placeholder={props.placeholder}
-        value={props.value}
-        onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
-          props.onChange(e.target.value)
-        }
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        onBlur={onBlur}
+        name={name}
+        ref={ref}
       />
     </BaseInputWrapper>
   );
-}
+});
+
+TextAreaInput.displayName = "TextAreaInput";

@@ -1,4 +1,4 @@
-import { ElementType, ComponentPropsWithoutRef } from "react";
+import { ElementType, ComponentPropsWithoutRef, forwardRef, Ref } from "react";
 
 interface BaseInputProps<T extends ElementType = "input"> {
   as?: T;
@@ -7,14 +7,16 @@ interface BaseInputProps<T extends ElementType = "input"> {
 type Props<T extends ElementType> = BaseInputProps<T> &
   Omit<ComponentPropsWithoutRef<T>, keyof BaseInputProps>;
 
-export function BaseInput<T extends ElementType = "input">({
-  as,
-  ...props
-}: Props<T>) {
-  const Component = as || "input";
-  return (
-    <Component
-      className="
+const BaseInput = forwardRef(
+  <T extends ElementType = "input">(
+    { as, ...props }: Props<T>,
+    ref: Ref<any>
+  ) => {
+    const Component = as || "input";
+    return (
+      <Component
+        ref={ref}
+        className="
         w-full
         mt-1
         px-3
@@ -28,7 +30,12 @@ export function BaseInput<T extends ElementType = "input">({
         focus:border-indigo-500
         sm:text-md
       "
-      {...props}
-    />
-  );
-}
+        {...props}
+      />
+    );
+  }
+);
+
+BaseInput.displayName = "BaseInput";
+
+export { BaseInput };
