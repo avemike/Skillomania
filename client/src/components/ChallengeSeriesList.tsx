@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useChallengeSeries } from "../api/useChallenges";
+import { useChallengeSeries } from "../api/useChallengeSeries";
 import { ChallengeCreationModal } from "./ChallengeCreationModal";
 
 export function ChallengeSeriesList() {

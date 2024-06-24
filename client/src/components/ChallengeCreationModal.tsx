@@ -1,5 +1,5 @@
 import { Controller, useForm } from "react-hook-form";
-import { useChallengeSeries } from "../api/useChallenges";
+import { useChallengeSeries } from "../api/useChallengeSeries";
 import { Select } from "./form/Select";
 import { TextAreaInput } from "./form/TextAreaInput";
 import { TextInput } from "./form/TextInput";
@@ -7,17 +7,17 @@ import { Modal } from "./Modal";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "./form/Button";
+import { useChallengeMutation } from "../api/useChallengeMutation";
 
 const schema = z.object({
   title: z.string().min(5).max(100),
   description: z.string().min(10).max(1000),
-  challengeSeriesId: z.string().optional(),
+  challengeSeriesId: z.number().optional().nullable(),
 });
 
 const DEFAULT_VALUES: z.infer<typeof schema> = {
   title: "",
   description: "",
-  challengeSeriesId: "",
 };
 
 interface ChallengeCreationModalProps {
@@ -34,13 +34,19 @@ export function ChallengeCreationModal({
     resolver: zodResolver(schema),
   });
   const { data = [], isLoading, isError } = useChallengeSeries();
+  const challengeMutation = useChallengeMutation();
 
   const handleSubmit = form.handleSubmit((data) => {
-    console.log(data);
+    challengeMutation.mutate({
+      title: data.title,
+      description: data.description,
+      seriesId: data.challengeSeriesId,
+    });
   });
 
   const handleReset = () => {
     form.reset();
+    challengeMutation.reset();
   };
 
   const handleClose = () => {
@@ -78,14 +84,21 @@ export function ChallengeCreationModal({
                   label: series.title,
                 }))}
                 value={field.value}
-                onChange={field.onChange}
+                onChange={(val) => field.onChange(Number(val))}
                 error={form.formState.errors.challengeSeriesId?.message}
               />
             )}
           />
         </Modal.Content>
         <Modal.Footer>
-          <Button type="submit" variant="outline">
+          {challengeMutation.isError && (
+            <div className="text-red-500">An error occurred</div>
+          )}
+          <Button
+            type="submit"
+            variant="outline"
+            isLoading={challengeMutation.isLoading}
+          >
             Create
           </Button>
         </Modal.Footer>
