@@ -35,7 +35,7 @@ challengesRouter.post("/series/:id", async (req: Request, res: Response) => {
 });
 
 challengesRouter.post(
-  "/challenge",
+  "/",
   createChallengeValidator,
   async (req: Request, res: Response) => {
     const challenge = await challengesService.createChallenge({

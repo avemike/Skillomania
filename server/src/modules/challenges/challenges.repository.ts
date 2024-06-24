@@ -64,6 +64,10 @@ async function insertChallenge({
   const challenge = challengeRepository.create({
     title,
     description,
+    /** temp start */
+    author: { id: 1 },
+    versionAuthor: { id: 1 },
+    /** temp end */
     ...(seriesId && {
       series: [{ id: seriesId }],
     }),

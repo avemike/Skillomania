@@ -28,6 +28,7 @@ export class CreateChallengeSeriesValidationSchema {
 
 export const createChallengeValidator = createPayloadValidator(
   (req: Request) => {
+    console.log("[createChallengeValidator]: ", req.body);
     const challenge = new CreateChallengeValidationSchema();
 
     challenge.title = req.body.title;
