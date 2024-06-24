@@ -5,7 +5,7 @@ import { BaseInputLabel } from "./BaseInputLabel";
 
 interface SelectProps {
   label: string;
-  value: string | number | undefined;
+  value: string | number | undefined | null;
   options: { value: number | string; label: string }[];
   onChange: (value: number | string) => void;
   name?: string;
@@ -39,9 +39,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           name={name}
           ref={ref}
         >
-          <option value="" disabled selected>
-            -- {placeholder} --
-          </option>
+          <option selected>-- {placeholder} --</option>
           {options.map((option) => (
             <option
               className="text-base"
