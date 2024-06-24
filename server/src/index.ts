@@ -1,10 +1,26 @@
-import express from "express";
-import dotenv from "dotenv";
+import "reflect-metadata";
+import "dotenv/config";
 
-dotenv.config();
+import express from "express";
+import { setupContext } from "./setupContext";
+import { challengesRouter } from "./modules/challenges/challenges.controller";
+import cors from "cors";
 
 const app = express();
-const port = process.env.PORT;
+
+app.use(cors());
+app.use(express.json());
+
+const port = process.env.SERVER_PORT;
+
+// Setup context
+app.use(async (req, _res, next) => {
+  const context = await setupContext();
+
+  req = Object.assign(req, context);
+
+  next();
+});
 
 app.get("/", (_req, res) => {
   res.send("Express + TypeScript Server");
@@ -13,3 +29,5 @@ app.get("/", (_req, res) => {
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
 });
+
+app.use("/challenges", challengesRouter);
