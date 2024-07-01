@@ -92,6 +92,10 @@ async function insertChallengeSeries({
   const challengeSeries = challengeSeriesRepository.create({
     title,
     description,
+    /** temp start */
+    author: { id: 1 },
+    versionAuthor: { id: 1 },
+    /** temp end */
   });
 
   await challengeSeriesRepository.save(challengeSeries);

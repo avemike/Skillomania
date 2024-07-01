@@ -14,6 +14,40 @@ const runningChallengeSeries = {
   description: "This challenge series is all about running",
 };
 
+const readingChallengeSeries = {
+  title: "Reading",
+  description: "This challenge series is all about reading",
+};
+
+const readingChallenge1 = {
+  title: "Read a short story",
+  description:
+    "Reading books might be overwhelming, but a short story, might be just right!",
+};
+
+const readingChallenge2 = {
+  title: "Read an easy book",
+  description:
+    "Whoa! We're just getting started, read maybe a chapter a day, i would suggest romance or fantasy?",
+};
+
+const readingChallenge3 = {
+  title: "Read a book that makes you think",
+  description:
+    "i would suggest horror, thriler or maybe even something based on true events?",
+};
+
+const readingChallenge4 = {
+  title: "Read an scientific book!",
+  description:
+    "Not talking about chemistry book, maybe you like fishes or urban legends, let it be niche",
+};
+
+const readingChallenge5 = {
+  title: "Read someting that you never thought you would",
+  description: "Get outside your comfortzone",
+};
+
 const playingGuitarChallenge1 = {
   title: "Play a G major chord",
   description:
@@ -68,9 +102,8 @@ const yoMamaChallenge = {
 };
 
 export default class ChallengeSeeder implements Seeder {
-  track = true;
-
   public async run(dataSource: DataSource): Promise<any> {
+    console.log("yo mama");
     const userRepository = dataSource.getRepository(User);
     const challengeRepository = dataSource.getRepository(Challenge);
     const challengeSeriesRepository = dataSource.getRepository(ChallengeSeries);
@@ -85,6 +118,9 @@ export default class ChallengeSeeder implements Seeder {
       {
         email: "yourMamaHehe@samplemail.com",
       },
+      {
+        email: "Readingchamp@readingiscool.com",
+      },
     ]);
 
     console.log(users);
@@ -98,6 +134,12 @@ export default class ChallengeSeeder implements Seeder {
 
     const runningChallengeSeriesEntity = await challengeSeriesRepository.save({
       ...runningChallengeSeries,
+      author: users[1],
+      versionAuthor: users[1],
+    });
+
+    const readingChallengeSeriesEntity = await challengeSeriesRepository.save({
+      ...readingChallengeSeries,
       author: users[1],
       versionAuthor: users[1],
     });
@@ -163,6 +205,38 @@ export default class ChallengeSeeder implements Seeder {
       author: users[1],
       versionAuthor: users[1],
       series: [runningChallengeSeriesEntity],
+    });
+
+    challengeRepository.save({
+      ...readingChallenge1,
+      author: users[1],
+      versionAuthor: users[1],
+      series: [readingChallengeSeriesEntity],
+    });
+
+    challengeRepository.save({
+      ...readingChallenge2,
+      author: users[1],
+      versionAuthor: users[1],
+      series: [readingChallengeSeriesEntity],
+    });
+    challengeRepository.save({
+      ...readingChallenge3,
+      author: users[1],
+      versionAuthor: users[1],
+      series: [readingChallengeSeriesEntity],
+    });
+    challengeRepository.save({
+      ...readingChallenge4,
+      author: users[1],
+      versionAuthor: users[1],
+      series: [readingChallengeSeriesEntity],
+    });
+    challengeRepository.save({
+      ...readingChallenge5,
+      author: users[1],
+      versionAuthor: users[1],
+      series: [readingChallengeSeriesEntity],
     });
 
     challengeRepository.save({

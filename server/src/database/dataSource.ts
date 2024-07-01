@@ -1,6 +1,9 @@
 import "dotenv/config";
 import { DataSource, DataSourceOptions } from "typeorm";
 import { SeederOptions } from "typeorm-extension";
+import userFactory from "./factories/user.factory";
+import ChallengeSeeder from "./seeds/challengeAndAuthors.seeder";
+import UserSeeder from "./seeds/user.seeder";
 
 const config: DataSourceOptions & SeederOptions = {
   type: "postgres",
@@ -13,9 +16,8 @@ const config: DataSourceOptions & SeederOptions = {
   migrationsTableName: "migration_typeorm",
   entities: [__dirname + "/entities/*.entity.{js,ts}"],
   maxQueryExecutionTime: 1000,
-  seeds: [__dirname + "/seeds/*"],
-  factories: [__dirname + "/factories/*.factory.{js,ts}"],
-  seedTracking: true,
+  seeds: [ChallengeSeeder, UserSeeder],
+  factories: [userFactory],
 };
 
 export const AppDataSource = new DataSource(config);
