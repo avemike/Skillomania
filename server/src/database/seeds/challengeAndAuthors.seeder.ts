@@ -19,6 +19,38 @@ const readingChallengeSeries = {
   description: "This challenge series is all about reading",
 };
 
+const cookingChallengeSeries = {
+  title: "Cooking",
+  description: "This challenge series is all about cooking",
+};
+
+const cookingChallenge1 = {
+  title: "Learning what to cook",
+  description:
+    "Find a cooking book or search internet for tasty ideas, watch them, observe, save them for later",
+};
+
+const cookingChallenge2 = {
+  title: "Let's start the cooking",
+  description:
+    "Using saved materials from before, try cooking something that seems easy, if it goes the wrong way, don't give up!",
+};
+
+const cookingChallenge3 = {
+  title: "Try someting more complex",
+  description: "Try someting from different country",
+};
+
+const cookingChallenge4 = {
+  title: "Lovely recipe",
+  description: "Try to cook your favorite dish!",
+};
+
+const cookingChallenge5 = {
+  title: "Full table",
+  description: "Try to cook your friend of family member favorite dish!",
+};
+
 const readingChallenge1 = {
   title: "Read a short story",
   description:
@@ -142,6 +174,47 @@ export default class ChallengeSeeder implements Seeder {
       ...readingChallengeSeries,
       author: users[1],
       versionAuthor: users[1],
+    });
+
+    const cookingChallengeSeriesEntity = await challengeSeriesRepository.save({
+      ...cookingChallengeSeries,
+      author: users[2],
+      versionAuthor: users[2],
+    });
+
+    challengeRepository.save({
+      ...cookingChallenge1,
+      author: users[2],
+      varsionAuthor: users[2],
+      series: [cookingChallengeSeriesEntity],
+    });
+
+    challengeRepository.save({
+      ...cookingChallenge2,
+      author: users[2],
+      varsionAuthor: users[2],
+      series: [cookingChallengeSeriesEntity],
+    });
+
+    challengeRepository.save({
+      ...cookingChallenge3,
+      author: users[2],
+      varsionAuthor: users[2],
+      series: [cookingChallengeSeriesEntity],
+    });
+
+    challengeRepository.save({
+      ...cookingChallenge4,
+      author: users[2],
+      varsionAuthor: users[2],
+      series: [cookingChallengeSeriesEntity],
+    });
+
+    challengeRepository.save({
+      ...cookingChallenge5,
+      author: users[2],
+      varsionAuthor: users[2],
+      series: [cookingChallengeSeriesEntity],
     });
 
     challengeRepository.save({
