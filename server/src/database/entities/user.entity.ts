@@ -9,7 +9,7 @@ import {
 } from "typeorm";
 import { Challenge } from "./challenge.entity";
 import { ChallengeSeries } from "./challengeSeries.entity";
-import { IUser } from "../../models/IUser";
+import { AuthSource, IUser } from "../../models/IUser";
 
 @Entity({
   name: "app_user",
@@ -22,6 +22,21 @@ export class User implements IUser {
     length: 100,
   })
   email: string;
+
+  @Column({
+    length: 100,
+  })
+  firstName: string;
+
+  @Column({
+    length: 100,
+  })
+  lastName: string;
+
+  @Column({
+    length: 100,
+  })
+  authSource: AuthSource;
 
   @OneToMany(() => Challenge, (challenge) => challenge.author)
   challenges: Challenge[];

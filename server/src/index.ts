@@ -5,6 +5,7 @@ import express from "express";
 import { setupContext } from "./setupContext";
 import { challengesRouter } from "./modules/challenges/challenges.controller";
 import cors from "cors";
+import { googleAuthHandler } from "./googleAuth";
 
 const app = express();
 
@@ -29,5 +30,7 @@ app.get("/", (_req, res) => {
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
 });
+
+app.post("/google-auth", googleAuthHandler);
 
 app.use("/challenges", challengesRouter);
