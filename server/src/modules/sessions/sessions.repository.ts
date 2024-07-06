@@ -28,6 +28,21 @@ async function createSession({
   return session;
 }
 
+interface GetSessionArgs extends Pick<ServerContext, "db"> {
+  token: string;
+  userId: number;
+}
+
+async function getSession({ db, token, userId }: GetSessionArgs) {
+  const sessionRepository = db.getRepository(Session);
+  const session = await sessionRepository.findOne({
+    where: { token, user: { id: userId } },
+  });
+
+  return session;
+}
+
 export const sessionsRepository = {
   createSession,
+  getSession,
 };

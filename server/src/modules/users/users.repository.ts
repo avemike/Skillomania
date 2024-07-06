@@ -1,7 +1,7 @@
 import { User } from "../../database/entities/user.entity";
 import { ServerContext } from "../../types/custom";
 
-interface GetUserArgs extends ServerContext {
+interface GetUserArgs extends Pick<ServerContext, "db"> {
   email: string;
 }
 
@@ -14,7 +14,7 @@ async function getUser({ db, email }: GetUserArgs) {
   return user;
 }
 
-interface InsertUserArgs extends ServerContext {
+interface InsertUserArgs extends Pick<ServerContext, "db"> {
   email: string;
   firstName: string;
   lastName: string;

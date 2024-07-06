@@ -6,7 +6,7 @@ import { setupContext } from "./setupContext";
 import { challengesRouter } from "./modules/challenges/challenges.controller";
 import cors from "cors";
 import { validateEnvs } from "./validateEnvs";
-import { googleAuthHandler } from "./googleAuth";
+import { googleAuthHandler } from "./auth/googleAuthHandler";
 
 validateEnvs();
 
