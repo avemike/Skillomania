@@ -10,6 +10,7 @@ import {
 import { Challenge } from "./challenge.entity";
 import { ChallengeSeries } from "./challengeSeries.entity";
 import { AuthSource, IUser } from "../../models/IUser";
+import { Session } from "./session.entity";
 
 @Entity({
   name: "app_user",
@@ -67,4 +68,7 @@ export class User implements IUser {
     name: "deleted_at",
   })
   deletedAt: Date;
+
+  @OneToMany(() => Session, (session) => session.user)
+  sessions: Session[];
 }
