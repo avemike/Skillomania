@@ -6,6 +6,7 @@ import { sessionsService } from "../modules/sessions/sessions.service";
 const googleOauthClient = new OAuth2Client(process.env.GOOGLE_OAUTH_CLIENT_ID);
 
 export async function googleAuthHandler(req: Request, res: Response) {
+  // @todo: add class validator
   const { credential, client_id } = req.body;
 
   try {

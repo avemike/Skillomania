@@ -15,11 +15,17 @@ async function createSession({
   expiresAt,
 }: CreateSessionArgs) {
   const sessionRepository = db.getRepository(Session);
-  await sessionRepository.insert({
-    user,
-    token,
-    expires_at: expiresAt,
-  });
+  await sessionRepository
+    .insert({
+      user,
+      token,
+      expires_at: expiresAt,
+    })
+    .catch((err) => {
+      console.error(err);
+
+      throw new Error("Failed to create session");
+    });
 
   const session = await sessionRepository.findOneOrFail({
     where: { token, expires_at: expiresAt },

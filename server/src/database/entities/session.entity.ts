@@ -5,6 +5,7 @@ import {
   ManyToOne,
   CreateDateColumn,
   UpdateDateColumn,
+  JoinColumn,
 } from "typeorm";
 import { User } from "./user.entity";
 
@@ -14,6 +15,7 @@ export class Session {
   id: number;
 
   @ManyToOne(() => User, (user) => user.sessions)
+  @JoinColumn({ name: "user_id" })
   user: User;
 
   @Column()

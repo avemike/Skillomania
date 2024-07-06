@@ -26,16 +26,19 @@ export class User implements IUser {
 
   @Column({
     length: 100,
+    name: "first_name",
   })
   firstName: string;
 
   @Column({
     length: 100,
+    name: "last_name",
   })
   lastName: string;
 
   @Column({
     length: 100,
+    name: "auth_source",
   })
   authSource: AuthSource;
 
