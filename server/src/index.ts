@@ -5,7 +5,10 @@ import express from "express";
 import { setupContext } from "./setupContext";
 import { challengesRouter } from "./modules/challenges/challenges.controller";
 import cors from "cors";
+import { validateEnvs } from "./validateEnvs";
 import { googleAuthHandler } from "./googleAuth";
+
+validateEnvs();
 
 const app = express();
 
