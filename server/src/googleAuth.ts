@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import { usersRepository } from "./modules/users/users.repository";
-import jwt from "jsonwebtoken";
 import { OAuth2Client } from "google-auth-library";
+import { sessionsService } from "./modules/sessions/sessions.service";
 
-const googleOauthClient = new OAuth2Client();
+const googleOauthClient = new OAuth2Client(process.env.GOOGLE_OAUTH_CLIENT_ID);
 
 export async function googleAuthHandler(req: Request, res: Response) {
   const { credential, client_id } = req.body;
@@ -36,9 +36,14 @@ export async function googleAuthHandler(req: Request, res: Response) {
       });
     }
 
-    const token = jwt.sign({ user }, process.env.JWT_SECRET as string);
+    if (!user) {
+      // @todo: shouldn't happen, add logging
+      throw new Error("Something went wrong");
+    }
 
-    res.status(200).cookie("token", token).json({ payload });
+    const session = await sessionsService.createSession({ db: req.db, user });
+
+    res.status(200).cookie("token", session.token).json({ payload });
   } catch (err) {
     res.status(400).json({ err });
   }
