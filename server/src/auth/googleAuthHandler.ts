@@ -44,7 +44,7 @@ export async function googleAuthHandler(req: Request, res: Response) {
 
     const session = await sessionsService.createSession({ db: req.db, user });
 
-    res.status(200).cookie("token", session.token).json({ payload });
+    res.status(200).cookie("token", session.token).json({ payload, user });
   } catch (err) {
     res.status(400).json({ err });
   }
