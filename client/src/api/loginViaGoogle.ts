@@ -6,6 +6,10 @@ import { fetchBase } from "./fetchBase";
  * Please use in the context of code/component from the mentioned library.
  */
 export async function loginViaGoogle(credentialResponse: CredentialResponse) {
+  if (!credentialResponse.credential) {
+    return;
+  }
+
   const response = await fetchBase("/google-auth", {
     method: "POST",
     body: JSON.stringify({
@@ -19,5 +23,10 @@ export async function loginViaGoogle(credentialResponse: CredentialResponse) {
     console.error(error);
   });
 
-  console.log(response);
+  if (!response) {
+    return;
+  }
+
+  localStorage.setItem("token", credentialResponse.credential);
+  window.location.reload();
 }

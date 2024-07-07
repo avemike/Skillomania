@@ -15,18 +15,7 @@ export function WelcomePage() {
 
   return (
     <>
-      <div className="bg-[url('./assets/welcome_website.svg')] bg-center bg-cover h-dvh w-svw absolute top-0 left-0 ">
-        <div className="absolute right-28 top-10 flex gap-20">
-          <a className="font-bold " href="/">
-            Home
-          </a>
-          <a className="font-bold" href="/About">
-            About
-          </a>
-          <a className="font-bold" href="/Contacts">
-            Contacts
-          </a>
-        </div>
+      <div className="h-dvh w-svw">
         <div className="flex flex-col items-start absolute left-60 top-1/3">
           <h1 className="font-bold text-7xl bg-clip-text text-black">
             Welcome

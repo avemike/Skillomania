@@ -13,6 +13,7 @@ import { Contacts } from "./pages/Contacts";
 import { Home } from "./pages/Home";
 import { ChallengeSeriesPage } from "./pages/ChallengeSeriesPage";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { fetchBase } from "./api/fetchBase";
 
 function StandardPage({ page }: { page: ReactNode }) {
   return <StandardLayout>{page}</StandardLayout>;
@@ -35,23 +36,7 @@ const router = createBrowserRouter([
 ]);
 
 // @todo: temporarily hardcoded
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      queryFn: async ({ queryKey: [url] }) => {
-        if (typeof url === "string") {
-          const response = await fetch(
-            `${import.meta.env.VITE_SERVER_BASE_URL}/${url.toLowerCase()}`
-          );
-
-          return await response.json();
-        }
-
-        throw new Error("Invalid QueryKey");
-      },
-    },
-  },
-});
+const queryClient = new QueryClient();
 
 /**
  * Renders the Main App component - bootstrap for the entire app.

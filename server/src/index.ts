@@ -14,8 +14,13 @@ validateEnvs();
 const app = express();
 
 app.use(cookieParser());
-app.use(cors());
+app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 app.use(express.json());
+// Logger middleware
+app.use((req, _res, next) => {
+  console.log(`[server]: ${req.method} ${req.path}`);
+  next();
+});
 
 const port = process.env.SERVER_PORT;
 

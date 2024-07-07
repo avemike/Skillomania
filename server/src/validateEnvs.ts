@@ -6,6 +6,7 @@ const REQUIRED_ENVS = [
   "DB_PASSWORD",
   "DB_DATABASE",
   "JWT_SECRET",
+  "CLIENT_URL",
 ];
 
 export function validateEnvs() {

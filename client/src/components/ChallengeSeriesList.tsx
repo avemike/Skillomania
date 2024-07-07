@@ -6,7 +6,7 @@ export function ChallengeSeriesList() {
   const { data, isLoading, isError } = useChallengeSeries();
 
   const commonStyles =
-    "bg-[url('./assets/welcome_website.svg')] bg-center bg-cover h-screen w-screen absolute top-0 left-0 flex flex-col items-center justify-center";
+    "bg-[url('./assets/welcome_website.svg')] bg-center bg-cover h-screen w-screen flex flex-col items-center justify-center";
 
   if (isLoading) {
     return (
