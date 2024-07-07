@@ -9,7 +9,8 @@ import {
 } from "typeorm";
 import { Challenge } from "./challenge.entity";
 import { ChallengeSeries } from "./challengeSeries.entity";
-import { IUser } from "../../models/IUser";
+import { AuthSource, IUser } from "../../models/IUser";
+import { Session } from "./session.entity";
 
 @Entity({
   name: "app_user",
@@ -22,6 +23,24 @@ export class User implements IUser {
     length: 100,
   })
   email: string;
+
+  @Column({
+    length: 100,
+    name: "first_name",
+  })
+  firstName: string;
+
+  @Column({
+    length: 100,
+    name: "last_name",
+  })
+  lastName: string;
+
+  @Column({
+    length: 100,
+    name: "auth_source",
+  })
+  authSource: AuthSource;
 
   @OneToMany(() => Challenge, (challenge) => challenge.author)
   challenges: Challenge[];
@@ -52,4 +71,7 @@ export class User implements IUser {
     name: "deleted_at",
   })
   deletedAt: Date;
+
+  @OneToMany(() => Session, (session) => session.user)
+  sessions: Session[];
 }

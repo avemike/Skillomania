@@ -1,4 +1,8 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouteObject,
+  RouterProvider,
+} from "react-router-dom";
 import { StandardLayout } from "./layouts/StandardLayout";
 import { WelcomePage } from "./pages/WelcomePage";
 import { About } from "./pages/About";
@@ -9,59 +13,30 @@ import { Contacts } from "./pages/Contacts";
 import { Home } from "./pages/Home";
 import { ChallengeSeriesPage } from "./pages/ChallengeSeriesPage";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { fetchBase } from "./api/fetchBase";
 
 function StandardPage({ page }: { page: ReactNode }) {
   return <StandardLayout>{page}</StandardLayout>;
 }
+function createStandardRoute(path: string, element: ReactNode): RouteObject {
+  return {
+    path,
+    element: <StandardPage page={element} />,
+  };
+}
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <StandardPage page={<WelcomePage />} />,
-  },
-  {
-    path: "/About",
-    element: <StandardPage page={<About />} />,
-  },
-  {
-    path: "/*",
-    element: <StandardPage page={<ErrorPage />} />,
-  },
-  {
-    path: "/Register",
-    element: <StandardPage page={<Register />} />,
-  },
-  {
-    path: "/Contacts",
-    element: <StandardPage page={<Contacts />} />,
-  },
-  {
-    path: "/Home",
-    element: <StandardPage page={<Home />} />,
-  },
-  {
-    path: "/Challenges",
-    element: <StandardPage page={<ChallengeSeriesPage />} />,
-  },
+  createStandardRoute("/*", <ErrorPage />),
+  createStandardRoute("/", <WelcomePage />),
+  createStandardRoute("/about", <About />),
+  createStandardRoute("/register", <Register />),
+  createStandardRoute("/contacts", <Contacts />),
+  createStandardRoute("/home", <Home />),
+  createStandardRoute("/challenges", <ChallengeSeriesPage />),
 ]);
 
 // @todo: temporarily hardcoded
-const BASE_URL = "http://localhost:3005";
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      queryFn: async ({ queryKey: [url] }) => {
-        if (typeof url === "string") {
-          const response = await fetch(`${BASE_URL}/${url.toLowerCase()}`);
-
-          return await response.json();
-        }
-
-        throw new Error("Invalid QueryKey");
-      },
-    },
-  },
-});
+const queryClient = new QueryClient();
 
 /**
  * Renders the Main App component - bootstrap for the entire app.

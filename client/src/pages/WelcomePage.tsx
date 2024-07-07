@@ -1,4 +1,5 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
+import { GoogleAuthButton } from "../components/GoogleAuthButton";
 
 /**
  * Renders the Home component.
@@ -6,25 +7,15 @@ import { useContext, useState } from "react";
  * WIP: Currently function as a placeholder for the homepage.
  */
 export function WelcomePage() {
-  const [isPanelHidden, SetIsPanelHidden] = useState<boolean>(true);
+  const [isPanelHidden, setIsPanelHidden] = useState<boolean>(true);
 
   const toggle = () => {
-    SetIsPanelHidden((previsPanelHidden) => !previsPanelHidden);
+    setIsPanelHidden((previousPanelHidden) => !previousPanelHidden);
   };
+
   return (
     <>
-      <div className="bg-[url('./assets/welcome_website.svg')] bg-center bg-cover h-dvh w-svw absolute top-0 left-0 ">
-        <div className="absolute right-28 top-10 flex gap-20">
-          <a className="font-bold " href="/">
-            Home
-          </a>
-          <a className="font-bold" href="/About">
-            About
-          </a>
-          <a className="font-bold" href="/Contacts">
-            Contacts
-          </a>
-        </div>
+      <div className="h-dvh w-svw">
         <div className="flex flex-col items-start absolute left-60 top-1/3">
           <h1 className="font-bold text-7xl bg-clip-text text-black">
             Welcome
@@ -48,20 +39,20 @@ export function WelcomePage() {
           <p className="text-gray-400 pt-14 ml-12  ">Skillomania</p>
         </div>
       </div>
-      {isPanelHidden == false ? (
+      {!isPanelHidden ? (
         <div
           className="z-10 h-dvh w-svw absolute top-0 left-0 backdrop-blur backdrop-brightness-50"
           onClick={toggle}
         >
           <div
-            className="absolute z-20 h-2/3 w-2/5 bg-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex shadow-gray-600 shadow-lg "
+            className="absolute z-20 min-w-96 w-[50%] max-w-[1000px] bg-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex shadow-gray-600 shadow-lg"
             onClick={(event) => event.stopPropagation()}
           >
             <div className="h-full w-1/2 ">
               <div className="flex flex-col m-10 mt-16">
                 <h2 className=" text-2xl font-bold">Hi!</h2>
                 <p className=" text-mid my-2">
-                  Enter your informations to go further!
+                  Enter your credentials to go further!
                 </p>
                 <label htmlFor="email" className="text-sm font-bold mt-6 mb-2">
                   Email
@@ -95,10 +86,11 @@ export function WelcomePage() {
                 <p className="text-xs text-gray-600 my-3 text-center">
                   Or log in with
                 </p>
-                <button className="bg-white text-black text-sm border-gray-300 mb-2 flex gap-2 justify-center items-center ">
+                <GoogleAuthButton />
+                {/* <button className="bg-white text-black text-sm border-gray-300 mb-2 flex gap-2 justify-center items-center ">
                   <div className="bg-[url('./assets/google.svg')] h-5 w-5"></div>
                   <p>Sign up with Google</p>
-                </button>
+                </button> */}
                 <div className="flex mt-3 justify-between px-11">
                   <p className="text-xs font-bold">Don't have an account?</p>
                   <a href="/Register" className="text-xs font-bold underline">
@@ -107,7 +99,13 @@ export function WelcomePage() {
                 </div>
               </div>
             </div>
-            <div className="bg-[url('./assets/login.svg')] h-full w-1/2 bg-center bg-cover"></div>
+            <div className="w-1/2 bg-center bg-cover">
+              <img
+                src="login.svg"
+                alt="Login background image"
+                className="h-full w-full object-cover"
+              />
+            </div>
           </div>
         </div>
       ) : (

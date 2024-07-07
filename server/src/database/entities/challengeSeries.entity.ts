@@ -29,9 +29,7 @@ export class ChallengeSeries implements IChallengeSeries {
   description: string;
 
   @ManyToOne(() => User, (user) => user.challengeSeries)
-  @JoinColumn({
-    name: "author_id",
-  })
+  @JoinColumn({ name: "author_id" })
   author: User;
 
   @ManyToMany(() => Challenge, (challenge) => challenge.series)

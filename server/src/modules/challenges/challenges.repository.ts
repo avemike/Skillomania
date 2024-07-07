@@ -4,7 +4,7 @@ import { Challenge } from "../../database/entities/challenge.entity";
 import { ChallengeSeries } from "../../database/entities/challengeSeries.entity";
 import { ServerContext } from "../../types/custom";
 
-interface GetChallengeArgs extends ServerContext {
+interface GetChallengeArgs extends Pick<ServerContext, "db"> {
   id?: number;
 }
 
@@ -19,7 +19,7 @@ async function getChallenge({ db, id }: GetChallengeArgs) {
 }
 
 /** Challenges without any series associated with them */
-async function getLooseChallenges({ db }: ServerContext) {
+async function getLooseChallenges({ db }: Pick<ServerContext, "db">) {
   const challengeRepository = db.getRepository(Challenge);
 
   const challenges = await challengeRepository
@@ -31,7 +31,7 @@ async function getLooseChallenges({ db }: ServerContext) {
   return challenges;
 }
 
-interface GetSeriesWithChallengesArgs extends ServerContext {
+interface GetSeriesWithChallengesArgs extends Pick<ServerContext, "db"> {
   ids?: number[];
 }
 
@@ -48,7 +48,7 @@ async function getSeriesWithChallenges({
   return challengeSeries;
 }
 
-interface InsertChallengeArgs extends ServerContext {
+interface InsertChallengeArgs extends Pick<ServerContext, "db"> {
   title: string;
   description: string;
   seriesId?: number;
@@ -78,7 +78,7 @@ async function insertChallenge({
   return challenge;
 }
 
-interface InsertChallengeSeriesArgs extends ServerContext {
+interface InsertChallengeSeriesArgs extends Pick<ServerContext, "db"> {
   title: string;
   description: string;
 }

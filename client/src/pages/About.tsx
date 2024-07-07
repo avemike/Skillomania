@@ -5,7 +5,7 @@
  */
 export function About() {
   return (
-    <div className="bg-[url('./assets/welcome_website.svg')] bg-center bg-cover h-dvh w-svw absolute top-0 left-0 flex flex-col text-center items-center justify-center">
+    <div className="h-dvh w-svw flex flex-col text-center items-center justify-center">
       <div className="bg-white/50 p-10 round">
         <h1 className=" text-4xl">Hi!</h1>
         <h2 className=" text-2xl">
