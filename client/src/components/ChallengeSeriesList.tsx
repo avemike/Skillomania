@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useChallengeSeries } from "../api/useChallengeSeries";
 import { ChallengeCreationModal } from "./ChallengeCreationModal";
+import { useAuth } from "../AuthenticationProvider";
 
 export function ChallengeSeriesList() {
   const { data, isLoading, isError } = useChallengeSeries();
@@ -68,9 +69,15 @@ export function ChallengeSeriesList() {
 }
 
 function ChallengeCreateButton() {
+  const { isAuthenticated } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = () => setIsModalOpen(true);
+
+  // Don't show the button if the user is not authenticated
+  if (!isAuthenticated) {
+    return null;
+  }
 
   return (
     <>

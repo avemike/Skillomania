@@ -26,7 +26,13 @@ export async function loginViaGoogle(credentialResponse: CredentialResponse) {
   if (!response) {
     return;
   }
+  const data = await response.json();
+  const user = data.user;
 
   localStorage.setItem("token", credentialResponse.credential);
+  localStorage.setItem("firstName", user.firstName);
+  localStorage.setItem("lastName", user.lastName);
+  localStorage.setItem("email", user.email);
+
   window.location.reload();
 }
