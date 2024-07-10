@@ -24,6 +24,33 @@ const cookingChallengeSeries = {
   description: "This challenge series is all about cooking",
 };
 
+const playingUkuleleChallengeSeries = {
+  title: "Playing Ukulele"
+  description: "This challenge series is all about playing ukulele",
+};
+
+const playingUkuleleChallenge1= {
+  title:"Easy chords" ,
+  description: "Search up online how to tune the ukulele and practice chords (you can also search for them online, video or image)",
+};
+const playingUkuleleChallenge2= {
+  title:"First song" ,
+  description: "Try to play an easy song like - I'm yours - ",
+};
+const playingUkuleleChallenge3= {
+  title:"Your song" ,
+  description: "Try to play a song that you like!",
+};
+const playingUkuleleChallenge4= {
+  title:"Remembering" ,
+  description: "Try to learn how to play a song and play it from memory",
+};
+const playingUkuleleChallenge5= {
+  title:"Tricks" ,
+  description: "Try to learn some tricks like slaping or tabs",
+};
+
+
 const cookingChallenge1 = {
   title: "Learning what to cook",
   description:
@@ -180,6 +207,44 @@ export default class ChallengeSeeder implements Seeder {
       ...cookingChallengeSeries,
       author: users[2],
       versionAuthor: users[2],
+    });
+
+    const playingUkuleleChallengeSeriesEntity = await challengeRepository.save({
+      ...playingUkuleleChallengeSeries,
+      author: users[1],
+      versionAuthor: users[1]
+    });
+
+    challengeRepository.save({
+      ...playingUkuleleChallenge1,
+      author: users[1],
+      versionAuthor: users[1],
+      series: [playingUkuleleChallengeSeriesEntity],
+    });
+
+    challengeRepository.save({
+      ...playingUkuleleChallenge2,
+      author: users[1],
+      versionAuthor: users[1],
+      series: [playingUkuleleChallengeSeriesEntity],
+    });
+    challengeRepository.save({
+      ...playingUkuleleChallenge3,
+      author: users[1],
+      versionAuthor: users[1],
+      series: [playingUkuleleChallengeSeriesEntity],
+    });
+    challengeRepository.save({
+      ...playingUkuleleChallenge4,
+      author: users[1],
+      versionAuthor: users[1],
+      series: [playingUkuleleChallengeSeriesEntity],
+    });
+    challengeRepository.save({
+      ...playingUkuleleChallenge5,
+      author: users[1],
+      versionAuthor: users[1],
+      series: [playingUkuleleChallengeSeriesEntity],
     });
 
     challengeRepository.save({
