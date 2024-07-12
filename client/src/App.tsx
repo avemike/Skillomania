@@ -12,6 +12,7 @@ import { Register } from "./pages/Register";
 import { Contacts } from "./pages/Contacts";
 import { Home } from "./pages/Home";
 import { ChallengeSeriesPage } from "./pages/ChallengeSeriesPage";
+import { AddNewSeries } from "./pages/AddNewSeries";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { AuthProvider } from "./AuthenticationProvider";
 
@@ -33,6 +34,7 @@ const router = createBrowserRouter([
   createStandardRoute("/contacts", <Contacts />),
   createStandardRoute("/home", <Home />),
   createStandardRoute("/challenges", <ChallengeSeriesPage />),
+  createStandardRoute("/AddNewSeries", <AddNewSeries />),
 ]);
 
 // @todo: temporarily hardcoded
