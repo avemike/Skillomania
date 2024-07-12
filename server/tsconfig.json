@@ -5,22 +5,40 @@
     "lib": ["ES2020"],
     "module": "CommonJS",
     "skipLibCheck": true,
-    "esModuleInterop": true,
-
-    "outDir": "dist",
-    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "strictPropertyInitialization": false,
-
-    /* Linting */
+    "outDir": "./build",
+    
+    /* Strict Type-Checking Options */
     "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+
+    // @todo: strictPropertyInitialization doesn't work correctly with TypeORM entities - investigate it
+    "strictPropertyInitialization": false,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    /* Additional Checks */
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+
+    /* Module Resolution Options */
+    "moduleResolution": "node",
+    // "baseUrl": ".",
+    "esModuleInterop": true,
+
+    /* Experimental Options */
+    "experimentalDecorators": true,
+
+    /* Advanced Options */
+    "forceConsistentCasingInFileNames": true
+
+
   },
   "include": ["src/**/*", "src/types/custom.d.ts"],
 }

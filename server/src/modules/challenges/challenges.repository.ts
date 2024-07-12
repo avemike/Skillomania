@@ -1,7 +1,6 @@
-// import { db } from "../../db";
-
 import { Challenge } from "../../database/entities/challenge.entity";
 import { ChallengeSeries } from "../../database/entities/challengeSeries.entity";
+import { IChallenge } from "../../models/IChallenge";
 import { ServerContext } from "../../types/custom";
 
 interface GetChallengeArgs extends Pick<ServerContext, "db"> {
@@ -19,7 +18,9 @@ async function getChallenge({ db, id }: GetChallengeArgs) {
 }
 
 /** Challenges without any series associated with them */
-async function getLooseChallenges({ db }: Pick<ServerContext, "db">) {
+async function getLooseChallenges({
+  db,
+}: Pick<ServerContext, "db">): Promise<IChallenge[]> {
   const challengeRepository = db.getRepository(Challenge);
 
   const challenges = await challengeRepository

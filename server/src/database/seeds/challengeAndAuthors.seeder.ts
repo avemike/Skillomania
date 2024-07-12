@@ -185,35 +185,35 @@ export default class ChallengeSeeder implements Seeder {
     challengeRepository.save({
       ...cookingChallenge1,
       author: users[2],
-      varsionAuthor: users[2],
+      versionAuthor: users[2],
       series: [cookingChallengeSeriesEntity],
     });
 
     challengeRepository.save({
       ...cookingChallenge2,
       author: users[2],
-      varsionAuthor: users[2],
+      versionAuthor: users[2],
       series: [cookingChallengeSeriesEntity],
     });
 
     challengeRepository.save({
       ...cookingChallenge3,
       author: users[2],
-      varsionAuthor: users[2],
+      versionAuthor: users[2],
       series: [cookingChallengeSeriesEntity],
     });
 
     challengeRepository.save({
       ...cookingChallenge4,
       author: users[2],
-      varsionAuthor: users[2],
+      versionAuthor: users[2],
       series: [cookingChallengeSeriesEntity],
     });
 
     challengeRepository.save({
       ...cookingChallenge5,
       author: users[2],
-      varsionAuthor: users[2],
+      versionAuthor: users[2],
       series: [cookingChallengeSeriesEntity],
     });
 

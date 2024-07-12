@@ -14,7 +14,7 @@ export const createPayloadValidator = (
 
       await validateOrReject(schema);
 
-      next();
+      return next();
     } catch (e: any) {
       const message = Object.values(e[0].constraints)[0];
 

@@ -1,16 +1,17 @@
 {
   "name": "skillomania-server",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "build/src/server.js",
+  "private": true,
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
+    "----PRODUCTION-BELOW----": "",
+    "start": "node build/src/server.js",
+    "----TOOLS-BELOW----": "",
+    "build": "tsoa spec-and-routes && tsc --project tsconfig.json",
+    "generate-types": "openapi-typescript src/doc/api-definition-base.yml --output src/types/api.ts",
     "----DEV-MODES-BELOW----": "",
-    "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run watch:ts\" \"npm run watch:node\"",
-    "watch:node": "nodemon dist/index.js",
-    "watch:ts": "tsc --watch --project tsconfig.json",
-    "watch-debug": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run watch:ts\" \"npm run serve:debug\"",
-    "watch-debug:node": "nodemon --inspect dist/server.js",
+    "dev": "concurrently \"nodemon\" \"nodemon -x tsoa spec-and-routes\"",
     "----DATABASE-OPERATIONS-BELOW----": "",
     "db:migration:create": "node scripts/createMigration.js",
     "db:migration:run": "ts-node --project ./tsconfig.json ../node_modules/typeorm/cli.js migration:run -d ./src/database/dataSource.ts",
@@ -29,6 +30,7 @@
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.12.0",
     "reflect-metadata": "^0.2.2",
+    "tsoa": "^6.3.1",
     "typeorm": "^0.3.20",
     "typeorm-extension": "^3.5.1"
   },
@@ -40,9 +42,17 @@
     "@types/node": "^20.12.13",
     "@types/readline-sync": "^1.4.8",
     "concurrently": "^8.2.2",
-    "nodemon": "^3.1.2",
+    "nodemon": "^3.1.4",
     "readline-sync": "^1.4.10",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
+  },
+  "workspaces": {
+    "nohoist": [
+      "tsoa",
+      "tsoa/**",
+      "concurrently",
+      "concurrently/**"
+    ]
   }
 }

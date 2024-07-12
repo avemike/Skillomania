@@ -1,63 +1,56 @@
-import express, { Request, Response } from "express";
-import { challengesService } from "./challenges.service";
+import express from "express";
 import { extractContextFromRequest } from "../../helpers/extractContextFromRequest";
+
+import { Controller, Get, Route, Request, Post, Body, Middlewares } from "tsoa";
+import { ChallengesService } from "./challenges.service";
+import { IChallenge } from "../../models/IChallenge";
+import { IChallengeSeries } from "../../models/IChallengeSeries";
 import {
   createChallengeSeriesValidator,
   createChallengeValidator,
 } from "./challenges.validation";
 
-const challengesRouter = express.Router();
-
-challengesRouter.get("/", async (req: Request, res: Response) => {
-  const challenges = await challengesService.getLooseChallenges(
-    extractContextFromRequest(req)
-  );
-
-  return res.json(challenges);
-});
-
-challengesRouter.get("/series", async (req: Request, res: Response) => {
-  const series = await challengesService.getSeries(
-    extractContextFromRequest(req)
-  );
-
-  return res.json(series);
-});
-
-challengesRouter.post("/series/:id", async (req: Request, res: Response) => {
-  const challenge = await challengesService.createChallenge({
-    ...req.body,
-    seriesId: Number(req.params.id),
-    ...extractContextFromRequest(req),
-  });
-
-  return res.json(challenge);
-});
-
-challengesRouter.post(
-  "/",
-  createChallengeValidator,
-  async (req: Request, res: Response) => {
-    const challenge = await challengesService.createChallenge({
-      ...req.body,
-      ...extractContextFromRequest(req),
-    });
-
-    return res.json(challenge);
+@Route("challenges")
+export class ChallengesController extends Controller {
+  @Get()
+  public async getChallenges(
+    @Request() request: express.Request
+  ): Promise<IChallenge[]> {
+    return new ChallengesService().getLooseChallenges(
+      extractContextFromRequest(request)
+    );
   }
-);
 
-challengesRouter.post(
-  "/series",
-  createChallengeSeriesValidator,
-  async (req: Request, res: Response) => {
-    const series = await challengesService.createChallengeSeries({
-      ...req.body,
-      ...extractContextFromRequest(req),
-    });
-
-    return res.json(series);
+  @Get("series")
+  public async getSeries(
+    @Request() request: express.Request
+  ): Promise<IChallengeSeries[]> {
+    return new ChallengesService().getSeries(
+      extractContextFromRequest(request)
+    );
   }
-);
 
-export { challengesRouter };
+  @Post()
+  @Middlewares(createChallengeValidator)
+  public async createChallenge(
+    @Request() request: express.Request,
+    @Body() body: { title: string; description: string }
+  ): Promise<IChallenge> {
+    return new ChallengesService().createChallenge({
+      ...body,
+      ...extractContextFromRequest(request),
+    });
+  }
+
+  @Post("series")
+  @Middlewares(createChallengeSeriesValidator)
+  public async createChallengeSeries(
+    @Request() request: express.Request,
+    @Body() body: { title: string; description: string }
+  ): Promise<IChallengeSeries> {
+    return new ChallengesService().createChallengeSeries({
+      ...body,
+      ...extractContextFromRequest(request),
+    });
+  }
+}
