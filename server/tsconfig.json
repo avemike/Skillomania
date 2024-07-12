@@ -36,9 +36,7 @@
     "experimentalDecorators": true,
 
     /* Advanced Options */
-    "forceConsistentCasingInFileNames": true
-
-
+    "forceConsistentCasingInFileNames": true,
   },
   "include": ["src/**/*", "src/types/custom.d.ts"],
 }

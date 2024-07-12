@@ -52,7 +52,7 @@ async function getSeriesWithChallenges({
 interface InsertChallengeArgs extends Pick<ServerContext, "db"> {
   title: string;
   description: string;
-  seriesId?: number;
+  seriesId?: number | null;
 }
 
 async function insertChallenge({

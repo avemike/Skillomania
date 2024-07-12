@@ -12,7 +12,7 @@ interface GetChallengeArgs extends Pick<ServerContext, "db"> {
 interface CreateChallengeArgs extends Pick<ServerContext, "db"> {
   title: string;
   description: string;
-  seriesId?: number;
+  seriesId?: number | null;
 }
 
 interface CreateChallengeSeriesArgs extends Pick<ServerContext, "db"> {

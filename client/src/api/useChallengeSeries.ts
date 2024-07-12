@@ -1,14 +1,9 @@
 import { useQuery } from "react-query";
-import { ChallengeSeries } from "../types/challengeSeries";
-import { fetchBase } from "./fetchBase";
-
-export const CHALLENGE_SERIES_KEY = "/challenges/series";
-
-const fetchChallengeSeries = (): Promise<ChallengeSeries[]> =>
-  fetchBase("/challenges/series").then((response) => response.json());
+import { getSeries } from "./openapi";
+import { CHALLENGE_SERIES_KEY } from "./queryKeys";
 
 export function useChallengeSeries() {
   return useQuery(CHALLENGE_SERIES_KEY, {
-    queryFn: fetchChallengeSeries,
+    queryFn: getSeries,
   });
 }

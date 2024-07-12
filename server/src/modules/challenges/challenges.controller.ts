@@ -34,7 +34,8 @@ export class ChallengesController extends Controller {
   @Middlewares(createChallengeValidator)
   public async createChallenge(
     @Request() request: express.Request,
-    @Body() body: { title: string; description: string }
+    @Body()
+    body: { title: string; description: string; seriesId?: number | null }
   ): Promise<IChallenge> {
     return new ChallengesService().createChallenge({
       ...body,

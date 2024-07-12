@@ -42,7 +42,7 @@ export function ChallengeSeriesList() {
         <div className="bg-[rgba(0,100,190,0.05)] backdrop-filter backdrop-blur-sm flex flex-col text-center items-center justify-center w-3/5 p-8 rounded-xl space-y-6">
           <div className="text-black text-3xl font-bold">Challenges</div>
           <div className="text-black text-lg font-semibold space-y-6">
-            {data?.map((series) => (
+            {data?.data?.map((series) => (
               <div key={series.id} className="space-y-2 text-left w-full">
                 <div className="text-xl font-bold">{series.title}</div>
                 <div className="text-sm italic">{series.description}</div>
