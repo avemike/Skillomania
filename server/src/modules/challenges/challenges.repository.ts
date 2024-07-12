@@ -1,13 +1,12 @@
 import { Challenge } from "../../database/entities/challenge.entity";
 import { ChallengeSeries } from "../../database/entities/challengeSeries.entity";
-import { IChallenge } from "../../models/IChallenge";
-import { ServerContext } from "../../types/custom";
+import { db } from "../../database/initializeDatabase";
 
-interface GetChallengeArgs extends Pick<ServerContext, "db"> {
+interface GetChallengeArgs {
   id?: number;
 }
 
-async function getChallenge({ db, id }: GetChallengeArgs) {
+async function getChallenge({ id }: GetChallengeArgs) {
   const challengeRepository = db.getRepository(Challenge);
   const challenge = await challengeRepository.findOne({
     where: { id },
@@ -18,9 +17,7 @@ async function getChallenge({ db, id }: GetChallengeArgs) {
 }
 
 /** Challenges without any series associated with them */
-async function getLooseChallenges({
-  db,
-}: Pick<ServerContext, "db">): Promise<IChallenge[]> {
+async function getLooseChallenges() {
   const challengeRepository = db.getRepository(Challenge);
 
   const challenges = await challengeRepository
@@ -32,13 +29,12 @@ async function getLooseChallenges({
   return challenges;
 }
 
-interface GetSeriesWithChallengesArgs extends Pick<ServerContext, "db"> {
+interface GetSeriesWithChallengesArgs {
   ids?: number[];
 }
 
 async function getSeriesWithChallenges({
   ids = [],
-  db,
 }: GetSeriesWithChallengesArgs) {
   const challengeSeriesRepository = db.getRepository(ChallengeSeries);
   const challengeSeries = await challengeSeriesRepository.find({
@@ -49,14 +45,13 @@ async function getSeriesWithChallenges({
   return challengeSeries;
 }
 
-interface InsertChallengeArgs extends Pick<ServerContext, "db"> {
+interface InsertChallengeArgs {
   title: string;
   description: string;
   seriesId?: number | null;
 }
 
 async function insertChallenge({
-  db,
   title,
   description,
   seriesId,
@@ -79,13 +74,12 @@ async function insertChallenge({
   return challenge;
 }
 
-interface InsertChallengeSeriesArgs extends Pick<ServerContext, "db"> {
+interface InsertChallengeSeriesArgs {
   title: string;
   description: string;
 }
 
 async function insertChallengeSeries({
-  db,
   title,
   description,
 }: InsertChallengeSeriesArgs) {

@@ -1,46 +1,43 @@
-import { ServerContext } from "../../types/custom";
 import { challengesRepository } from "./challenges.repository";
 
-interface GetSeriesArgs extends Pick<ServerContext, "db"> {
+interface GetSeriesArgs {
   ids?: number[];
 }
 
-interface GetChallengeArgs extends Pick<ServerContext, "db"> {
+interface GetChallengeArgs {
   id?: number;
 }
 
-interface CreateChallengeArgs extends Pick<ServerContext, "db"> {
+interface CreateChallengeArgs {
   title: string;
   description: string;
   seriesId?: number | null;
 }
 
-interface CreateChallengeSeriesArgs extends Pick<ServerContext, "db"> {
+interface CreateChallengeSeriesArgs {
   title: string;
   description: string;
 }
 
 export class ChallengesService {
-  public getSeries = async ({ ids, db }: GetSeriesArgs) => {
-    return await challengesRepository.getSeriesWithChallenges({ ids, db });
+  public getSeries = async ({ ids }: GetSeriesArgs) => {
+    return await challengesRepository.getSeriesWithChallenges({ ids });
   };
 
-  public getLooseChallenges = async ({ db }: Pick<ServerContext, "db">) => {
-    return await challengesRepository.getLooseChallenges({ db });
+  public getLooseChallenges = async () => {
+    return await challengesRepository.getLooseChallenges();
   };
 
-  public getChallenge = async ({ id, db }: GetChallengeArgs) => {
-    return await challengesRepository.getChallenge({ db, id });
+  public getChallenge = async ({ id }: GetChallengeArgs) => {
+    return await challengesRepository.getChallenge({ id });
   };
 
   public createChallenge = async ({
-    db,
     title,
     description,
     seriesId,
   }: CreateChallengeArgs) => {
     return await challengesRepository.insertChallenge({
-      db,
       title,
       description,
       seriesId,
@@ -48,12 +45,10 @@ export class ChallengesService {
   };
 
   public createChallengeSeries = async ({
-    db,
     title,
     description,
   }: CreateChallengeSeriesArgs) => {
     return await challengesRepository.insertChallengeSeries({
-      db,
       title,
       description,
     });
