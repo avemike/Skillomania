@@ -1,15 +1,14 @@
-/**
- * Renders the Home component.
- * @remarks
- * WIP: Currently function as a placeholder for the homepage.
- */
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+
 export function AddNewSeries() {
+  const { handleSubmit } = useForm();
   return (
-    <div className="h-dvh w-svw flex flex-col text-center items-center justify-center">
-      <h1 className=" text-4xl">
-        No tu będzie guzik który dodaje challenge ale musze ogarnąć jak to
-        zrobić
-      </h1>
-    </div>
+    <form onSubmit={handleSubmit((data) => console.log(data))}>
+      <input type="text" placeholder="New Series name" />
+      <input type="text" placeholder="Title" />
+      <input type="text" placeholder="Description" />
+      <button type="submit">Submit</button>
+    </form>
   );
 }

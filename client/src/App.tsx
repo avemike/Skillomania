@@ -4,6 +4,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { StandardLayout } from "./layouts/StandardLayout";
+import { HomeLayout } from "./layouts/HomeLayout";
 import { WelcomePage } from "./pages/WelcomePage";
 import { About } from "./pages/About";
 import { Error as ErrorPage } from "./pages/Error";
@@ -19,10 +20,21 @@ import { AuthProvider } from "./AuthenticationProvider";
 function StandardPage({ page }: { page: ReactNode }) {
   return <StandardLayout>{page}</StandardLayout>;
 }
+
+function HomePage({ page }: { page: ReactNode }) {
+  return <HomeLayout>{page}</HomeLayout>;
+}
 function createStandardRoute(path: string, element: ReactNode): RouteObject {
   return {
     path,
     element: <StandardPage page={element} />,
+  };
+}
+
+function createHomeRoute(path: string, element: ReactNode): RouteObject {
+  return {
+    path,
+    element: <HomePage page={element} />,
   };
 }
 
@@ -33,8 +45,8 @@ const router = createBrowserRouter([
   createStandardRoute("/register", <Register />),
   createStandardRoute("/contacts", <Contacts />),
   createStandardRoute("/home", <Home />),
-  createStandardRoute("/challenges", <ChallengeSeriesPage />),
-  createStandardRoute("/AddNewSeries", <AddNewSeries />),
+  createHomeRoute("/challenges", <ChallengeSeriesPage />),
+  createHomeRoute("/AddNewSeries", <AddNewSeries />),
 ]);
 
 // @todo: temporarily hardcoded
