@@ -7,12 +7,12 @@ export function ChallengeSeriesList() {
   const { data: response, isLoading, isError } = useChallengeSeries();
 
   const commonStyles =
-    "bg-[url('./assets/welcome_website.svg')] bg-center bg-cover h-screen w-screen flex flex-col items-center justify-center";
+    "bg-[url('./assets/welcome_website.svg')] bg-center bg-cover min-h-screen  w-screen flex flex-col items-center justify-center ";
 
   if (isLoading) {
     return (
       <div className={commonStyles}>
-        <div className="flex justify-center items-center h-screen">
+        <div className="flex justify-center items-center min-h-screen">
           <div className="animate-spin rounded-full h-32 w-32 border-b-4 border-gray-900"></div>
         </div>
       </div>
@@ -41,7 +41,7 @@ export function ChallengeSeriesList() {
         </div>
         <div className="bg-[rgba(0,100,190,0.05)] backdrop-filter backdrop-blur-sm flex flex-col text-center items-center justify-center w-3/5 p-8 rounded-xl space-y-6">
           <div className="text-black text-3xl font-bold">Challenges</div>
-          <div className="text-black text-lg font-semibold space-y-6">
+          <div className="text-black text-lg font-semibold space-y-6 max-h-[500px] overflow-y-auto">
             {response?.data?.map((series) => (
               <div key={series.id} className="space-y-2 text-left w-full">
                 <div className="text-xl font-bold">{series.title}</div>

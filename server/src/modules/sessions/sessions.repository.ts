@@ -1,19 +1,14 @@
 import { Session } from "../../database/entities/session.entity";
 import { User } from "../../database/entities/user.entity";
-import { ServerContext } from "../../types/custom";
+import { db } from "../../database/initializeDatabase";
 
-interface CreateSessionArgs extends Pick<ServerContext, "db"> {
+interface CreateSessionArgs {
   user: User;
   token: string;
   expiresAt: Date;
 }
 
-async function createSession({
-  db,
-  user,
-  token,
-  expiresAt,
-}: CreateSessionArgs) {
+async function createSession({ user, token, expiresAt }: CreateSessionArgs) {
   const sessionRepository = db.getRepository(Session);
   await sessionRepository
     .insert({
@@ -34,12 +29,12 @@ async function createSession({
   return session;
 }
 
-interface GetSessionArgs extends Pick<ServerContext, "db"> {
+interface GetSessionArgs {
   token: string;
   userId: number;
 }
 
-async function getSession({ db, token, userId }: GetSessionArgs) {
+async function getSession({ token, userId }: GetSessionArgs) {
   const sessionRepository = db.getRepository(Session);
   const session = await sessionRepository.findOne({
     where: { token, user: { id: userId } },

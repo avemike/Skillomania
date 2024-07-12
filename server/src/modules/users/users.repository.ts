@@ -1,11 +1,11 @@
 import { User } from "../../database/entities/user.entity";
-import { ServerContext } from "../../types/custom";
+import { db } from "../../database/initializeDatabase";
 
-interface GetUserArgs extends Pick<ServerContext, "db"> {
+interface GetUserArgs {
   email: string;
 }
 
-async function getUser({ db, email }: GetUserArgs) {
+async function getUser({ email }: GetUserArgs) {
   const userRepository = db.getRepository(User);
   const user = await userRepository.findOne({
     where: { email },
@@ -14,7 +14,7 @@ async function getUser({ db, email }: GetUserArgs) {
   return user;
 }
 
-interface InsertUserArgs extends Pick<ServerContext, "db"> {
+interface InsertUserArgs {
   email: string;
   firstName: string;
   lastName: string;
@@ -22,7 +22,6 @@ interface InsertUserArgs extends Pick<ServerContext, "db"> {
 }
 
 async function insertUser({
-  db,
   email,
   firstName,
   lastName,
