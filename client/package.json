@@ -7,9 +7,13 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "openapi-ts": "openapi-ts"
   },
   "dependencies": {
+    "@casl/ability": "^6.7.1",
+    "@casl/react": "^4.0.0",
+    "@hey-api/client-fetch": "^0.1.8",
     "@hookform/resolvers": "^3.6.0",
     "@react-oauth/google": "^0.12.1",
     "prop-types": "^15.8.1",
@@ -21,6 +25,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@hey-api/openapi-ts": "^0.48.2",
     "@julr/vite-plugin-validate-env": "^1.1.1",
     "@tanstack/eslint-plugin-query": "^5.43.1",
     "@types/node": "^20.14.7",
@@ -37,5 +42,11 @@
     "tailwindcss": "^3.4.3",
     "typescript": "^5.2.2",
     "vite": "^5.2.0"
+  },
+  "workspaces": {
+    "nohoist": [
+      "@hey-api",
+      "@hey-api/**"
+    ]
   }
 }

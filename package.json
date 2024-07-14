@@ -4,8 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "private": true,
-  "workspaces": [
-    "client",
-    "server"
-  ]
+  "workspaces": {
+    "packages": [
+      "client",
+      "server"
+    ]
+  }
 }

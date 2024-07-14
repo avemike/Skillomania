@@ -1,19 +1,24 @@
-import { Request, Response } from "express";
-import { usersRepository } from "../modules/users/users.repository";
 import { OAuth2Client } from "google-auth-library";
-import { sessionsService } from "../modules/sessions/sessions.service";
+import { Body, Post, Route, Controller } from "tsoa";
+import { sessionsService } from "../sessions/sessions.service";
+import { usersRepository } from "../users/users.repository";
 
 const googleOauthClient = new OAuth2Client(process.env.GOOGLE_OAUTH_CLIENT_ID);
 
-export async function googleAuthHandler(req: Request, res: Response) {
-  // @todo: add class validator
-  const { credential, client_id } = req.body;
+interface IGoogleAuthRequestBody {
+  credential: string;
+  client_id: string;
+}
 
-  try {
+@Route("google-auth")
+export class GoogleAuthController extends Controller {
+  @Post()
+  public async googleAuth(@Body() body: IGoogleAuthRequestBody) {
     const ticket = await googleOauthClient.verifyIdToken({
-      idToken: credential,
-      audience: client_id,
+      idToken: body.credential,
+      audience: body.client_id,
     });
+
     const payload = ticket.getPayload();
     const email = payload?.email;
 
@@ -37,14 +42,16 @@ export async function googleAuthHandler(req: Request, res: Response) {
     }
 
     if (!user) {
-      // @todo: shouldn't happen, add logging
       throw new Error("Something went wrong");
     }
 
     const session = await sessionsService.createSession({ user });
 
-    res.status(200).cookie("token", session.token).json({ payload, user });
-  } catch (err) {
-    res.status(400).json({ err });
+    this.setHeader("Set-Cookie", `token=${session.token}`);
+
+    return {
+      payload,
+      user,
+    };
   }
 }

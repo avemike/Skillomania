@@ -1,8 +1,5 @@
-import "reflect-metadata";
-import "dotenv/config";
-
-import { validateEnvs } from "./validateEnvs";
 import { app } from "./app";
+import { validateEnvs } from "./validateEnvs";
 
 validateEnvs();
 

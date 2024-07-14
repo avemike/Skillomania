@@ -1,7 +1,7 @@
 import { DataSource } from "typeorm";
 import { AppDataSource } from "./dataSource";
 
-let db: DataSource;
+export let db: DataSource;
 
 export async function initializeDatabase() {
   if (db) {

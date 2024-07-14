@@ -33,14 +33,16 @@ export function ChallengeCreationModal({
     defaultValues: DEFAULT_VALUES,
     resolver: zodResolver(schema),
   });
-  const { data = [], isLoading, isError } = useChallengeSeries();
+  const { data: response } = useChallengeSeries();
   const challengeMutation = useChallengeMutation();
 
   const handleSubmit = form.handleSubmit((data) => {
     challengeMutation.mutate({
-      title: data.title,
-      description: data.description,
-      seriesId: data.challengeSeriesId,
+      body: {
+        title: data.title,
+        description: data.description,
+        seriesId: data.challengeSeriesId,
+      },
     });
   });
 
@@ -53,6 +55,12 @@ export function ChallengeCreationModal({
     handleReset();
     onClose();
   };
+
+  const seriesList =
+    response?.data?.map((series) => ({
+      value: series.id,
+      label: series.title,
+    })) ?? [];
 
   return (
     <Modal.Wrapper isOpen={isOpen} onClose={handleClose}>
@@ -79,10 +87,7 @@ export function ChallengeCreationModal({
             render={({ field }) => (
               <Select
                 label="Series"
-                options={data.map((series) => ({
-                  value: series.id,
-                  label: series.title,
-                }))}
+                options={seriesList}
                 value={field.value}
                 onChange={(val) => field.onChange(Number(val))}
                 error={form.formState.errors.challengeSeriesId?.message}

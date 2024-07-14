@@ -1,16 +1,13 @@
 import jwt from "jsonwebtoken";
 import { sessionsRepository } from "../modules/sessions/sessions.repository";
 import { User } from "../database/entities/user.entity";
-import { ServerContext } from "../types/custom";
 
 interface GetUserFromTokenArgs {
   token: string;
-  db: ServerContext["db"];
 }
 
 export async function getUserFromToken({
   token,
-  db,
 }: GetUserFromTokenArgs): Promise<User | null> {
   if (!token) {
     return null;
@@ -26,7 +23,6 @@ export async function getUserFromToken({
 
     const session = await sessionsRepository.getSession({
       token,
-      db,
       userId: decoded.userId,
     });
 
