@@ -12,8 +12,8 @@ const config: Config = {
   ],
   coverageDirectory: "coverage",
   moduleFileExtensions: ["js", "ts"],
-  modulePathIgnorePatterns: ["<rootDir>/src/test-helpers/"],
-  extensionsToTreatAsEsm: [".ts"],
+  modulePathIgnorePatterns: ["<rootDir>/src/test-helpers/", "<rootDir>/build/"],
+  setupFiles: ["./src/test-helpers/setupTests.test.ts"],
 };
 
 export default config;
