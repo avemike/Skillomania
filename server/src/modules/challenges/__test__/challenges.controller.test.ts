@@ -54,7 +54,7 @@ describe("GET /challenges", () => {
   });
 
   it("should return 500 if service throws", async () => {
-    mockGetLooseChallenges.mockRejectedValue(new Error("Test error"));
+    mockGetLooseChallenges.mockRejectedValueOnce(new Error("Test error"));
 
     const response = await request(app).get("/challenges");
 
@@ -80,7 +80,7 @@ describe("GET /challenges/series", () => {
   });
 
   it("should return 500 if service throws", async () => {
-    mockGetSeries.mockRejectedValue(new Error("Test error"));
+    mockGetSeries.mockRejectedValueOnce(new Error("Test error"));
 
     const response = await request(app).get("/challenges/series");
 
@@ -107,7 +107,7 @@ describe("POST /challenges", () => {
   });
 
   it("should return 500 if service throws", async () => {
-    mockCreateChallenge.mockRejectedValue(new Error("Test error"));
+    mockCreateChallenge.mockRejectedValueOnce(new Error("Test error"));
 
     const response = await request(app).post("/challenges").send({
       title: "Challenge 1",
@@ -120,24 +120,141 @@ describe("POST /challenges", () => {
     expect(mockCreateChallenge).toHaveBeenCalledTimes(1);
   });
 
-  it("should return 422 as validation error if title is missing", async () => {
-    const response = await request(app).post("/challenges").send({
-      description: "Challenge 1 description",
+  describe("validation errors", () => {
+    beforeEach(() => {
+      jest.clearAllMocks();
     });
 
-    expect(response.status).toBe(422);
-    expect(response.body).toEqual({
-      errors: [
-        {
-          children: [],
-          constraints: {
-            isLength: "title must be longer than or equal to 5 characters",
-            isNotEmpty: "title should not be empty",
+    it("should return 422 as validation error if title is missing", async () => {
+      const response = await request(app).post("/challenges").send({
+        description: "Challenge 1 description",
+      });
+
+      expect(response.status).toBe(422);
+      expect(response.body).toEqual({
+        errors: [
+          {
+            children: [],
+            constraints: {
+              isLength: "title must be longer than or equal to 5 characters",
+              isNotEmpty: "title should not be empty",
+            },
+            property: "title",
+            target: { description: "Challenge 1 description" },
           },
-          property: "title",
-          target: { description: "Challenge 1 description" },
-        },
-      ],
+        ],
+      });
+    });
+
+    it("should return 422 as validation error if description is missing", async () => {
+      const response = await request(app).post("/challenges").send({
+        title: "Challenge 1",
+      });
+
+      expect(response.status).toBe(422);
+      expect(response.body).toEqual({
+        errors: [
+          {
+            children: [],
+            constraints: {
+              isLength:
+                "description must be longer than or equal to 5 characters",
+              isNotEmpty: "description should not be empty",
+            },
+            property: "description",
+            target: { title: "Challenge 1" },
+          },
+        ],
+      });
+    });
+
+    it("shouldn't return validation error if seriesId is empty", async () => {
+      const response = await request(app).post("/challenges").send({
+        title: "Challenge 1",
+        description: "Challenge 1 description",
+      });
+
+      expect(response.status).toBe(201);
+    });
+  });
+});
+
+describe("POST /challenges/series", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it("should return 201", async () => {
+    const response = await request(app).post("/challenges/series").send({
+      title: "Series 1",
+      description: "Series 1 description",
+    });
+
+    expect(response.status).toBe(200);
+    expect(mockChallengeService).toHaveBeenCalledTimes(1);
+    expect(mockCreateChallengeSeries).toHaveBeenCalledTimes(1);
+  });
+
+  it("should return 500 if service throws", async () => {
+    mockCreateChallengeSeries.mockRejectedValueOnce(new Error("Test error"));
+
+    const response = await request(app).post("/challenges/series").send({
+      title: "Series 1",
+      description: "Series 1 description",
+    });
+
+    expect(response.status).toBe(500);
+    expect(response.body).toEqual({ message: "Internal Server Error" });
+    expect(mockChallengeService).toHaveBeenCalledTimes(1);
+    expect(mockCreateChallengeSeries).toHaveBeenCalledTimes(1);
+  });
+
+  describe("validation errors", () => {
+    beforeEach(() => {
+      jest.clearAllMocks();
+    });
+
+    it("should return 422 as validation error if title is missing", async () => {
+      const response = await request(app).post("/challenges/series").send({
+        description: "Series 1 description",
+      });
+
+      expect(response.status).toBe(422);
+      expect(response.body).toEqual({
+        errors: [
+          {
+            children: [],
+            constraints: {
+              isLength: "title must be longer than or equal to 5 characters",
+              isNotEmpty: "title should not be empty",
+            },
+            property: "title",
+            target: { description: "Series 1 description" },
+          },
+        ],
+      });
+    });
+
+    it("should return 422 as validation error if description is missing", async () => {
+      const response = await request(app).post("/challenges/series").send({
+        title: "Series 1",
+      });
+
+      expect(response.status).toBe(422);
+      expect(response.body).toEqual({
+        errors: [
+          {
+            children: [],
+            constraints: {
+              isLength:
+                "description must be longer than or equal to 5 characters",
+              isNotEmpty: "description should not be empty",
+            },
+            property: "description",
+            target: { title: "Series 1" },
+          },
+        ],
+      });
     });
   });
 });
