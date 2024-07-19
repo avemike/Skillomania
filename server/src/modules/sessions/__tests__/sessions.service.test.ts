@@ -2,7 +2,7 @@ const mockJwt = {
   sign: jest.fn().mockReturnValue("token"),
 };
 
-jest.mock("jsonWebToken", () => ({
+jest.mock("jsonwebtoken", () => ({
   default: mockJwt,
   __esModule: true,
 }));
