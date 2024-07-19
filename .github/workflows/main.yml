@@ -1,0 +1,20 @@
+name: Server Unit Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches: [main]
+
+jobs:
+  Jest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install dependencies
+        working-directory: ./server
+        run: yarn install --frozen-lock
+      - name: Test
+        working-directory: ./server
+        run: yarn test          
+
