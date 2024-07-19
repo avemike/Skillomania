@@ -44,8 +44,8 @@ export class ChallengesController extends Controller {
   }
 
   @SuccessResponse("201", "Created")
-  @Post("series")
   @Middlewares(createChallengeSeriesValidator)
+  @Post("series")
   public async createChallengeSeries(
     @Body() body: { title: string; description: string }
   ): Promise<IChallengeSeries> {

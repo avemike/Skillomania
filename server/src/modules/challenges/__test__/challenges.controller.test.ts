@@ -190,7 +190,7 @@ describe("POST /challenges/series", () => {
       description: "Series 1 description",
     });
 
-    expect(response.status).toBe(200);
+    expect(response.status).toBe(201);
     expect(mockChallengeService).toHaveBeenCalledTimes(1);
     expect(mockCreateChallengeSeries).toHaveBeenCalledTimes(1);
   });
