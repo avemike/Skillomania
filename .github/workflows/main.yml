@@ -16,6 +16,9 @@ jobs:
       - name: Install dependencies
         working-directory: server
         run: yarn install --frozen-lock
+      - name: Build
+        working-directory: server
+        run: yarn build
       - name: Test
         working-directory: server
         run: yarn test          
