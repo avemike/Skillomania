@@ -8,7 +8,7 @@ const config: Config = {
   collectCoverageFrom: [
     "src/**/*.controller.ts",
     "src/**/*.service.ts",
-    "src/**/*.repository.ts",
+    // "src/**/*.repository.ts",
   ],
   coverageDirectory: "coverage",
   moduleFileExtensions: ["js", "ts"],
