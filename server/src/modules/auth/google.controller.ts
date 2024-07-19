@@ -2,8 +2,7 @@ import { OAuth2Client } from "google-auth-library";
 import { Body, Post, Route, Controller } from "tsoa";
 import { sessionsService } from "../sessions/sessions.service";
 import { usersRepository } from "../users/users.repository";
-
-const googleOauthClient = new OAuth2Client(process.env.GOOGLE_OAUTH_CLIENT_ID);
+import { BadRequestError } from "../../errors/publicErrors";
 
 interface IGoogleAuthRequestBody {
   credential: string;
@@ -12,9 +11,13 @@ interface IGoogleAuthRequestBody {
 
 @Route("google-auth")
 export class GoogleAuthController extends Controller {
+  private googleOauthClient = new OAuth2Client(
+    process.env.GOOGLE_OAUTH_CLIENT_ID
+  );
+
   @Post()
   public async googleAuth(@Body() body: IGoogleAuthRequestBody) {
-    const ticket = await googleOauthClient.verifyIdToken({
+    const ticket = await this.googleOauthClient.verifyIdToken({
       idToken: body.credential,
       audience: body.client_id,
     });
@@ -23,11 +26,11 @@ export class GoogleAuthController extends Controller {
     const email = payload?.email;
 
     if (!email) {
-      throw new Error("Email not found in payload");
+      throw new BadRequestError("Email not found in payload");
     }
 
     if (!payload?.email_verified) {
-      throw new Error("Email not verified");
+      throw new BadRequestError("Email not verified");
     }
 
     let user = await usersRepository.getUser({ email });

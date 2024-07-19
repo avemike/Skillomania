@@ -1,4 +1,12 @@
-import { Controller, Get, Route, Post, Body, Middlewares } from "tsoa";
+import {
+  Controller,
+  Get,
+  Route,
+  Post,
+  Body,
+  Middlewares,
+  SuccessResponse,
+} from "tsoa";
 import { ChallengesService } from "./challenges.service";
 import { IChallenge } from "../../models/IChallenge";
 import { IChallengeSeries } from "../../models/IChallengeSeries";
@@ -19,8 +27,9 @@ export class ChallengesController extends Controller {
     return new ChallengesService().getSeries({});
   }
 
-  @Post()
+  @SuccessResponse("201", "Created")
   @Middlewares(createChallengeValidator)
+  @Post()
   public async createChallenge(
     @Body()
     body: {
@@ -29,11 +38,14 @@ export class ChallengesController extends Controller {
       seriesId?: number | null;
     }
   ): Promise<IChallenge> {
+    this.setStatus(201);
+
     return new ChallengesService().createChallenge(body);
   }
 
-  @Post("series")
+  @SuccessResponse("201", "Created")
   @Middlewares(createChallengeSeriesValidator)
+  @Post("series")
   public async createChallengeSeries(
     @Body() body: { title: string; description: string }
   ): Promise<IChallengeSeries> {

@@ -9,6 +9,7 @@
     "isolatedModules": true,
     "emitDecoratorMetadata": true,
     "outDir": "./build",
+    "types": ["jest", "node", "@types/jest"],
     
     /* Strict Type-Checking Options */
     "strict": true,
@@ -39,4 +40,8 @@
     "forceConsistentCasingInFileNames": true,
   },
   "include": ["src/**/*", "src/types/custom.d.ts"],
+  // "ts-node": {
+  //   "esm": true,
+  //   "experimentalSpecifierResolution": "node"
+  // },
 }
