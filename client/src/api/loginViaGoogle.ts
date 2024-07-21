@@ -1,23 +1,19 @@
 import { CredentialResponse } from "@react-oauth/google";
-import { fetchBase } from "./fetchBase";
+import { googleAuth } from "./openapi";
 
 /**
  * Function that logs in a user via Google using '@react-oauth/google' library
  * Please use in the context of code/component from the mentioned library.
  */
 export async function loginViaGoogle(credentialResponse: CredentialResponse) {
-  if (!credentialResponse.credential) {
+  if (!credentialResponse.credential || !credentialResponse.clientId) {
     return;
   }
 
-  const response = await fetchBase("/google-auth", {
-    method: "POST",
-    body: JSON.stringify({
+  const response = await googleAuth({
+    body: {
       credential: credentialResponse.credential,
       client_id: credentialResponse.clientId,
-    }),
-    headers: {
-      "Content-Type": "application/json",
     },
   }).catch((error) => {
     console.error(error);
@@ -26,8 +22,12 @@ export async function loginViaGoogle(credentialResponse: CredentialResponse) {
   if (!response) {
     return;
   }
-  const data = await response.json();
-  const user = data.user;
+
+  const { user, payload } = response.data ?? {};
+
+  if (!payload || !user) {
+    throw new Error("Invalid response from server");
+  }
 
   localStorage.setItem("token", credentialResponse.credential);
   localStorage.setItem("firstName", user.firstName);

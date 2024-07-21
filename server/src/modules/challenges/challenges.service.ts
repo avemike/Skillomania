@@ -1,67 +1,56 @@
-import { ServerContext } from "../../types/custom";
 import { challengesRepository } from "./challenges.repository";
 
-interface GetSeriesArgs extends Pick<ServerContext, "db"> {
+interface GetSeriesArgs {
   ids?: number[];
 }
 
-async function getSeries({ ids, db }: GetSeriesArgs) {
-  return await challengesRepository.getSeriesWithChallenges({ ids, db });
-}
-
-async function getLooseChallenges({ db }: Pick<ServerContext, "db">) {
-  return await challengesRepository.getLooseChallenges({ db });
-}
-
-interface GetChallengeArgs extends Pick<ServerContext, "db"> {
+interface GetChallengeArgs {
   id?: number;
 }
 
-async function getChallenge({ id, db }: GetChallengeArgs) {
-  return await challengesRepository.getChallenge({ db, id });
-}
-
-interface CreateChallengeArgs extends Pick<ServerContext, "db"> {
+interface CreateChallengeArgs {
   title: string;
   description: string;
-  seriesId?: number;
+  seriesId?: number | null;
 }
 
-async function createChallenge({
-  db,
-  title,
-  description,
-  seriesId,
-}: CreateChallengeArgs) {
-  return await challengesRepository.insertChallenge({
-    db,
+interface CreateChallengeSeriesArgs {
+  title: string;
+  description: string;
+}
+
+export class ChallengesService {
+  public getSeries = async ({ ids }: GetSeriesArgs) => {
+    return await challengesRepository.getSeriesWithChallenges({ ids });
+  };
+
+  public getLooseChallenges = async () => {
+    return await challengesRepository.getLooseChallenges();
+  };
+
+  public getChallenge = async ({ id }: GetChallengeArgs) => {
+    return await challengesRepository.getChallenge({ id });
+  };
+
+  public createChallenge = async ({
     title,
     description,
     seriesId,
-  });
-}
+  }: CreateChallengeArgs) => {
+    return await challengesRepository.insertChallenge({
+      title,
+      description,
+      seriesId,
+    });
+  };
 
-interface CreateChallengeSeriesArgs extends Pick<ServerContext, "db"> {
-  title: string;
-  description: string;
-}
-
-async function createChallengeSeries({
-  db,
-  title,
-  description,
-}: CreateChallengeSeriesArgs) {
-  return await challengesRepository.insertChallengeSeries({
-    db,
+  public createChallengeSeries = async ({
     title,
     description,
-  });
+  }: CreateChallengeSeriesArgs) => {
+    return await challengesRepository.insertChallengeSeries({
+      title,
+      description,
+    });
+  };
 }
-
-export const challengesService = {
-  getSeries,
-  getLooseChallenges,
-  getChallenge,
-  createChallenge,
-  createChallengeSeries,
-};

@@ -10,7 +10,6 @@ export async function setupContext(
   const db = await initializeDatabase();
   const user = await getUserFromToken({
     token: req.cookies.token,
-    db,
   });
 
   return {
