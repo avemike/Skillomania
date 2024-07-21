@@ -1,11 +1,11 @@
-import { Controller, useForm } from "react-hook-form";
-import { Select } from "../components/form/Select";
-import { TextAreaInput } from "../components/form/TextAreaInput";
-import { TextInput } from "../components/form/TextInput";
-import { Modal } from "../components/Modal";
+import { useForm } from "react-hook-form";
+// import { Select } from "../components/form/Select";
+// import { TextAreaInput } from "../components/form/TextAreaInput";
+// import { TextInput } from "../components/form/TextInput";
+// import { Modal } from "../components/Modal";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Button } from "../components/form/Button";
+// import { Button } from "../components/form/Button";
 import { useChallengeSeries } from "../api/useChallengeSeries";
 import { useChallengeMutation } from "../api/useChallengeMutation";
 
@@ -27,7 +27,10 @@ interface SeriesCreationModalProps {
   onClose: () => void;
 }
 
-export function SeriesCreationModal({}: SeriesCreationModalProps) {
+export function SeriesCreationModal({
+  isOpen,
+  onClose,
+}: SeriesCreationModalProps) {
   const form = useForm<z.infer<typeof schema>>({
     defaultValues: DEFAULT_VALUES,
     resolver: zodResolver(schema),
@@ -45,6 +48,7 @@ export function SeriesCreationModal({}: SeriesCreationModalProps) {
       seriesId: data.challengeSeriesId,
     });
   });
+
   return (
     <Modal.Wrapper>
       <form className="contents" onSubmit={handleSubmit}>
