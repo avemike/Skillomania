@@ -9,20 +9,15 @@ import { setupContext } from "./setupContext";
 import { RegisterRoutes } from "../build/routes";
 import swaggerUi from "swagger-ui-express";
 import { errorHandler } from "./errors/errorHandler";
-// import { configuredPino } from "./pino";
+import { configuredPino } from "./pino";
 
 export const app = express();
 
-// app.use(configuredPino);
+app.use(configuredPino);
 app.use(cookieParser());
 app.use(urlencoded({ extended: true }));
 app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 app.use(express.json());
-// Logger middleware
-app.use((req, _res, next) => {
-  console.log(`[server]: ${req.method} ${req.path}`);
-  next();
-});
 
 app.use("/docs", swaggerUi.serve, async (_req: ExRequest, res: ExResponse) => {
   // _req.log.info("Serving swagger docs");
