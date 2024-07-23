@@ -4,6 +4,8 @@ import App from "./App.tsx";
 import "./index.css";
 import { client, createClient } from "@hey-api/client-fetch";
 
+import "./i18n.ts";
+
 createClient({
   baseUrl: import.meta.env.VITE_SERVER_BASE_URL,
 });
