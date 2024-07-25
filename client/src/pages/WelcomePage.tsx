@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { GoogleAuthButton } from "../components/GoogleAuthButton";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 /**
  * Renders the Home component.
@@ -7,6 +9,7 @@ import { GoogleAuthButton } from "../components/GoogleAuthButton";
  * WIP: Currently function as a placeholder for the homepage.
  */
 export function WelcomePage() {
+  const { t } = useTranslation();
   const [isPanelHidden, setIsPanelHidden] = useState<boolean>(true);
 
   const toggle = () => {
@@ -18,20 +21,19 @@ export function WelcomePage() {
       <div className="h-dvh w-svw">
         <div className="flex flex-col items-start absolute left-60 top-1/3">
           <h1 className="font-bold text-7xl bg-clip-text text-black">
-            Welcome
+            {t("home.welcome")}
           </h1>
           <h2 className="text-2xl my-4 text-gray-500">
-            To the <b>skillomania</b>
+            {t("home.toThe")}
+            <b>skillomania</b>
           </h2>
-          <p className="text-gray-500">
-            On this webside we upgrade our skills.
-          </p>
-          <p className="text-gray-500 mb-6">If you would be intrested.</p>
+          <p className="text-gray-500">{t("home.hereWeUpgradeSkills")}</p>
+          <p className="text-gray-500 mb-6">{t("home.ifYouAreInterested")}</p>
           <button
             className=" hover:shadow-indigo-100/50 shadow-lg shadow-indigo-100/50 text-white bg-black"
             onClick={toggle}
           >
-            Check us out!
+            {t("home.checkUsOut")}
           </button>
         </div>
 
