@@ -1,6 +1,7 @@
 import { Challenge } from "../../database/entities/challenge.entity";
 import { ChallengeSeries } from "../../database/entities/challengeSeries.entity";
 import { db } from "../../database/initializeDatabase";
+import { wrapInRepositoryError } from "../../errors/errorWrappers";
 
 interface GetChallengeArgs {
   id?: number;
@@ -99,11 +100,11 @@ async function insertChallengeSeries({
 }
 
 const challengesRepository = {
-  getChallenge,
-  getLooseChallenges,
-  getSeriesWithChallenges,
-  insertChallenge,
-  insertChallengeSeries,
+  getChallenge: wrapInRepositoryError(getChallenge),
+  getLooseChallenges: wrapInRepositoryError(getLooseChallenges),
+  getSeriesWithChallenges: wrapInRepositoryError(getSeriesWithChallenges),
+  insertChallenge: wrapInRepositoryError(insertChallenge),
+  insertChallengeSeries: wrapInRepositoryError(insertChallengeSeries),
 };
 
 export { challengesRepository };

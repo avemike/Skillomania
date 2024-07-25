@@ -30,3 +30,5 @@ export const configuredPino = pino({
     },
   },
 });
+
+export const logger = configuredPino.logger;

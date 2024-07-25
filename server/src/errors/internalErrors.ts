@@ -6,21 +6,30 @@
  */
 
 export class InternalError extends Error {
-  constructor(message: string) {
+  error?: unknown;
+
+  constructor(message: string, error?: unknown) {
     super(message);
+
+    this.name = "InternalError";
+    this.error = error;
   }
 }
 
 export class RepositoryError extends InternalError {
-  constructor(message: string) {
+  constructor(message: string, error: unknown) {
     super(message);
+
     this.name = "RepositoryError";
+    this.error = error;
   }
 }
 
 export class ServiceError extends InternalError {
-  constructor(message: string) {
+  constructor(message: string, error: unknown) {
     super(message);
+
     this.name = "ServiceError";
+    this.error = error;
   }
 }

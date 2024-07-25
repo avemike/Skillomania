@@ -12,6 +12,7 @@ import {
   ValidationError,
 } from "./publicErrors";
 import { InternalError, RepositoryError, ServiceError } from "./internalErrors";
+import { logger } from "../pino";
 
 export function errorHandler(
   err: unknown,
@@ -29,7 +30,7 @@ export function errorHandler(
   }
 
   if (err instanceof Error) {
-    console.error("Unhandled error: ", err.message);
+    logger.error("Unhandled error: ", err.message);
 
     return res.status(500).json({
       message: "Internal Server Error",
@@ -41,14 +42,14 @@ export function errorHandler(
 
 function handleInternalErrors(err: InternalError, res: ExResponse) {
   if (err instanceof RepositoryError) {
-    console.error(`Caught Repository Error:`, err.message);
+    logger.error(err, `Caught Repository Error: ${err.message}`);
   }
 
   if (err instanceof ServiceError) {
-    console.error(`Caught Service Error:`, err.message);
+    logger.error(`Caught Service Error:`, err.message);
   }
 
-  console.error(`Unhandled Internal Error:`, err.message, err);
+  logger.error(`Unhandled Internal Error:`, err.message, err);
 
   return res.status(500).json({
     message: "Internal Server Error",
@@ -57,36 +58,36 @@ function handleInternalErrors(err: InternalError, res: ExResponse) {
 
 function handlePublicErrors(err: PublicError, res: ExResponse) {
   if (err instanceof ValidationError) {
-    console.warn(`Caught Validation Error:`, err.message);
+    logger.warn(`Caught Validation Error:`, err.message);
 
     return res.status(422).json(err);
   }
 
   if (err instanceof NotFoundError) {
-    console.warn(`Caught Not Found Error:`, err.message);
+    logger.warn(`Caught Not Found Error:`, err.message);
 
     return res.status(404).json(err);
   }
 
   if (err instanceof UnauthorizedError) {
-    console.warn(`Caught Unauthorized Error:`, err.message);
+    logger.warn(`Caught Unauthorized Error:`, err.message);
 
     return res.status(401).json(err);
   }
 
   if (err instanceof ForbiddenError) {
-    console.warn(`Caught Forbidden Error:`, err.message);
+    logger.warn(`Caught Forbidden Error:`, err.message);
 
     return res.status(403).json(err);
   }
 
   if (err instanceof BadRequestError) {
-    console.warn(`Caught Bad Request Error:`, err.message);
+    logger.warn(`Caught Bad Request Error:`, err.message);
 
     return res.status(400).json(err);
   }
 
-  console.error(`Unhandled Public Error:`, err.message);
+  logger.error(`Unhandled Public Error:`, err.message);
 
   return res.status(500).json({
     message: "Internal Server Error",
