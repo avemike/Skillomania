@@ -34,7 +34,7 @@ export class ChallengeSeries implements IChallengeSeries {
 
   @ManyToMany(() => Challenge, (challenge) => challenge.series)
   @JoinTable({
-    name: "challenge_challenge_series",
+    name: "rel_challenge_challenge_series",
     joinColumn: { name: "challenge_series_id" },
     inverseJoinColumn: { name: "challenge_id" },
   })

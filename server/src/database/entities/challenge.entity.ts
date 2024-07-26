@@ -41,7 +41,7 @@ export class Challenge implements IChallenge {
     (challengeSeries) => challengeSeries.challenges
   )
   @JoinTable({
-    name: "challenge_challenge_series",
+    name: "rel_challenge_challenge_series",
     joinColumn: { name: "challenge_id" },
     inverseJoinColumn: { name: "challenge_series_id" },
   })
