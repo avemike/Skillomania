@@ -3,7 +3,7 @@ import { MigrationInterface, QueryRunner } from "typeorm";
 export class CreateCategories1721938276950 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`
-            CREATE TABLE categories (
+            CREATE TABLE category (
                 id SERIAL PRIMARY KEY,
                 name VARCHAR(255) NOT NULL,
                 parent_category_id INT,
@@ -13,16 +13,16 @@ export class CreateCategories1721938276950 implements MigrationInterface {
         `);
 
     await queryRunner.query(`
-            ALTER TABLE categories
+            ALTER TABLE category
             ADD CONSTRAINT fk_parent_category_id
             FOREIGN KEY (parent_category_id)
-            REFERENCES categories(id)
+            REFERENCES category(id)
             ON DELETE SET NULL;
         `);
 
     await queryRunner.query(`
             CREATE INDEX idx_parent_category_id
-            ON categories(parent_category_id);
+            ON category(parent_category_id);
         `);
   }
 
@@ -32,12 +32,12 @@ export class CreateCategories1721938276950 implements MigrationInterface {
         `);
 
     await queryRunner.query(`
-            ALTER TABLE categories
+            ALTER TABLE category
             DROP CONSTRAINT fk_parent_category_id;
         `);
 
     await queryRunner.query(`
-            DROP TABLE categories;
+            DROP TABLE category;
         `);
   }
 }
