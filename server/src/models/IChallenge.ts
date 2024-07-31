@@ -1,3 +1,4 @@
+import { ICategory } from "./ICategory";
 import { IChallengeSeries } from "./IChallengeSeries";
 import { IUser } from "./IUser";
 
@@ -6,7 +7,9 @@ export interface IChallenge {
   title: string;
   description: string;
   author: IUser;
+  owners: IUser[];
   series: IChallengeSeries[];
+  category: ICategory;
   version: number;
   versionCreatedAt: Date;
   versionAuthor: IUser;
