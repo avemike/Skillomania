@@ -2,9 +2,7 @@ import "dotenv/config";
 
 import { DataSource, DataSourceOptions } from "typeorm";
 import { SeederOptions } from "typeorm-extension";
-import userFactory from "./factories/user.factory";
-import ChallengeSeeder from "./seeds/challengeAndAuthors.seeder";
-import UserSeeder from "./seeds/user.seeder";
+import MainSeeder from "./seeds/main-seeder";
 
 const config: DataSourceOptions & SeederOptions = {
   type: "postgres",
@@ -17,8 +15,7 @@ const config: DataSourceOptions & SeederOptions = {
   migrationsTableName: "migration_typeorm",
   entities: [__dirname + "/entities/*.entity.{js,ts}"],
   maxQueryExecutionTime: 1000,
-  seeds: [ChallengeSeeder, UserSeeder],
-  factories: [userFactory],
+  seeds: [MainSeeder],
 };
 
 export const AppDataSource = new DataSource(config);
