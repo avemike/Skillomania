@@ -11,9 +11,9 @@ export class AddLevels1722534091994 implements MigrationInterface {
 
     await queryRunner.query(`
             ALTER TABLE "challenge" ADD "required_expertise" integer NOT NULL;
-            ALTER TABLE "challenge" ADD CONSTRAINT "required_expertise_check" CHECK ("required_expertise" >= 0 AND "required_expertise" <= 4);
+            ALTER TABLE "challenge" ADD CONSTRAINT "required_expertise_check" CHECK ("required_expertise" >= 0 AND "required_expertise" <= 3);
             ALTER TABLE "challenge_series" ADD "required_expertise" integer NOT NULL;
-            ALTER TABLE "challenge_series" ADD CONSTRAINT "required_expertise_check" CHECK ("required_expertise" >= 0 AND "required_expertise" <= 4);
+            ALTER TABLE "challenge_series" ADD CONSTRAINT "required_expertise_check" CHECK ("required_expertise" >= 0 AND "required_expertise" <= 3);
         `);
 
     await queryRunner.query(`

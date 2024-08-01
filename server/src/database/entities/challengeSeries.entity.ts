@@ -23,11 +23,33 @@ export class ChallengeSeries implements IChallengeSeries {
 
   @Column({
     length: 100,
+    nullable: false,
   })
   title: string;
 
   @Column("text")
   description: string;
+
+  @Column({
+    type: "integer",
+    name: "effort_level",
+    nullable: false,
+  })
+  effortLevel: 1 | 2 | 3 | 4 | 5;
+
+  @Column({
+    type: "integer",
+    name: "required_expertise",
+    nullable: false,
+  })
+  requiredExpertise: 0 | 1 | 2 | 3;
+
+  @Column({
+    type: "text",
+    name: "difficulty_explanation",
+    nullable: true,
+  })
+  difficultyExplanation: string;
 
   @ManyToOne(() => User, (user) => user.challengeSeries)
   @JoinColumn({ name: "author_id" })
