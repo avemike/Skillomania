@@ -1,13 +1,13 @@
 import { IChallenge } from "./IChallenge";
 import { IChallengeSeries } from "./IChallengeSeries";
 
-export type AuthSource = "google";
-export interface IUser {
+export interface ICategory {
   id: number;
-  email: string;
-  firstName: string;
-  lastName: string;
-  authSource: AuthSource;
+  name: string;
+  parentCategory: ICategory | null;
   challenges: IChallenge[];
   challengeSeries: IChallengeSeries[];
+  childrenCategories: ICategory[];
+  createdAt: Date;
+  updatedAt: Date;
 }

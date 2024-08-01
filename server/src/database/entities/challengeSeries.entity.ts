@@ -14,6 +14,7 @@ import {
 import { Challenge } from "./challenge.entity";
 import { User } from "./user.entity";
 import { IChallengeSeries } from "../../models/IChallengeSeries";
+import { Category } from "./category.entity";
 
 @Entity()
 export class ChallengeSeries implements IChallengeSeries {
@@ -32,13 +33,25 @@ export class ChallengeSeries implements IChallengeSeries {
   @JoinColumn({ name: "author_id" })
   author: User;
 
+  @ManyToMany(() => User, (user) => user.challengeSeries)
+  @JoinTable({
+    name: "rel_user_challenge_series",
+    joinColumn: { name: "challenge_series_id" },
+    inverseJoinColumn: { name: "user_id" },
+  })
+  owners: User[];
+
   @ManyToMany(() => Challenge, (challenge) => challenge.series)
   @JoinTable({
-    name: "challenge_challenge_series",
+    name: "rel_challenge_challenge_series",
     joinColumn: { name: "challenge_series_id" },
     inverseJoinColumn: { name: "challenge_id" },
   })
   challenges: Challenge[];
+
+  @ManyToOne(() => Category, (category) => category.challengeSeries)
+  @JoinColumn({ name: "category_id" })
+  category: Category;
 
   @VersionColumn()
   version: number;

@@ -1,19 +1,27 @@
-import { Seeder, SeederFactoryManager } from "typeorm-extension";
 import { DataSource } from "typeorm";
 import { User } from "../entities/user.entity";
+import {
+  userGuitarMaster,
+  userReadingChamp,
+  userRunningGuru,
+  userYourMama,
+} from "./seeds";
 
-export default class UserSeeder implements Seeder {
-  track = true;
-
-  public async run(
-    _dataSource: DataSource,
-    factoryManager: SeederFactoryManager
-  ): Promise<any> {
+export const UserSeeder = {
+  run: async (dataSource: DataSource) => {
     console.log("UserSeeder is running...");
+    const userRepository = dataSource.getRepository(User);
 
-    const userFactory = await factoryManager.get(User);
-    await userFactory.saveMany(100);
+    const [user1, user2, user3, user4] = await userRepository.save([
+      userGuitarMaster,
+      userRunningGuru,
+      userYourMama,
+      userReadingChamp,
+    ]);
 
-    console.log("UserSeeder has run successfully!");
-  }
-}
+    userGuitarMaster.id = user1.id;
+    userRunningGuru.id = user2.id;
+    userYourMama.id = user3.id;
+    userReadingChamp.id = user4.id;
+  },
+};

@@ -24,11 +24,16 @@ import { initializeDatabase } from "./initializeDatabase";
   console.log("Purging the database...");
   const connection = await initializeDatabase();
 
-  await connection.query("TRUNCATE TABLE user_challenge CASCADE");
+  await connection.query("TRUNCATE TABLE rel_user_challenge CASCADE");
+  await connection.query("TRUNCATE TABLE rel_user_challenge_series CASCADE");
+  await connection.query(
+    "TRUNCATE TABLE rel_challenge_challenge_series CASCADE"
+  );
   await connection.query("TRUNCATE TABLE app_user CASCADE");
-  await connection.query("TRUNCATE TABLE challenge_challenge_series CASCADE");
   await connection.query("TRUNCATE TABLE challenge CASCADE");
   await connection.query("TRUNCATE TABLE challenge_series CASCADE");
+  await connection.query("TRUNCATE TABLE category CASCADE");
+  await connection.query("TRUNCATE TABLE session CASCADE");
   await connection.query("TRUNCATE TABLE seeds CASCADE");
 
   console.log("Database purged.");

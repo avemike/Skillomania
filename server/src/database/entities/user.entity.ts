@@ -6,6 +6,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
+  ManyToMany,
 } from "typeorm";
 import { Challenge } from "./challenge.entity";
 import { ChallengeSeries } from "./challengeSeries.entity";
@@ -42,10 +43,13 @@ export class User implements IUser {
   })
   authSource: AuthSource;
 
-  @OneToMany(() => Challenge, (challenge) => challenge.author)
+  @ManyToMany(() => Challenge, (challenge) => challenge.owners)
   challenges: Challenge[];
 
-  @OneToMany(() => ChallengeSeries, (challengeSeries) => challengeSeries.author)
+  @ManyToMany(
+    () => ChallengeSeries,
+    (challengeSeries) => challengeSeries.owners
+  )
   challengeSeries: ChallengeSeries[];
 
   @OneToMany(
