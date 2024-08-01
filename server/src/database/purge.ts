@@ -35,6 +35,9 @@ import { initializeDatabase } from "./initializeDatabase";
   await connection.query("TRUNCATE TABLE category CASCADE");
   await connection.query("TRUNCATE TABLE session CASCADE");
   await connection.query("TRUNCATE TABLE seeds CASCADE");
+  await connection.query("TRUNCATE TABLE category CASCADE");
+
+  await connection.destroy();
 
   console.log("Database purged.");
 })();
