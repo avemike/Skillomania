@@ -25,7 +25,7 @@ export function WelcomePage() {
           </h1>
           <h2 className="text-2xl my-4 text-gray-500">
             {t("home.toThe")}
-            <b>skillomania</b>
+            <b> skillomania</b>
           </h2>
           <p className="text-gray-500">{t("home.hereWeUpgradeSkills")}</p>
           <p className="text-gray-500 mb-6">{t("home.ifYouAreInterested")}</p>
