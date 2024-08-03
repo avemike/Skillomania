@@ -15,5 +15,7 @@ export default class MainSeeder implements Seeder {
     await ChallengeSeeder.run(dataSource);
 
     console.log("MainSeeder has run successfully!");
+
+    dataSource.destroy();
   }
 }

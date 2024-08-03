@@ -11,6 +11,8 @@ const config: DataSourceOptions & SeederOptions = {
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
+  synchronize: true,
+  logging: true,
   migrations: [__dirname + "/migrations/*.{js,ts}"],
   migrationsTableName: "migration_typeorm",
   entities: [__dirname + "/entities/*.entity.{js,ts}"],
