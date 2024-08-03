@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useChallengeSeries } from "../api/useChallengeSeries";
 import { ChallengeCreationModal } from "./ChallengeCreationModal";
 import { useAuth } from "../AuthenticationProvider";
+import { ChallengeSeriesCreationModal } from "./ChallengeSeriesCreationModal";
 
 export function ChallengeSeriesList() {
   const { data: response, isLoading, isError } = useChallengeSeries();
@@ -38,6 +39,7 @@ export function ChallengeSeriesList() {
       <div className="w-full h-full flex flex-col items-center justify-center space-y-4">
         <div className="w-full flex justify-end px-8">
           <ChallengeCreateButton />
+          <ChallengeSeriesCreateButton />
         </div>
         <div className="bg-[rgba(0,100,190,0.05)] backdrop-filter backdrop-blur-sm flex flex-col text-center items-center justify-center w-3/5 p-8 rounded-xl space-y-6">
           <div className="text-black text-3xl font-bold">Challenges</div>
@@ -88,6 +90,32 @@ function ChallengeCreateButton() {
         Create Challenge
       </button>
       <ChallengeCreationModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
+    </>
+  );
+}
+
+function ChallengeSeriesCreateButton() {
+  const { isAuthenticated } = useAuth();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => setIsModalOpen(true);
+
+  if (!isAuthenticated) {
+    return null;
+  }
+
+  return (
+    <>
+      <button
+        onClick={handleOpenModal}
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Create Series
+      </button>
+      <ChallengeSeriesCreationModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
