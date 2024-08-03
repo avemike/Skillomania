@@ -6,25 +6,32 @@ import {
   Body,
   Middlewares,
   SuccessResponse,
+  Request,
 } from "tsoa";
 import { ChallengesService } from "./challenges.service";
 import { IChallenge } from "../../models/IChallenge";
 import { IChallengeSeries } from "../../models/IChallengeSeries";
 import {
+  CreateChallengeSeriesValidationSchema,
   createChallengeSeriesValidator,
+  CreateChallengeValidationSchema,
   createChallengeValidator,
 } from "./challenges.validation";
+import { ServerContext } from "../../types/custom";
+import { UnauthorizedError } from "../../errors/publicErrors";
 
 @Route("challenges")
 export class ChallengesController extends Controller {
+  challengesService: ChallengesService = new ChallengesService();
+
   @Get()
   public async getChallenges(): Promise<IChallenge[]> {
-    return new ChallengesService().getLooseChallenges();
+    return this.challengesService.getLooseChallenges();
   }
 
   @Get("series")
   public async getSeries(): Promise<IChallengeSeries[]> {
-    return new ChallengesService().getSeries({});
+    return this.challengesService.getSeries({});
   }
 
   @SuccessResponse("201", "Created")
@@ -32,23 +39,48 @@ export class ChallengesController extends Controller {
   @Post()
   public async createChallenge(
     @Body()
-    body: {
-      title: string;
-      description: string;
-      seriesId?: number | null;
-    }
+    body: CreateChallengeValidationSchema,
+    @Request() request: ServerContext
   ): Promise<IChallenge> {
-    this.setStatus(201);
+    if (!request.user) {
+      throw new UnauthorizedError(
+        "You must be logged in to create a challenge"
+      );
+    }
 
-    return new ChallengesService().createChallenge(body);
+    const response = await this.challengesService.createChallenge({
+      title: body.title,
+      description: body.description,
+      categoryId: body.categoryId,
+      effortLevel: body.effortLevel,
+      requiredExpertise: body.requiredExpertise,
+      difficultyExplanation: body.difficultyExplanation,
+      authorId: request.user.id,
+    });
+
+    this.setStatus(201);
+    return response;
   }
 
   @SuccessResponse("201", "Created")
   @Middlewares(createChallengeSeriesValidator)
   @Post("series")
   public async createChallengeSeries(
-    @Body() body: { title: string; description: string }
+    @Body() body: CreateChallengeSeriesValidationSchema,
+    @Request() request: ServerContext
   ): Promise<IChallengeSeries> {
-    return new ChallengesService().createChallengeSeries(body);
+    if (!request.user) {
+      throw new UnauthorizedError("You must be logged in to create a series");
+    }
+
+    return this.challengesService.createChallengeSeries({
+      title: body.title,
+      description: body.description,
+      categoryId: body.categoryId,
+      effortLevel: body.effortLevel,
+      requiredExpertise: body.requiredExpertise,
+      difficultyExplanation: body.difficultyExplanation,
+      authorId: request.user.id,
+    });
   }
 }

@@ -2,6 +2,8 @@ import { Challenge } from "../../database/entities/challenge.entity";
 import { ChallengeSeries } from "../../database/entities/challengeSeries.entity";
 import { db } from "../../database/initializeDatabase";
 import { wrapInRepositoryError } from "../../errors/errorWrappers";
+import { IChallenge } from "../../models/IChallenge";
+import { IChallengeSeries } from "../../models/IChallengeSeries";
 
 interface GetChallengeArgs {
   id?: number;
@@ -49,6 +51,11 @@ async function getSeriesWithChallenges({
 interface InsertChallengeArgs {
   title: string;
   description: string;
+  categoryId: number;
+  effortLevel: IChallenge["effortLevel"];
+  requiredExpertise: IChallenge["requiredExpertise"];
+  authorId: number;
+  difficultyExplanation?: string;
   seriesId?: number | null;
 }
 
@@ -56,15 +63,22 @@ async function insertChallenge({
   title,
   description,
   seriesId,
+  categoryId,
+  effortLevel,
+  requiredExpertise,
+  authorId,
+  difficultyExplanation,
 }: InsertChallengeArgs) {
   const challengeRepository = db.getRepository(Challenge);
   const challenge = challengeRepository.create({
     title,
     description,
-    /** temp start */
-    author: { id: 1 },
-    versionAuthor: { id: 1 },
-    /** temp end */
+    author: { id: authorId },
+    versionAuthor: { id: authorId },
+    category: { id: categoryId },
+    effortLevel,
+    requiredExpertise,
+    difficultyExplanation: difficultyExplanation,
     ...(seriesId && {
       series: [{ id: seriesId }],
     }),
@@ -78,20 +92,32 @@ async function insertChallenge({
 interface InsertChallengeSeriesArgs {
   title: string;
   description: string;
+  categoryId: number;
+  effortLevel: IChallengeSeries["effortLevel"];
+  requiredExpertise: IChallengeSeries["requiredExpertise"];
+  authorId: number;
+  difficultyExplanation?: string;
 }
 
 async function insertChallengeSeries({
   title,
   description,
+  categoryId,
+  effortLevel,
+  requiredExpertise,
+  authorId,
+  difficultyExplanation,
 }: InsertChallengeSeriesArgs) {
   const challengeSeriesRepository = db.getRepository(ChallengeSeries);
   const challengeSeries = challengeSeriesRepository.create({
     title,
     description,
-    /** temp start */
-    author: { id: 1 },
-    versionAuthor: { id: 1 },
-    /** temp end */
+    category: { id: categoryId },
+    effortLevel,
+    requiredExpertise,
+    author: { id: authorId },
+    versionAuthor: { id: authorId },
+    difficultyExplanation: difficultyExplanation,
   });
 
   await challengeSeriesRepository.save(challengeSeries);
