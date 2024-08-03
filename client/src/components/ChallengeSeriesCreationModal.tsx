@@ -8,12 +8,12 @@ import { Button } from "./form/Button";
 import { useChallengeSeriesMutation } from "../api/useChallengeSeriesMutation";
 
 const schema = z.object({
-  seriesName: z.string().min(5).max(30),
+  name: z.string().min(5).max(30),
   description: z.string().min(10).max(1000),
 });
 
 const DEFAULT_VALUES: z.infer<typeof schema> = {
-  seriesName: "",
+  name: "",
   description: "",
 };
 
@@ -36,7 +36,7 @@ export function ChallengeSeriesCreationModal({
   const handleSubmit = form.handleSubmit((formValues) => {
     challengeSeriesMutation.mutate({
       body: {
-        title: formValues.seriesName,
+        title: formValues.name,
         description: formValues.description,
       },
     });
@@ -52,8 +52,8 @@ export function ChallengeSeriesCreationModal({
           <TextInput
             label="Series"
             placeholder="Series title"
-            {...form.register("seriesName")}
-            error={form.formState.errors.seriesName?.message}
+            {...form.register("name")}
+            error={form.formState.errors.name?.message}
           />
           <TextAreaInput
             label="Description"
