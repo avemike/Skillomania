@@ -8,13 +8,14 @@ import "./i18n.ts";
 
 createClient({
   baseUrl: import.meta.env.VITE_SERVER_BASE_URL,
+  credentials: "include",
 });
 
 client.interceptors.request.use((request) => {
   const token = localStorage.getItem("token");
 
   if (token) {
-    request.headers.set("Authorization", `Bearer ${token}`);
+    request.headers.set("authorization", `Bearer ${token}`);
   }
 
   return request;
