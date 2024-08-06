@@ -1,8 +1,6 @@
 export function Navbar() {
   const token = localStorage.getItem("token");
 
-  console.log(token);
-
   return (
     <nav className="bg-transparent py-4">
       <div className="container mx-auto flex justify-between items-center">
