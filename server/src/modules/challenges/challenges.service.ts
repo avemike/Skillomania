@@ -44,6 +44,10 @@ export class ChallengesService {
     return await challengesRepository.getChallenge({ id });
   };
 
+  public getCategories = async () => {
+    return await challengesRepository.getCategories();
+  };
+
   public createChallenge = async ({
     title,
     description,

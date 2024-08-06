@@ -19,6 +19,7 @@ import {
 } from "./challenges.validation";
 import { ServerContext } from "../../types/custom";
 import { UnauthorizedError } from "../../errors/publicErrors";
+import { ICategory } from "../../models/ICategory";
 
 @Route("challenges")
 export class ChallengesController extends Controller {
@@ -32,6 +33,11 @@ export class ChallengesController extends Controller {
   @Get("series")
   public async getSeries(): Promise<IChallengeSeries[]> {
     return this.challengesService.getSeries({});
+  }
+
+  @Get("categories")
+  public async getCategories(): Promise<ICategory[]> {
+    return this.challengesService.getCategories();
   }
 
   @SuccessResponse("201", "Created")
@@ -55,6 +61,7 @@ export class ChallengesController extends Controller {
       effortLevel: body.effortLevel,
       requiredExpertise: body.requiredExpertise,
       difficultyExplanation: body.difficultyExplanation,
+      seriesId: body.seriesId,
       authorId: request.user.id,
     });
 

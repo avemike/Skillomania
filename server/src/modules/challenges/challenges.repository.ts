@@ -1,3 +1,4 @@
+import { Category } from "../../database/entities/category.entity";
 import { Challenge } from "../../database/entities/challenge.entity";
 import { ChallengeSeries } from "../../database/entities/challengeSeries.entity";
 import { db } from "../../database/initializeDatabase";
@@ -125,10 +126,19 @@ async function insertChallengeSeries({
   return challengeSeries;
 }
 
+async function getCategories() {
+  const categoryRepository = db.getRepository(Category);
+  const categories = await categoryRepository.find();
+
+  return categories;
+}
+
 const challengesRepository = {
+  getCategories: wrapInRepositoryError(getCategories),
   getChallenge: wrapInRepositoryError(getChallenge),
   getLooseChallenges: wrapInRepositoryError(getLooseChallenges),
   getSeriesWithChallenges: wrapInRepositoryError(getSeriesWithChallenges),
+
   insertChallenge: wrapInRepositoryError(insertChallenge),
   insertChallengeSeries: wrapInRepositoryError(insertChallengeSeries),
 };
