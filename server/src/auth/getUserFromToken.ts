@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import { sessionsRepository } from "../modules/sessions/sessions.repository";
 import { User } from "../database/entities/user.entity";
+import { logger } from "../pino";
 
 interface GetUserFromTokenArgs {
   token: string;
@@ -27,12 +28,14 @@ export async function getUserFromToken({
     });
 
     // Session doesn't exist or has expired
-    if (!session || session.expires_at < new Date()) {
+    if (!session || session.expiresAt < new Date()) {
       return null;
     }
 
     return session.user;
   } catch (err) {
+    logger.error(err, "Error getting user from token: ");
+
     return null;
   }
 }

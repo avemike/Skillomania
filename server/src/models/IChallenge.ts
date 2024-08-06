@@ -7,6 +7,7 @@ export interface IChallenge {
   title: string;
   effortLevel: 1 | 2 | 3 | 4 | 5;
   requiredExpertise: 0 | 1 | 2 | 3;
+  estimatedTime?: string | null;
   author: IUser;
   owners: IUser[];
   series: IChallengeSeries[];
