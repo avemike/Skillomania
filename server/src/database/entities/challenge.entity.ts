@@ -48,6 +48,13 @@ export class Challenge implements IChallenge {
 
   @Column({
     type: "text",
+    name: "estimated_time",
+    nullable: true,
+  })
+  estimatedTime: string;
+
+  @Column({
+    type: "text",
     name: "difficulty_explanation",
     nullable: true,
   })

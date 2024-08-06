@@ -38,6 +38,13 @@ export class ChallengeSeries implements IChallengeSeries {
   effortLevel: 1 | 2 | 3 | 4 | 5;
 
   @Column({
+    type: "text",
+    name: "estimated_time",
+    nullable: true,
+  })
+  estimatedTime: string;
+
+  @Column({
     type: "integer",
     name: "required_expertise",
     nullable: false,
