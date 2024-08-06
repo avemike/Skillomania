@@ -9,7 +9,11 @@ export async function initializeDatabase() {
   }
 
   try {
-    db = await AppDataSource.initialize();
+    if (AppDataSource.isInitialized) {
+      db = AppDataSource;
+    } else {
+      db = await AppDataSource.initialize();
+    }
 
     return db;
   } catch (error) {
