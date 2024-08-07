@@ -31,7 +31,12 @@ describe("createSession func", () => {
     const user = { id: 1 } as any;
     const session = await sessionsService.createSession({ user });
 
-    expect(session).toEqual({ id: 1 });
+    expect(session).toEqual({
+      session: {
+        id: 1,
+      },
+      token: "token",
+    });
     expect(mockJwt.sign).toHaveBeenCalledTimes(1);
     expect(mockSessionRepository.createSession).toHaveBeenCalledTimes(1);
     expect(mockSessionRepository.createSession).toHaveBeenCalledWith({

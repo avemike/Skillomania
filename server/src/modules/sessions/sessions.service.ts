@@ -21,7 +21,7 @@ async function createSession({ user }: CreateSessionArgs) {
     expiresAt: new Date(Date.now() + ONE_HOUR_IN_MS),
   });
 
-  return session;
+  return { session, token };
 }
 
 export const sessionsService = {

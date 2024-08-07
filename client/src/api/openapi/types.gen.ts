@@ -2,23 +2,36 @@
 
 export type AuthSource = 'google';
 
-export type IUser = {
-    id: number;
-    email: string;
-    firstName: string;
-    lastName: string;
-    authSource: AuthSource;
-};
-
 export type IChallenge = {
     id: number;
     title: string;
-    description: string;
+    effortLevel: 1 | 2 | 3 | 4 | 5;
+    requiredExpertise: 0 | 1 | 2 | 3;
     author: IUser;
+    owners: Array<IUser>;
     series: Array<IChallengeSeries>;
+    category: ICategory;
     version: number;
     versionCreatedAt: string;
     versionAuthor: IUser;
+    createdAt: string;
+    updatedAt: string;
+    deletedAt?: string | null;
+    description?: string | null;
+    difficultyExplanation?: string | null;
+};
+
+export type effortLevel = 1 | 2 | 3 | 4 | 5;
+
+export type requiredExpertise = 0 | 1 | 2 | 3;
+
+export type ICategory = {
+    id: number;
+    name: string;
+    parentCategory: (ICategory) | null;
+    challenges: Array<IChallenge>;
+    challengeSeries: Array<IChallengeSeries>;
+    childrenCategories: Array<ICategory>;
     createdAt: string;
     updatedAt: string;
 };
@@ -27,8 +40,13 @@ export type IChallengeSeries = {
     id: number;
     title: string;
     description: string;
+    effortLevel: 1 | 2 | 3 | 4 | 5;
+    requiredExpertise: 0 | 1 | 2 | 3;
+    difficultyExplanation: string;
     challenges: Array<IChallenge>;
+    category: ICategory;
     author: IUser;
+    owners: Array<IUser>;
     version: number;
     versionCreatedAt: string;
     versionAuthor: IUser;
@@ -36,115 +54,33 @@ export type IChallengeSeries = {
     updatedAt: string;
 };
 
-export type TokenPayload = {
-    /**
-     * The Issuer Identifier for the Issuer of the response. Always
-     * https://accounts.google.com or accounts.google.com for Google ID tokens.
-     */
-    iss: string;
-    /**
-     * Access token hash. Provides validation that the access token is tied to the
-     * identity token. If the ID token is issued with an access token in the
-     * server flow, this is always included. This can be used as an alternate
-     * mechanism to protect against cross-site request forgery attacks, but if you
-     * follow Step 1 and Step 3 it is not necessary to verify the access token.
-     */
-    at_hash?: string;
-    /**
-     * True if the user's e-mail address has been verified; otherwise false.
-     */
-    email_verified?: boolean;
-    /**
-     * An identifier for the user, unique among all Google accounts and never
-     * reused. A Google account can have multiple emails at different points in
-     * time, but the sub value is never changed. Use sub within your application
-     * as the unique-identifier key for the user.
-     */
-    sub: string;
-    /**
-     * The client_id of the authorized presenter. This claim is only needed when
-     * the party requesting the ID token is not the same as the audience of the ID
-     * token. This may be the case at Google for hybrid apps where a web
-     * application and Android app have a different client_id but share the same
-     * project.
-     */
-    azp?: string;
-    /**
-     * The user's email address. This may not be unique and is not suitable for
-     * use as a primary key. Provided only if your scope included the string
-     * "email".
-     */
-    email?: string;
-    /**
-     * The URL of the user's profile page. Might be provided when:
-     * - The request scope included the string "profile"
-     * - The ID token is returned from a token refresh
-     * - When profile claims are present, you can use them to update your app's
-     * user records. Note that this claim is never guaranteed to be present.
-     */
-    profile?: string;
-    /**
-     * The URL of the user's profile picture. Might be provided when:
-     * - The request scope included the string "profile"
-     * - The ID token is returned from a token refresh
-     * - When picture claims are present, you can use them to update your app's
-     * user records. Note that this claim is never guaranteed to be present.
-     */
-    picture?: string;
-    /**
-     * The user's full name, in a displayable form. Might be provided when:
-     * - The request scope included the string "profile"
-     * - The ID token is returned from a token refresh
-     * - When name claims are present, you can use them to update your app's user
-     * records. Note that this claim is never guaranteed to be present.
-     */
-    name?: string;
-    /**
-     * The user's given name, in a displayable form. Might be provided when:
-     * - The request scope included the string "profile"
-     * - The ID token is returned from a token refresh
-     * - When name claims are present, you can use them to update your app's user
-     * records. Note that this claim is never guaranteed to be present.
-     */
-    given_name?: string;
-    /**
-     * The user's family name, in a displayable form. Might be provided when:
-     * - The request scope included the string "profile"
-     * - The ID token is returned from a token refresh
-     * - When name claims are present, you can use them to update your app's user
-     * records. Note that this claim is never guaranteed to be present.
-     */
-    family_name?: string;
-    /**
-     * Identifies the audience that this ID token is intended for. It must be one
-     * of the OAuth 2.0 client IDs of your application.
-     */
-    aud: string;
-    /**
-     * The time the ID token was issued, represented in Unix time (integer
-     * seconds).
-     */
-    iat: number;
-    /**
-     * The time the ID token expires, represented in Unix time (integer seconds).
-     */
-    exp: number;
-    /**
-     * The value of the nonce supplied by your app in the authentication request.
-     * You should enforce protection against replay attacks by ensuring it is
-     * presented only once.
-     */
-    nonce?: string;
-    /**
-     * The hosted G Suite domain of the user. Provided only if the user belongs to
-     * a hosted domain.
-     */
-    hd?: string;
-    /**
-     * The user's locale, represented by a BCP 47 language tag.
-     * Might be provided when a name claim is present.
-     */
-    locale?: string;
+export type IUser = {
+    id: number;
+    email: string;
+    firstName: string;
+    lastName: string;
+    authSource: AuthSource;
+    challenges: Array<IChallenge>;
+    challengeSeries: Array<IChallengeSeries>;
+};
+
+export type CreateChallengeValidationSchema = {
+    title: string;
+    description: string;
+    seriesId?: number;
+    categoryId: number;
+    effortLevel: 1 | 2 | 3 | 4 | 5;
+    requiredExpertise: 0 | 1 | 2 | 3;
+    difficultyExplanation?: string;
+};
+
+export type CreateChallengeSeriesValidationSchema = {
+    title: string;
+    description: string;
+    categoryId: number;
+    effortLevel: 1 | 2 | 3 | 4 | 5;
+    requiredExpertise: 0 | 1 | 2 | 3;
+    difficultyExplanation?: string;
 };
 
 export type User = {
@@ -166,23 +102,44 @@ export type User = {
 export type Challenge = {
     id: number;
     title: string;
-    description: string;
+    effortLevel: 1 | 2 | 3 | 4 | 5;
+    requiredExpertise: 0 | 1 | 2 | 3;
     author: User;
+    owners: Array<User>;
     series: Array<ChallengeSeries>;
+    category: Category;
     version: number;
     versionCreatedAt: string;
     versionAuthor: User;
     createdAt: string;
     updatedAt: string;
     deletedAt: string;
+    description: string;
+    difficultyExplanation: string;
+};
+
+export type Category = {
+    id: number;
+    name: string;
+    parentCategory: (Category) | null;
+    challenges: Array<Challenge>;
+    challengeSeries: Array<ChallengeSeries>;
+    childrenCategories: Array<Category>;
+    createdAt: string;
+    updatedAt: string;
 };
 
 export type ChallengeSeries = {
     id: number;
     title: string;
     description: string;
+    effortLevel: 1 | 2 | 3 | 4 | 5;
+    requiredExpertise: 0 | 1 | 2 | 3;
+    difficultyExplanation: string;
     challenges: Array<Challenge>;
+    category: Category;
     author: User;
+    owners: Array<User>;
     version: number;
     versionCreatedAt: string;
     versionAuthor: User;
@@ -210,11 +167,7 @@ export type GetChallengesResponse = Array<IChallenge>;
 export type GetChallengesError = unknown;
 
 export type CreateChallengeData = {
-    body: {
-        seriesId?: number | null;
-        description: string;
-        title: string;
-    };
+    body: CreateChallengeValidationSchema;
 };
 
 export type CreateChallengeResponse = IChallenge;
@@ -226,23 +179,24 @@ export type GetSeriesResponse = Array<IChallengeSeries>;
 export type GetSeriesError = unknown;
 
 export type CreateChallengeSeriesData = {
-    body: {
-        description: string;
-        title: string;
-    };
+    body: CreateChallengeSeriesValidationSchema;
 };
 
 export type CreateChallengeSeriesResponse = IChallengeSeries;
 
 export type CreateChallengeSeriesError = unknown;
 
+export type GetCategoriesResponse = Array<ICategory>;
+
+export type GetCategoriesError = unknown;
+
 export type GoogleAuthData = {
     body: IGoogleAuthRequestBody;
 };
 
 export type GoogleAuthResponse = {
+    token: unknown;
     user: User;
-    payload: TokenPayload;
 };
 
 export type GoogleAuthError = unknown;
@@ -261,9 +215,9 @@ export type $OpenApiTs = {
             req: CreateChallengeData;
             res: {
                 /**
-                 * Ok
+                 * Created
                  */
-                '200': IChallenge;
+                '201': IChallenge;
             };
         };
     };
@@ -280,9 +234,19 @@ export type $OpenApiTs = {
             req: CreateChallengeSeriesData;
             res: {
                 /**
+                 * Created
+                 */
+                '201': IChallengeSeries;
+            };
+        };
+    };
+    '/challenges/categories': {
+        get: {
+            res: {
+                /**
                  * Ok
                  */
-                '200': IChallengeSeries;
+                '200': Array<ICategory>;
             };
         };
     };
@@ -294,8 +258,8 @@ export type $OpenApiTs = {
                  * Ok
                  */
                 '200': {
+                    token: unknown;
                     user: User;
-                    payload: TokenPayload;
                 };
             };
         };

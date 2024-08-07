@@ -4,6 +4,9 @@ const mockLooseChallenges: Partial<IChallenge>[] = [
     id: 1,
     title: "Challenge 1",
     description: "Challenge 1 description",
+    category: { id: 1 } as ICategory,
+    effortLevel: 1,
+    requiredExpertise: 1,
   },
 ];
 
@@ -13,6 +16,9 @@ const mockSeries: Partial<IChallengeSeries>[] = [
     title: "Series 1",
     description: "Series 1 description",
     challenges: mockLooseChallenges as IChallenge[],
+    category: { id: 1 } as ICategory,
+    effortLevel: 1,
+    requiredExpertise: 1,
   },
 ];
 
@@ -20,7 +26,6 @@ const mockGetLooseChallenges = jest.fn().mockResolvedValue(mockLooseChallenges);
 const mockGetSeries = jest.fn().mockResolvedValue(mockSeries);
 const mockCreateChallenge = jest.fn().mockResolvedValue({ id: 1 });
 const mockCreateChallengeSeries = jest.fn().mockResolvedValue({ id: 1 });
-
 const mockChallengeService = jest.fn().mockImplementation(() => {
   return {
     getLooseChallenges: mockGetLooseChallenges,
@@ -29,15 +34,22 @@ const mockChallengeService = jest.fn().mockImplementation(() => {
     createChallengeSeries: mockCreateChallengeSeries,
   };
 });
+const mockGetUserFromToken = jest.fn().mockResolvedValue({ id: 1 });
 
 jest.mock("../challenges.service.ts", () => ({
   ChallengesService: mockChallengeService,
   __esModule: true,
 }));
 
+jest.mock("../../../auth/getUserFromToken", () => ({
+  getUserFromToken: mockGetUserFromToken,
+  __esModule: true,
+}));
+
 import { app } from "../../../app";
 import { IChallenge } from "../../../models/IChallenge";
 import { IChallengeSeries } from "../../../models/IChallengeSeries";
+import { ICategory } from "../../../models/ICategory";
 
 describe("GET /challenges", () => {
   beforeEach(() => {
@@ -99,6 +111,9 @@ describe("POST /challenges", () => {
     const response = await request(app).post("/challenges").send({
       title: "Challenge 1",
       description: "Challenge 1 description",
+      categoryId: 1,
+      effortLevel: 1,
+      requiredExpertise: 1,
     });
 
     expect(response.status).toBe(201);
@@ -112,6 +127,9 @@ describe("POST /challenges", () => {
     const response = await request(app).post("/challenges").send({
       title: "Challenge 1",
       description: "Challenge 1 description",
+      categoryId: 1,
+      effortLevel: 1,
+      requiredExpertise: 1,
     });
 
     expect(response.status).toBe(500);
@@ -128,6 +146,9 @@ describe("POST /challenges", () => {
     it("should return 422 as validation error if title is missing", async () => {
       const response = await request(app).post("/challenges").send({
         description: "Challenge 1 description",
+        categoryId: 1,
+        effortLevel: 1,
+        requiredExpertise: 1,
       });
 
       expect(response.status).toBe(422);
@@ -140,7 +161,12 @@ describe("POST /challenges", () => {
               isNotEmpty: "title should not be empty",
             },
             property: "title",
-            target: { description: "Challenge 1 description" },
+            target: {
+              description: "Challenge 1 description",
+              categoryId: 1,
+              effortLevel: 1,
+              requiredExpertise: 1,
+            },
           },
         ],
       });
@@ -149,6 +175,9 @@ describe("POST /challenges", () => {
     it("should return 422 as validation error if description is missing", async () => {
       const response = await request(app).post("/challenges").send({
         title: "Challenge 1",
+        categoryId: 1,
+        effortLevel: 1,
+        requiredExpertise: 1,
       });
 
       expect(response.status).toBe(422);
@@ -162,7 +191,12 @@ describe("POST /challenges", () => {
               isNotEmpty: "description should not be empty",
             },
             property: "description",
-            target: { title: "Challenge 1" },
+            target: {
+              title: "Challenge 1",
+              categoryId: 1,
+              effortLevel: 1,
+              requiredExpertise: 1,
+            },
           },
         ],
       });
@@ -172,6 +206,9 @@ describe("POST /challenges", () => {
       const response = await request(app).post("/challenges").send({
         title: "Challenge 1",
         description: "Challenge 1 description",
+        categoryId: 1,
+        effortLevel: 1,
+        requiredExpertise: 1,
       });
 
       expect(response.status).toBe(201);
@@ -188,6 +225,9 @@ describe("POST /challenges/series", () => {
     const response = await request(app).post("/challenges/series").send({
       title: "Series 1",
       description: "Series 1 description",
+      categoryId: 1,
+      effortLevel: 1,
+      requiredExpertise: 1,
     });
 
     expect(response.status).toBe(201);
@@ -201,6 +241,9 @@ describe("POST /challenges/series", () => {
     const response = await request(app).post("/challenges/series").send({
       title: "Series 1",
       description: "Series 1 description",
+      categoryId: 1,
+      effortLevel: 1,
+      requiredExpertise: 1,
     });
 
     expect(response.status).toBe(500);
@@ -217,6 +260,9 @@ describe("POST /challenges/series", () => {
     it("should return 422 as validation error if title is missing", async () => {
       const response = await request(app).post("/challenges/series").send({
         description: "Series 1 description",
+        categoryId: 1,
+        effortLevel: 1,
+        requiredExpertise: 1,
       });
 
       expect(response.status).toBe(422);
@@ -229,7 +275,12 @@ describe("POST /challenges/series", () => {
               isNotEmpty: "title should not be empty",
             },
             property: "title",
-            target: { description: "Series 1 description" },
+            target: {
+              description: "Series 1 description",
+              categoryId: 1,
+              effortLevel: 1,
+              requiredExpertise: 1,
+            },
           },
         ],
       });
@@ -238,6 +289,9 @@ describe("POST /challenges/series", () => {
     it("should return 422 as validation error if description is missing", async () => {
       const response = await request(app).post("/challenges/series").send({
         title: "Series 1",
+        categoryId: 1,
+        effortLevel: 1,
+        requiredExpertise: 1,
       });
 
       expect(response.status).toBe(422);
@@ -251,7 +305,12 @@ describe("POST /challenges/series", () => {
               isNotEmpty: "description should not be empty",
             },
             property: "description",
-            target: { title: "Series 1" },
+            target: {
+              title: "Series 1",
+              categoryId: 1,
+              effortLevel: 1,
+              requiredExpertise: 1,
+            },
           },
         ],
       });

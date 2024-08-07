@@ -17,8 +17,8 @@
     "dev": "concurrently \"nodemon | pino-pretty\" \"nodemon -x tsoa spec-and-routes\"",
     "----DATABASE-OPERATIONS-BELOW----": "",
     "db:migration:create": "node scripts/createMigration.js",
-    "db:migration:run": "ts-node --project ./tsconfig.json ./node_modules/typeorm/cli.js migration:run -d ./src/database/dataSource.ts",
-    "db:migration:revert": "ts-node  --project ./tsconfig.json ./node_modules/typeorm/cli.js migration:revert -d ./src/database/dataSource.ts",
+    "db:migration:run": "ts-node --project ./tsconfig.json ../node_modules/typeorm/cli.js migration:run -d ./src/database/dataSource.ts",
+    "db:migration:revert": "ts-node  --project ./tsconfig.json ../node_modules/typeorm/cli.js migration:revert -d ./src/database/dataSource.ts",
     "db:seed:run": "ts-node ./src/database/seed.ts",
     "db:purge:dangerous": "ts-node ./src/database/purge.ts"
   },

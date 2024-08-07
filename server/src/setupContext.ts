@@ -8,9 +8,11 @@ export async function setupContext(
   _res: Response
 ): Promise<ServerContext> {
   const db = await initializeDatabase();
-  const user = await getUserFromToken({
-    token: req.cookies.token,
-  });
+
+  const bearerToken = req.headers["authorization"] ?? "";
+  const token = bearerToken.replace("Bearer ", "");
+
+  const user = await getUserFromToken({ token });
 
   return {
     db,

@@ -14,7 +14,7 @@ async function createSession({ user, token, expiresAt }: CreateSessionArgs) {
     .insert({
       user,
       token,
-      expires_at: expiresAt,
+      expiresAt,
     })
     .catch((err) => {
       console.error(err);
@@ -23,7 +23,7 @@ async function createSession({ user, token, expiresAt }: CreateSessionArgs) {
     });
 
   const session = await sessionRepository.findOneOrFail({
-    where: { token, expires_at: expiresAt },
+    where: { token, expiresAt },
   });
 
   return session;
@@ -36,11 +36,15 @@ interface GetSessionArgs {
 
 async function getSession({ token, userId }: GetSessionArgs) {
   const sessionRepository = db.getRepository(Session);
-  const session = await sessionRepository.findOne({
+  const sessions = await sessionRepository.find({
     where: { token, user: { id: userId } },
+    order: { created_at: "DESC" },
+    skip: 0,
+    take: 1,
+    relations: ["user"],
   });
 
-  return session;
+  return sessions[0];
 }
 
 export const sessionsRepository = {

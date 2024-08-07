@@ -6,6 +6,9 @@ export interface IChallengeSeries {
   id: number;
   title: string;
   description: string;
+  effortLevel: 1 | 2 | 3 | 4 | 5;
+  requiredExpertise: 0 | 1 | 2 | 3;
+  difficultyExplanation: string;
   challenges: IChallenge[];
   category: ICategory;
   author: IUser;

@@ -122,6 +122,10 @@ describe("ChallengesService", () => {
         title: "Challenge 1",
         description: "Challenge 1 description",
         seriesId: 1,
+        effortLevel: 1,
+        requiredExpertise: 1,
+        categoryId: 1,
+        authorId: 1,
       });
 
       expect(mockInsertChallenge).toHaveBeenCalledTimes(1);
@@ -136,6 +140,10 @@ describe("ChallengesService", () => {
           title: "Challenge 1",
           description: "Challenge 1 description",
           seriesId: 1,
+          effortLevel: 1,
+          requiredExpertise: 1,
+          categoryId: 1,
+          authorId: 1,
         })
       ).rejects.toThrow("Test error");
     });
@@ -147,6 +155,10 @@ describe("ChallengesService", () => {
       await service.createChallengeSeries({
         title: "Series 1",
         description: "Series 1 description",
+        effortLevel: 1,
+        requiredExpertise: 1,
+        categoryId: 1,
+        authorId: 1,
       });
 
       expect(mockInsertChallengeSeries).toHaveBeenCalledTimes(1);
@@ -160,6 +172,10 @@ describe("ChallengesService", () => {
         service.createChallengeSeries({
           title: "Series 1",
           description: "Series 1 description",
+          effortLevel: 1,
+          requiredExpertise: 1,
+          categoryId: 1,
+          authorId: 1,
         })
       ).rejects.toThrow("Test error");
     });
