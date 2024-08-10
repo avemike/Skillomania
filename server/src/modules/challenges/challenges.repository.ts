@@ -42,7 +42,12 @@ async function getSeriesWithChallenges({
 }: GetSeriesWithChallengesArgs) {
   const challengeSeriesRepository = db.getRepository(ChallengeSeries);
   const challengeSeries = await challengeSeriesRepository.find({
-    relations: ["challenges"],
+    relations: [
+      "challenges",
+      "category",
+      "challenges.author",
+      "challenges.category",
+    ],
     where: ids.length ? ids.map((id) => ({ id })) : {},
   });
 

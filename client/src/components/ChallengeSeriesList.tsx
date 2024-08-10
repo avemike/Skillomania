@@ -3,6 +3,7 @@ import { useChallengeSeries } from "../api/useChallengeSeries";
 import { ChallengeCreationModal } from "./ChallengeCreationModal";
 import { useAuth } from "../AuthenticationProvider";
 import { ChallengeSeriesCreationModal } from "./ChallengeSeriesCreationModal";
+import { Challenge } from "../api/openapi";
 
 export function ChallengeSeriesList() {
   const { data: response, isLoading, isError } = useChallengeSeries();
@@ -42,20 +43,62 @@ export function ChallengeSeriesList() {
               <div className="text-sm italic">{series.description}</div>
               <div className="pl-4 mt-2 space-y-1">
                 {series.challenges.map((challenge) => (
-                  <div
-                    key={challenge.id}
-                    className="border-l-4 border-blue-500 pl-4"
-                  >
-                    <div className="font-semibold text-base">
-                      {challenge.title}
-                    </div>
-                    <div className="text-sm">{challenge.description}</div>
-                  </div>
+                  <ChallengeItem key={challenge.id} challenge={challenge} />
                 ))}
               </div>
             </div>
           ))}
         </div>
+      </div>
+    </div>
+  );
+}
+
+function ChallengeItem({ challenge }: { challenge: Challenge }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const authorName = `${challenge.author.firstName} ${challenge.author.lastName}`;
+  const effortLevel = challenge.effortLevel; // 1 | 2 | 3 | 4 | 5
+  const requiredExpertise = challenge.requiredExpertise; // 0 | 1 | 2 | 3
+  const challengeCategory = challenge.category.name;
+
+  return (
+    <div key={challenge.id} className="border-l-4 border-blue-500 pl-4 mb-4">
+      <div className="font-semibold text-lg">{challenge.title}</div>
+      <div className="text-sm text-gray-600">{challenge.description}</div>
+
+      <div className="text-xs">
+        <div
+          className="flex items-center text-gray-500 cursor-pointer mt-2"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <span>{isOpen ? "Hide Details" : "Show Details"}</span>
+          {isOpen ? (
+            <div className="w-4 h-4 ml-1">^</div>
+          ) : (
+            <div className="w-4 h-4 ml-1">v</div>
+          )}
+        </div>
+
+        {isOpen && (
+          <div className="mt-2 ml-2 space-y-1 text-gray-500">
+            <div>
+              <span className="font-semibold">Author:</span> {authorName}
+            </div>
+            <div>
+              <span className="font-semibold">Effort Level:</span> {effortLevel}
+              /5
+            </div>
+            <div>
+              <span className="font-semibold">Required Expertise:</span>{" "}
+              {requiredExpertise}/3
+            </div>
+            <div>
+              <span className="font-semibold">Category:</span>{" "}
+              {challengeCategory}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
