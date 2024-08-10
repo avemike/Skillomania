@@ -28,15 +28,15 @@ export function ChallengeSeriesList() {
   }
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center space-y-4">
-      <div className="w-full flex justify-end px-8">
+    <div className="w-full h-fit flex flex-col items-center justify-center space-y-4">
+      <div className="w-full flex justify-start ">
         <ChallengeCreateButton />
         <ChallengeSeriesCreateButton />
       </div>
-      <div className="bg-[rgba(0,100,190,0.05)] backdrop-filter backdrop-blur-sm flex flex-col text-center items-center justify-center w-3/5 p-8 rounded-xl space-y-6">
+      <div className="bg-[rgba(255,255,255,0.6)] backdrop-filter backdrop-blur-md flex flex-col text-center items-center justify-center w-full rounded-xl space-y-6">
         <div className="text-black text-3xl font-bold">Challenges</div>
-        <div className="text-black text-lg font-semibold space-y-6 max-h-[500px] overflow-y-auto">
-          {response?.data?.map((series) => (
+        <div className="text-black text-lg font-semibold space-y-6  overflow-y-auto">
+          {response?.data?.slice(0, 3).map((series) => (
             <div key={series.id} className="space-y-2 text-left w-full">
               <div className="text-xl font-bold">{series.title}</div>
               <div className="text-sm italic">{series.description}</div>

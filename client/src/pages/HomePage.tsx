@@ -1,9 +1,4 @@
-/**
- * Renders the Home component.
- * @remarks
- * WIP: Currently function as a placeholder for the homepage.
- */
-export function Home() {
+export function HomePage() {
   return (
     <div className="bg-center bg-cover h-dvh w-svw mt-32">
       <div className="">
