@@ -47,7 +47,17 @@ async function getSession({ token, userId }: GetSessionArgs) {
   return sessions[0];
 }
 
+async function deleteSessions({ userId }: { userId: number }) {
+  const sessionRepository = db.getRepository(Session);
+  await sessionRepository.delete({ user: { id: userId } }).catch((err) => {
+    console.error(err);
+
+    throw new Error("Failed to remove sessions");
+  });
+}
+
 export const sessionsRepository = {
   createSession,
   getSession,
+  deleteSessions,
 };

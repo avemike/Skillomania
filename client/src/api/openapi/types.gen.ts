@@ -7,6 +7,7 @@ export type IChallenge = {
     title: string;
     effortLevel: 1 | 2 | 3 | 4 | 5;
     requiredExpertise: 0 | 1 | 2 | 3;
+    estimatedTime?: string | null;
     author: IUser;
     owners: Array<IUser>;
     series: Array<IChallengeSeries>;
@@ -104,6 +105,7 @@ export type Challenge = {
     title: string;
     effortLevel: 1 | 2 | 3 | 4 | 5;
     requiredExpertise: 0 | 1 | 2 | 3;
+    estimatedTime: string;
     author: User;
     owners: Array<User>;
     series: Array<ChallengeSeries>;
@@ -145,6 +147,7 @@ export type ChallengeSeries = {
     versionAuthor: User;
     createdAt: string;
     updatedAt: string;
+    estimatedTime: string;
     deletedAt: string;
 };
 
@@ -153,14 +156,18 @@ export type Session = {
     user: User;
     token: string;
     created_at: string;
-    updated_at: string;
-    expires_at: string;
+    updatedAt: string;
+    expiresAt: string;
 };
 
 export type IGoogleAuthRequestBody = {
     credential: string;
     client_id: string;
 };
+
+export type LogoutResponse = void;
+
+export type LogoutError = unknown;
 
 export type GetChallengesResponse = Array<IChallenge>;
 
@@ -202,6 +209,16 @@ export type GoogleAuthResponse = {
 export type GoogleAuthError = unknown;
 
 export type $OpenApiTs = {
+    '/sessions/logout': {
+        post: {
+            res: {
+                /**
+                 * No content
+                 */
+                '204': void;
+            };
+        };
+    };
     '/challenges': {
         get: {
             res: {
