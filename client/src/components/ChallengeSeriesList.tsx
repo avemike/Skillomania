@@ -30,7 +30,7 @@ export function ChallengeSeriesList() {
 
   return (
     <div className="w-full h-fit flex flex-col items-center justify-center space-y-4">
-      <div className="w-full flex justify-start ">
+      <div className="w-full flex justify-start">
         <ChallengeCreateButton />
         <ChallengeSeriesCreateButton />
       </div>
