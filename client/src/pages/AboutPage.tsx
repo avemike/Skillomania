@@ -1,12 +1,7 @@
-/**
- * Renders the Home component.
- * @remarks
- * WIP: Currently function as a placeholder for the homepage.
- */
-export function About() {
+export function AboutPage() {
   return (
-    <div className="h-dvh w-svw flex flex-col text-center items-center justify-center">
-      <div className="bg-white/50 p-10 round">
+    <div className="grow w-full flex items-center justify-center">
+      <div className="bg-white/95 p-10 round">
         <h1 className=" text-4xl">Hi!</h1>
         <h2 className=" text-2xl">
           This is skillomania, a page on which we learn or upgrade our skills!

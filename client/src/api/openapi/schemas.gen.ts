@@ -23,6 +23,10 @@ export const $IChallenge = {
             type: 'number',
             enum: [0, 1, 2, 3]
         },
+        estimatedTime: {
+            type: 'string',
+            nullable: true
+        },
         author: {
             '$ref': '#/components/schemas/IUser'
         },
@@ -375,6 +379,9 @@ export const $Challenge = {
             type: 'number',
             enum: [0, 1, 2, 3]
         },
+        estimatedTime: {
+            type: 'string'
+        },
         author: {
             '$ref': '#/components/schemas/User'
         },
@@ -423,7 +430,7 @@ export const $Challenge = {
             type: 'string'
         }
     },
-    required: ['id', 'title', 'effortLevel', 'requiredExpertise', 'author', 'owners', 'series', 'category', 'version', 'versionCreatedAt', 'versionAuthor', 'createdAt', 'updatedAt', 'description', 'difficultyExplanation', 'deletedAt'],
+    required: ['id', 'title', 'effortLevel', 'requiredExpertise', 'author', 'owners', 'series', 'category', 'version', 'versionCreatedAt', 'versionAuthor', 'createdAt', 'updatedAt', 'description', 'estimatedTime', 'difficultyExplanation', 'deletedAt'],
     type: 'object',
     additionalProperties: false
 } as const;
@@ -537,12 +544,15 @@ export const $ChallengeSeries = {
             type: 'string',
             format: 'date-time'
         },
+        estimatedTime: {
+            type: 'string'
+        },
         deletedAt: {
             type: 'string',
             format: 'date-time'
         }
     },
-    required: ['id', 'title', 'description', 'effortLevel', 'requiredExpertise', 'difficultyExplanation', 'challenges', 'category', 'author', 'owners', 'version', 'versionCreatedAt', 'versionAuthor', 'createdAt', 'updatedAt', 'deletedAt'],
+    required: ['id', 'title', 'description', 'effortLevel', 'requiredExpertise', 'difficultyExplanation', 'challenges', 'category', 'author', 'owners', 'version', 'versionCreatedAt', 'versionAuthor', 'createdAt', 'updatedAt', 'estimatedTime', 'deletedAt'],
     type: 'object',
     additionalProperties: false
 } as const;
@@ -563,16 +573,16 @@ export const $Session = {
             type: 'string',
             format: 'date-time'
         },
-        updated_at: {
+        updatedAt: {
             type: 'string',
             format: 'date-time'
         },
-        expires_at: {
+        expiresAt: {
             type: 'string',
             format: 'date-time'
         }
     },
-    required: ['id', 'user', 'token', 'created_at', 'updated_at', 'expires_at'],
+    required: ['id', 'user', 'token', 'created_at', 'updatedAt', 'expiresAt'],
     type: 'object',
     additionalProperties: false
 } as const;
