@@ -25,7 +25,7 @@ interface ChallengeSeriesCreationModalProps {
 export function ChallengeSeriesCreationModal({
   isOpen,
   onClose,
-}: ChallengeSeriesCreationModalProps) {
+}: ChallengeSeriesCreationModalProps) {``
   const form = useForm<z.infer<typeof schema>>({
     defaultValues: DEFAULT_VALUES,
     resolver: zodResolver(schema),

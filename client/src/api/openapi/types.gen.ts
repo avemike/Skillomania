@@ -261,9 +261,9 @@ export type $OpenApiTs = {
             req: CreateChallengeData;
             res: {
                 /**
-                 * Ok
+                 * Created
                  */
-                '200': IChallenge;
+                '201': IChallenge;
             };
         };
     };
@@ -280,9 +280,9 @@ export type $OpenApiTs = {
             req: CreateChallengeSeriesData;
             res: {
                 /**
-                 * Ok
+                 * Created
                  */
-                '200': IChallengeSeries;
+                '201': IChallengeSeries;
             };
         };
     };
