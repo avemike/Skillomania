@@ -65,6 +65,9 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "outline";
   isDisabled?: boolean;
   isLoading?: boolean;
+  label: string;
+  size: string;
+  backgroundColor: string;
 }
 
 function Button({
@@ -117,7 +120,7 @@ function Button({
     return (
       <button
         onClick={onClick}
-        className={`px-4  py-2 text-white rounded-md ${variantClasses} ${className}`}
+        className={`px-4  py-2 text-white rounded-md ${variantClasses} ${className} onClick={onClick} style={style}`}
       >
         {label}
       </button>
