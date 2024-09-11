@@ -70,7 +70,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   backgroundColor: string;
 }
 
-function Button({
+export function Button({
   label,
   backgroundColor,
   size,
@@ -120,7 +120,7 @@ function Button({
     return (
       <button
         onClick={onClick}
-        className={`px-4  py-2 text-white rounded-md ${variantClasses} ${className} onClick={onClick} style={style}`}
+        className={`px-4  py-2 text-white rounded-md ${variantClasses} ${className} onClick=${onClick} style=${style}`}
       >
         {label}
       </button>
