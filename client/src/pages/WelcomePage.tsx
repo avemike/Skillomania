@@ -2,7 +2,7 @@ import { useState } from "react";
 import { GoogleAuthButton } from "../components/GoogleAuthButton";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
-import { Button } from "@chakra-ui/react";
+import { Button, Text } from "@chakra-ui/react";
 
 /**
  * Renders the Home component.
@@ -32,14 +32,9 @@ export function WelcomePage() {
           </h2>
           <p className="text-gray-500">{t("home.hereWeUpgradeSkills")}</p>
           <p className="text-gray-500 mb-6">{t("home.ifYouAreInterested")}</p>
-          <button
-            className=" hover:shadow-indigo-100/50 shadow-lg shadow-indigo-100/50 text-white bg-black"
-            onClick={toggle}
-          >
+          <Button colorScheme="blackAlpha" onClick={toggle}>
             {t("home.checkUsOut")}
-          </button>
-          <Button colorScheme="blue">Button</Button>
-          {/* czemu sie nie robi niebieski niewyobrazalne cierpienie przezywam z tego powodu */}
+          </Button>
         </div>
 
         <div className="absolute flex bottom-16 left-20 border-t-gray-100 border-t-2 w-11/12">

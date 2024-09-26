@@ -1,3 +1,5 @@
+import { Box } from "@chakra-ui/react";
+
 /**
  * Renders the Home component.
  * @remarks
