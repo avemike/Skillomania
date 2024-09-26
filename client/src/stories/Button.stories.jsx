@@ -1,4 +1,5 @@
-import Button from "../components/form/Button";
+import { Button } from "../components/form/Button";
+import "../index.css";
 
 export default {
   title: "Button",
@@ -7,9 +8,11 @@ export default {
 
 const Template = (args) => <Button {...args} />;
 
-export const Red = Template.bind({});
-Red.args = {
-  backgroundColor: "red",
+export const Primary = Template.bind({});
+Primary.args = {
+  variant: "primary",
   label: "Press me",
   size: "md",
+  isDisabled: false,
+  isLoading: false,
 };

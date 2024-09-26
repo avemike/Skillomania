@@ -2,6 +2,7 @@ import { useState } from "react";
 import { GoogleAuthButton } from "../components/GoogleAuthButton";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
+import { Button } from "@chakra-ui/react";
 
 /**
  * Renders the Home component.
@@ -23,8 +24,10 @@ export function WelcomePage() {
           <h1 className="font-bold text-7xl bg-clip-text text-black">
             {t("home.welcome")}
           </h1>
+
           <h2 className="text-2xl my-4 text-gray-500">
             {t("home.toThe")}
+
             <b> skillomania</b>
           </h2>
           <p className="text-gray-500">{t("home.hereWeUpgradeSkills")}</p>
@@ -35,6 +38,8 @@ export function WelcomePage() {
           >
             {t("home.checkUsOut")}
           </button>
+          <Button colorScheme="blue">Button</Button>
+          {/* czemu sie nie robi niebieski niewyobrazalne cierpienie przezywam z tego powodu */}
         </div>
 
         <div className="absolute flex bottom-16 left-20 border-t-gray-100 border-t-2 w-11/12">

@@ -15,6 +15,11 @@ import { Home } from "./pages/Home";
 import { ChallengeSeriesPage } from "./pages/ChallengeSeriesPage";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { AuthProvider } from "./AuthenticationProvider";
+import {
+  ChakraBaseProvider,
+  extendBaseTheme,
+  theme as chakraTheme,
+} from "@chakra-ui/react";
 
 function StandardPage({ page }: { page: ReactNode }) {
   return <StandardLayout>{page}</StandardLayout>;
@@ -47,6 +52,14 @@ const router = createBrowserRouter([
   createHomeRoute("/challenges", <ChallengeSeriesPage />),
 ]);
 
+const { Button } = chakraTheme.components;
+
+const theme = extendBaseTheme({
+  components: {
+    Button,
+  },
+});
+
 // @todo: temporarily hardcoded
 const queryClient = new QueryClient();
 
@@ -56,11 +69,13 @@ const queryClient = new QueryClient();
  */
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <RouterProvider router={router} />
-      </AuthProvider>
-    </QueryClientProvider>
+    <ChakraBaseProvider theme={theme}>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <RouterProvider router={router} />
+        </AuthProvider>
+      </QueryClientProvider>
+    </ChakraBaseProvider>
   );
 }
 
