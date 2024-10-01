@@ -23,7 +23,7 @@ export function Navbar() {
         </Flex>
         <Flex alignItems="center" ml="auto">
           {token ? (
-            <Text fontSize="md" ml="2">
+            <Text fontSize="md" ml="2" color="gray.300">
               Logged in
             </Text>
           ) : (

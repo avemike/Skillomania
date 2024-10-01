@@ -2,7 +2,7 @@ import { useState } from "react";
 import { GoogleAuthButton } from "../components/GoogleAuthButton";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
-import { Button, Text, Box } from "@chakra-ui/react";
+import { Button, Text, Box, Flex, Input, Checkbox } from "@chakra-ui/react";
 
 /**
  * Renders the Home component.
@@ -19,8 +19,8 @@ export function WelcomePage() {
 
   return (
     <>
-      <div className="h-dvh w-svw">
-        <div className="flex flex-col items-start absolute left-60 top-1/3">
+      <Box>
+        <Flex py="250" alignItems="start" direction="column">
           <Text fontSize="6xl" as="b">
             {t("home.welcome")}
           </Text>
@@ -38,7 +38,7 @@ export function WelcomePage() {
           <Button colorScheme="blackAlpha" onClick={toggle} mt={5}>
             {t("home.checkUsOut")}
           </Button>
-        </div>
+        </Flex>
         {/* ogolnie to to powinno byc na dole strony ale jeszcze nie wiem jak to zrobic */}
         <Box borderTopWidth="2px" borderColor="gray.200">
           <Text fontSize="sm" color="gray.200" maxW="sm">
@@ -46,12 +46,12 @@ export function WelcomePage() {
           </Text>
         </Box>
 
-        {/* <div className="absolute flex bottom-16 left-20 border-t-gray-100 border-t-2 w-11/12">
+        {/* <Box className="absolute flex bottom-16 left-20 border-t-gray-100 border-t-2 w-11/12">
           <Text fontSize="sm" color="gray.200">
             Skillomania
           </Text>
-        </div> */}
-      </div>
+        </Box> */}
+      </Box>
       {!isPanelHidden ? (
         <div
           className="z-10 h-dvh w-svw absolute top-0 left-0 backdrop-blur backdrop-brightness-50"
@@ -63,17 +63,23 @@ export function WelcomePage() {
           >
             <div className="h-full w-1/2 ">
               <div className="flex flex-col m-10 mt-16">
-                <h2 className=" text-2xl font-bold">Hi!</h2>
-                <p className=" text-mid my-2">
-                  Enter your credentials to go further!
-                </p>
+                <Text fontSize="2xl" as="b">
+                  Hi!
+                </Text>
+                <Text fontSize="md">Enter your credentials to go further!</Text>
                 <label htmlFor="email" className="text-sm font-bold mt-6 mb-2">
                   Email
                 </label>
-                <input
+                <Input
                   type="email"
-                  className="h-10 w-11/12 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg pl-3"
+                  h="10"
+                  w="2/3"
+                  border="1px"
+                  borderColor="gray.300"
+                  borderRadius="md"
                   placeholder="Enter your mail address"
+                  fontSize="sm"
+                  pl="2"
                 />
                 <label
                   htmlFor="password"
@@ -81,16 +87,23 @@ export function WelcomePage() {
                 >
                   Password
                 </label>
-                <input
+                <Input
                   type="password"
-                  className="h-10 w-11/12 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg pl-3"
+                  h="10"
+                  w="2/3"
+                  border="1px"
+                  borderColor="gray.300"
+                  borderRadius="md"
                   placeholder="Enter your password"
+                  fontSize="sm"
+                  pl="2"
                 />
                 <div className="flex mb-6 mt-1">
                   <input
                     type="checkbox"
                     className="h-6 self-start mt-2.5 ml-1 rounded-none"
                   />
+                  <Checkbox size="sm" colorScheme="blue"></Checkbox>
                   <label className="mt-3 ml-2 text-sm font-bold ">
                     Remember me
                   </label>
