@@ -1,4 +1,4 @@
-import { Text, Button, Link, Input } from "@chakra-ui/react";
+import { Text, Button, Link, Input, Flex, Box } from "@chakra-ui/react";
 
 /**
  * Renders the Home component.
@@ -15,8 +15,8 @@ export function Register() {
               <Text fontSize="2xl" as="b" mb="4">
                 Register
               </Text>
-              <div className="flex">
-                <div className="mt-6 mb-2 w-1/2">
+              <Flex>
+                <Box mt="6" mb="2" width="50%">
                   <label htmlFor="Username" className="text-sm font-bold ">
                     Username
                   </label>
@@ -31,8 +31,8 @@ export function Register() {
                     pl="2"
                     placeholder="Think of a username"
                   />
-                </div>
-                <div className="mt-6 mb-2 w-1/2">
+                </Box>
+                <Box mt="6" mb="2" width="50%">
                   <label htmlFor="email" className="text-sm font-bold ">
                     Email
                   </label>
@@ -47,10 +47,10 @@ export function Register() {
                     pl="2"
                     placeholder="Enter your mail address"
                   />
-                </div>
-              </div>
-              <div className="flex">
-                <div className="mt-2 mb-2 w-1/2">
+                </Box>
+              </Flex>
+              <Flex>
+                <Box mt="2" mb="2" width="50%">
                   <label htmlFor="Username" className="text-sm font-bold ">
                     Password
                   </label>
@@ -65,8 +65,8 @@ export function Register() {
                     pl="2"
                     placeholder="Password"
                   />
-                </div>
-                <div className="mt-2 mb-2 w-1/2">
+                </Box>
+                <Box mt="2" mb="2" width="50%">
                   <label htmlFor="password" className="text-sm font-bold ">
                     Password
                   </label>
@@ -81,8 +81,8 @@ export function Register() {
                     pl="2"
                     placeholder="Repeat password"
                   />
-                </div>
-              </div>
+                </Box>
+              </Flex>
               <Button colorScheme="blue" color="white" mt="5" mb="3">
                 Register
               </Button>
