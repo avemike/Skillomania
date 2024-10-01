@@ -1,3 +1,5 @@
+import { Link, Text, Flex, Button } from "@chakra-ui/react";
+
 export function Navbar() {
   const token = localStorage.getItem("token");
 
@@ -5,33 +7,30 @@ export function Navbar() {
 
   return (
     <nav className="bg-transparent py-4">
-      <div className="container mx-auto flex justify-between items-center">
-        <div className="flex-grow">
-          <a href="/" className="text-gray-800 hover:text-gray-600">
-            Home
-          </a>
-        </div>
-        <div className="flex space-x-4">
-          <a href="/contact" className="text-gray-800 hover:text-gray-600">
-            Contact
-          </a>
-          <a href="/about" className="text-gray-800 hover:text-gray-600">
-            About
-          </a>
-          <a href="/challenges" className="text-gray-800 hover:text-gray-600">
-            Challenges
-          </a>
-        </div>
-        <div className="flex items-center ml-auto">
+      <Flex
+        className="container"
+        mx="auto"
+        justify="between"
+        alignItems="center"
+      >
+        <Flex className="flex-grow">
+          <Link href="/">Home</Link>
+        </Flex>
+        <Flex gap="4">
+          <Link href="/contact">Contact</Link>
+          <Link href="/about">About</Link>
+          <Link href="/challenges">Challenges</Link>
+        </Flex>
+        <Flex alignItems="center" ml="auto">
           {token ? (
-            <span className="text-gray-800">Logged in</span>
+            <Text fontSize="md" ml="2">
+              Logged in
+            </Text>
           ) : (
-            <button className="bg-white text-gray-800 px-4 py-2 rounded hover:bg-gray-100">
-              Login
-            </button>
+            <Button colorScheme="AlphaBlack">Login</Button>
           )}
-        </div>
-      </div>
+        </Flex>
+      </Flex>
     </nav>
   );
 }
