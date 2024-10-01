@@ -2,7 +2,15 @@ import { useState } from "react";
 import { GoogleAuthButton } from "../components/GoogleAuthButton";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
-import { Button, Text, Box, Flex, Input, Checkbox } from "@chakra-ui/react";
+import {
+  Button,
+  Text,
+  Box,
+  Flex,
+  Input,
+  Checkbox,
+  Link,
+} from "@chakra-ui/react";
 
 /**
  * Renders the Home component.
@@ -108,20 +116,20 @@ export function WelcomePage() {
                     Remember me
                   </label>
                 </div>
-                <button className="bg-indigo-600 text-white">Log in</button>
-                <p className="text-xs text-gray-600 my-3 text-center">
+                <Button color="white" colorScheme="blue">
+                  Log in
+                </Button>
+                <Text fontSize="xs" color="gray" my="3" alignSelf="center">
                   Or log in with
-                </p>
+                </Text>
                 <GoogleAuthButton />
-                {/* <button className="bg-white text-black text-sm border-gray-300 mb-2 flex gap-2 justify-center items-center ">
-                  <div className="bg-[url('./assets/google.svg')] h-5 w-5"></div>
-                  <p>Sign up with Google</p>
-                </button> */}
                 <div className="flex mt-3 justify-between px-11">
-                  <p className="text-xs font-bold">Don't have an account?</p>
-                  <a href="/Register" className="text-xs font-bold underline">
+                  <Text fontSize="xs" as="b">
+                    Don't have an account?
+                  </Text>
+                  <Link href="/Register" fontSize="xs">
                     Register here
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
