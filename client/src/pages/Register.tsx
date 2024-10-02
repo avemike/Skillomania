@@ -7,9 +7,28 @@ import { Text, Button, Link, Input, Flex, Box } from "@chakra-ui/react";
  */
 export function Register() {
   return (
-    <div className="h-dvh w-svw absolute top-0 left-0  ">
-      <div className="z-10 h-dvh w-svw absolute top-0 left-0 backdrop-blur backdrop-brightness-50">
-        <div className="absolute z-20 h-2/3 w-2/4 bg-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex shadow-gray-600 shadow-lg ">
+    <Box height="100%" width="100%" position="absolute" top="0" left="0">
+      <Box
+        position="absolute"
+        height="100%"
+        width="100%"
+        zIndex="10"
+        top="0"
+        left="0"
+        backdropFilter="auto"
+        backdropBlur="8px"
+        backdropContrast="80%"
+      >
+        <Flex
+          position="absolute"
+          zIndex="20"
+          height="64%"
+          width="50%"
+          bgColor="white"
+          top="15%"
+          left="25%"
+          boxShadow="lg"
+        >
           <Box height="100%" width="50%">
             <Flex direction="column" m="10" mt="20">
               <Text fontSize="2xl" as="b" mb="4">
@@ -96,7 +115,12 @@ export function Register() {
                 </Link>
               </Flex>
             </Flex>
-            <div className="bg-[url('./assets/woman.svg')] h-44 w-96 absolute bottom-2 left-0 "></div>
+            <Box
+              className="bg-[url('./assets/woman.svg')] h-44 w-96 "
+              position="absolute"
+              left="0"
+              bottom="2"
+            ></Box>
           </Box>
           <Box
             className="bg-[url('./assets/login.svg')] "
@@ -105,8 +129,8 @@ export function Register() {
             bgSize="cover"
             bgPosition="center"
           ></Box>
-        </div>
-      </div>
-    </div>
+        </Flex>
+      </Box>
+    </Box>
   );
 }

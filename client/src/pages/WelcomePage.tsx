@@ -55,12 +55,27 @@ export function WelcomePage() {
         </Box>
       </Box>
       {!isPanelHidden ? (
-        <div
-          className="z-10 h-dvh w-svw absolute top-0 left-0 backdrop-blur backdrop-brightness-50"
+        <Box
+          height="100%"
+          width="100%"
+          zIndex="10"
+          position="absolute"
+          top="0"
+          left="0"
+          backdropFilter="auto"
+          backdropBlur="8px"
+          backdropContrast="80%"
           onClick={toggle}
         >
-          <div
-            className="absolute z-20 min-w-96 w-[50%] max-w-[1000px] bg-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex shadow-gray-600 shadow-lg"
+          <Flex
+            position="absolute"
+            zIndex="20"
+            width="50%"
+            maxWidth="1000px"
+            bgColor="white"
+            top="1%"
+            left="25%"
+            boxShadow="lg"
             onClick={(event) => event.stopPropagation()}
           >
             <Box height="full" width="50%">
@@ -133,8 +148,8 @@ export function WelcomePage() {
                 objectFit="cover"
               />
             </Box>
-          </div>
-        </div>
+          </Flex>
+        </Box>
       ) : (
         <Box></Box>
       )}
