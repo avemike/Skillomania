@@ -10,6 +10,7 @@ import {
   Input,
   Checkbox,
   Link,
+  Image,
 } from "@chakra-ui/react";
 
 /**
@@ -47,18 +48,11 @@ export function WelcomePage() {
             {t("home.checkUsOut")}
           </Button>
         </Flex>
-        {/* ogolnie to to powinno byc na dole strony ale jeszcze nie wiem jak to zrobic */}
         <Box borderTopWidth="2px" borderColor="gray.200">
           <Text fontSize="sm" color="gray.200" maxW="sm">
             Skillomania
           </Text>
         </Box>
-
-        {/* <Box className="absolute flex bottom-16 left-20 border-t-gray-100 border-t-2 w-11/12">
-          <Text fontSize="sm" color="gray.200">
-            Skillomania
-          </Text>
-        </Box> */}
       </Box>
       {!isPanelHidden ? (
         <div
@@ -69,15 +63,15 @@ export function WelcomePage() {
             className="absolute z-20 min-w-96 w-[50%] max-w-[1000px] bg-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex shadow-gray-600 shadow-lg"
             onClick={(event) => event.stopPropagation()}
           >
-            <div className="h-full w-1/2 ">
-              <div className="flex flex-col m-10 mt-16">
+            <Box height="full" width="50%">
+              <Flex className="flex-col" mt="16" m="10">
                 <Text fontSize="2xl" as="b">
                   Hi!
                 </Text>
                 <Text fontSize="md">Enter your credentials to go further!</Text>
-                <label htmlFor="email" className="text-sm font-bold mt-6 mb-2">
+                <Text fontSize="sm" as="b" mt="6" mb="2">
                   Email
-                </label>
+                </Text>
                 <Input
                   type="email"
                   h="10"
@@ -89,12 +83,9 @@ export function WelcomePage() {
                   fontSize="sm"
                   pl="2"
                 />
-                <label
-                  htmlFor="password"
-                  className="text-sm font-bold mt-6 mb-2"
-                >
+                <Text fontSize="sm" as="b" mt="6" mb="2">
                   Password
-                </label>
+                </Text>
                 <Input
                   type="password"
                   h="10"
@@ -106,16 +97,16 @@ export function WelcomePage() {
                   fontSize="sm"
                   pl="2"
                 />
-                <div className="flex mb-6 mt-1">
+                <Flex mb="6" mt="1">
                   <input
                     type="checkbox"
                     className="h-6 self-start mt-2.5 ml-1 rounded-none"
                   />
                   <Checkbox size="sm" colorScheme="blue"></Checkbox>
-                  <label className="mt-3 ml-2 text-sm font-bold ">
+                  <Text fontSize="xs" as="b" mt="3" mb="2" ml="1">
                     Remember me
-                  </label>
-                </div>
+                  </Text>
+                </Flex>
                 <Button color="white" colorScheme="blue">
                   Log in
                 </Button>
@@ -123,27 +114,29 @@ export function WelcomePage() {
                   Or log in with
                 </Text>
                 <GoogleAuthButton />
-                <div className="flex mt-3 justify-between px-11">
+                <Flex className="justify-between" mt="3" px="11">
                   <Text fontSize="xs" as="b">
                     Don't have an account?
                   </Text>
                   <Link href="/Register" fontSize="xs">
                     Register here
                   </Link>
-                </div>
-              </div>
-            </div>
-            <div className="w-1/2 bg-center bg-cover">
-              <img
+                </Flex>
+              </Flex>
+            </Box>
+            <Box width="50%" bgPosition="center" bgSize="cover">
+              <Image
                 src="login.svg"
                 alt="Login background image"
-                className="h-full w-full object-cover"
+                height="100%"
+                width="100%"
+                objectFit="cover"
               />
-            </div>
+            </Box>
           </div>
         </div>
       ) : (
-        <div></div>
+        <Box></Box>
       )}
     </>
   );

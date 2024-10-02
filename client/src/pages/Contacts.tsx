@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Text, Flex } from "@chakra-ui/react";
 
 /**
  * Renders the Home component.
@@ -9,13 +9,24 @@ export function Contacts() {
   return (
     <>
       {" "}
-      <div className="bg-pink-300/50 h-dvh w-svw absolute top-0 left-0 flex justify-center items-center">
-        <div className="flex flex-col text-center bg-gray-100 p-20 rounded-lg shadow-slate-500/50 shadow-md ">
-          <h1 className="mb-3">Check us out on:</h1>
-          <p>Instagram</p>
-          <p>Facebook</p>
-        </div>
-      </div>
+      <Flex
+        className=" h-dvh w-svw absolute top-0 left-0 justify-center "
+        bgColor="pink.300"
+        alignItems="center"
+      >
+        <Flex
+          className=" shadow-slate-500/50 shadow-md "
+          bg="gray.200"
+          p="20"
+          borderRadius="lg"
+          direction="column"
+          textAlign="center"
+        >
+          <Text mb="3">Check us out on:</Text>
+          <Text fontSize="sm">Instagram</Text>
+          <Text fontSize="sm">Facebook</Text>
+        </Flex>
+      </Flex>
     </>
   );
 }

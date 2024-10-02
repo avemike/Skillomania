@@ -10,16 +10,16 @@ export function Register() {
     <div className="h-dvh w-svw absolute top-0 left-0  ">
       <div className="z-10 h-dvh w-svw absolute top-0 left-0 backdrop-blur backdrop-brightness-50">
         <div className="absolute z-20 h-2/3 w-2/4 bg-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex shadow-gray-600 shadow-lg ">
-          <div className="h-full w-1/2 ">
-            <div className="flex flex-col m-10 mt-20">
+          <Box height="100%" width="50%">
+            <Flex direction="column" m="10" mt="20">
               <Text fontSize="2xl" as="b" mb="4">
                 Register
               </Text>
               <Flex>
                 <Box mt="6" mb="2" width="50%">
-                  <label htmlFor="Username" className="text-sm font-bold ">
+                  <Text fontSize="sm" as="b">
                     Username
-                  </label>
+                  </Text>
                   <Input
                     type="username"
                     h="10"
@@ -33,9 +33,9 @@ export function Register() {
                   />
                 </Box>
                 <Box mt="6" mb="2" width="50%">
-                  <label htmlFor="email" className="text-sm font-bold ">
+                  <Text fontSize="sm" as="b">
                     Email
-                  </label>
+                  </Text>
                   <Input
                     type="email"
                     h="10"
@@ -51,9 +51,9 @@ export function Register() {
               </Flex>
               <Flex>
                 <Box mt="2" mb="2" width="50%">
-                  <label htmlFor="Username" className="text-sm font-bold ">
+                  <Text fontSize="sm" as="b">
                     Password
-                  </label>
+                  </Text>
                   <Input
                     type="password"
                     h="10"
@@ -67,9 +67,9 @@ export function Register() {
                   />
                 </Box>
                 <Box mt="2" mb="2" width="50%">
-                  <label htmlFor="password" className="text-sm font-bold ">
+                  <Text fontSize="sm" as="b">
                     Password
-                  </label>
+                  </Text>
                   <Input
                     type="password"
                     h="10"
@@ -87,18 +87,24 @@ export function Register() {
                 Register
               </Button>
 
-              <div className="flex mt-3 justify-between px-16">
+              <Flex justify="space-between" mt="3" px="16">
                 <Text fontSize="xs" as="b">
                   Have an account?
                 </Text>
                 <Link href="/" fontSize="xs">
                   Go back to the main page
                 </Link>
-              </div>
-            </div>
+              </Flex>
+            </Flex>
             <div className="bg-[url('./assets/woman.svg')] h-44 w-96 absolute bottom-2 left-0 "></div>
-          </div>
-          <div className="bg-[url('./assets/login.svg')] h-full w-1/2 bg-center bg-cover"></div>
+          </Box>
+          <Box
+            className="bg-[url('./assets/login.svg')] "
+            height="full"
+            width="50%"
+            bgSize="cover"
+            bgPosition="center"
+          ></Box>
         </div>
       </div>
     </div>
