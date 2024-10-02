@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "./form/Button";
 import { useChallengeSeriesMutation } from "../api/useChallengeSeriesMutation";
+import { Text } from "@chakra-ui/react";
 
 const schema = z.object({
   name: z.string().min(5).max(30),
@@ -25,7 +26,8 @@ interface ChallengeSeriesCreationModalProps {
 export function ChallengeSeriesCreationModal({
   isOpen,
   onClose,
-}: ChallengeSeriesCreationModalProps) {``
+}: ChallengeSeriesCreationModalProps) {
+  ``;
   const form = useForm<z.infer<typeof schema>>({
     defaultValues: DEFAULT_VALUES,
     resolver: zodResolver(schema),
@@ -46,7 +48,9 @@ export function ChallengeSeriesCreationModal({
     <Modal.Wrapper isOpen={isOpen} onClose={onClose}>
       <form className="contents" onSubmit={handleSubmit}>
         <Modal.Header>
-          <h3 className="text-lg font-bold">Create Series</h3>
+          <Text fontSize="lg" as="b">
+            Create Series
+          </Text>
         </Modal.Header>
         <Modal.Content>
           <TextInput

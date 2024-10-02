@@ -3,6 +3,7 @@ import { useChallengeSeries } from "../api/useChallengeSeries";
 import { ChallengeCreationModal } from "./ChallengeCreationModal";
 import { useAuth } from "../AuthenticationProvider";
 import { ChallengeSeriesCreationModal } from "./ChallengeSeriesCreationModal";
+import { Text, Box, Flex, Button } from "@chakra-ui/react";
 
 export function ChallengeSeriesList() {
   const { data: response, isLoading, isError } = useChallengeSeries();
@@ -12,61 +13,104 @@ export function ChallengeSeriesList() {
 
   if (isLoading) {
     return (
-      <div className={commonStyles}>
-        <div className="flex justify-center items-center min-h-screen">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-4 border-gray-900"></div>
-        </div>
-      </div>
+      <Box className={commonStyles}>
+        <Flex alignItems="center" minHeight="screen" justifyContent="center">
+          <Box
+            className="animate-spin"
+            height="32"
+            width="32"
+            borderBottomWidth="4"
+            borderRadius="full"
+            borderColor="gray.900"
+          ></Box>
+        </Flex>
+      </Box>
     );
   }
 
   if (isError) {
     return (
-      <div className={commonStyles}>
-        <div className="w-full h-full flex justify-center items-center">
-          <div className="bg-[rgba(0,100,190,0.05)] backdrop-filter backdrop-blur-sm flex flex-col text-center items-center justify-center w-2/5 h-1/3 rounded-xl">
-            <div className="text-black text-2xl font-bold">
+      <Box className={commonStyles}>
+        <Flex
+          width="100%"
+          height="100%"
+          justifyContent="center"
+          alignItems="center"
+          justifyItems="center"
+        >
+          <Flex
+            className="bg-[rgba(0,100,190,0.05)]"
+            backdropFilter="auto"
+            backdropBlur="8px"
+            direction="column"
+            textAlign="center"
+            alignItems="center"
+            justifyItems="center"
+            width="40%"
+            height="33%"
+            borderRadius="full"
+          >
+            <Text color="black" fontSize="2xl" as="b">
               Error loading challenges
-            </div>
-          </div>
-        </div>
-      </div>
+            </Text>
+          </Flex>
+        </Flex>
+      </Box>
     );
   }
 
   return (
-    <div className={commonStyles}>
-      <div className="w-full h-full flex flex-col items-center justify-center space-y-4">
-        <div className="w-full flex justify-end px-8">
+    <Box className={commonStyles}>
+      <Flex
+        width="100%"
+        height="100%"
+        direction="column"
+        alignItems="center"
+        justifyContent="center"
+        gap="4"
+      >
+        <Flex width="100%" justifyContent="end" px="8">
           <ChallengeCreateButton />
           <ChallengeSeriesCreateButton />
-        </div>
+        </Flex>
         <div className="bg-[rgba(0,100,190,0.05)] backdrop-filter backdrop-blur-sm flex flex-col text-center items-center justify-center w-3/5 p-8 rounded-xl space-y-6">
-          <div className="text-black text-3xl font-bold">Challenges</div>
+          <Text color="black" fontSize="3xl" as="b">
+            Challenges
+          </Text>
           <div className="text-black text-lg font-semibold space-y-6 max-h-[500px] overflow-y-auto">
             {response?.data?.map((series) => (
-              <div key={series.id} className="space-y-2 text-left w-full">
-                <div className="text-xl font-bold">{series.title}</div>
-                <div className="text-sm italic">{series.description}</div>
-                <div className="pl-4 mt-2 space-y-1">
+              <Box key={series.id} textAlign="left" gap="2" width="100%">
+                <Text fontSize="xl" as="b">
+                  {series.title}
+                </Text>
+                <Text fontSize="sm" as="i">
+                  {series.description}
+                </Text>
+                <Box pl="4" mt="2" gap="1">
                   {series.challenges.map((challenge) => (
-                    <div
+                    <Box
                       key={challenge.id}
-                      className="border-l-4 border-blue-500 pl-4"
+                      borderLeftWidth="4"
+                      borderColor="blue"
+                      pl="4"
                     >
-                      <div className="font-semibold text-base">
+                      <Text
+                        className="font-semibold text-base"
+                        fontSize="md"
+                        as="b"
+                      >
                         {challenge.title}
-                      </div>
-                      <div className="text-sm">{challenge.description}</div>
-                    </div>
+                      </Text>
+                      <Text fontSize="sm">{challenge.description}</Text>
+                    </Box>
                   ))}
-                </div>
-              </div>
+                </Box>
+              </Box>
             ))}
           </div>
         </div>
-      </div>
-    </div>
+      </Flex>
+    </Box>
   );
 }
 
@@ -83,12 +127,9 @@ function ChallengeCreateButton() {
 
   return (
     <>
-      <button
-        onClick={handleOpenModal}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      >
+      <Button onClick={handleOpenModal} colorScheme="blue" py="2" px="4">
         Create Challenge
-      </button>
+      </Button>
       <ChallengeCreationModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
@@ -109,12 +150,9 @@ function ChallengeSeriesCreateButton() {
 
   return (
     <>
-      <button
-        onClick={handleOpenModal}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      >
+      <Button onClick={handleOpenModal} colorScheme="blue" py="2" px="4">
         Create Series
-      </button>
+      </Button>
       <ChallengeSeriesCreationModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}

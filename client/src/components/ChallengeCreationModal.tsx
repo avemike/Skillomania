@@ -8,6 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "./form/Button";
 import { useChallengeMutation } from "../api/useChallengeMutation";
+import { Text, Box } from "@chakra-ui/react";
 
 const schema = z.object({
   title: z.string().min(5).max(100),
@@ -66,7 +67,9 @@ export function ChallengeCreationModal({
     <Modal.Wrapper isOpen={isOpen} onClose={handleClose}>
       <form className="contents" onSubmit={handleSubmit}>
         <Modal.Header>
-          <h3 className="text-lg font-bold">Create Challenge</h3>
+          <Text fontSize="lg" as="b">
+            Create Challenge
+          </Text>
         </Modal.Header>
         <Modal.Content>
           <TextInput
@@ -97,7 +100,7 @@ export function ChallengeCreationModal({
         </Modal.Content>
         <Modal.Footer>
           {challengeMutation.isError && (
-            <div className="text-red-500">An error occurred</div>
+            <Box bgColor="red">An error occurred</Box>
           )}
           <Button
             type="submit"
