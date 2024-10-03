@@ -79,7 +79,7 @@ export function WelcomePage() {
             onClick={(event) => event.stopPropagation()}
           >
             <Box height="full" width="50%">
-              <Flex className="flex-col" mt="16" m="10">
+              <Flex direction="column" mt="16" m="10">
                 <Text fontSize="2xl" as="b">
                   Hi!
                 </Text>
@@ -129,7 +129,7 @@ export function WelcomePage() {
                   Or log in with
                 </Text>
                 <GoogleAuthButton />
-                <Flex className="justify-between" mt="3" px="11">
+                <Flex mt="3" px="11" justify="space-between">
                   <Text fontSize="xs" as="b">
                     Don't have an account?
                   </Text>

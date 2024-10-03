@@ -9,10 +9,10 @@ export function Error() {
     <>
       {" "}
       <Flex
-        width={"80vw"}
-        height={"85vh"}
-        alignContent={"center"}
-        justifyContent={"center"}
+        width="80vw"
+        height="85vh"
+        alignContent="center"
+        justifyContent="center"
       >
         <Center>
           <Box
