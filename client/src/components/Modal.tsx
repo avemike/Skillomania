@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { Text, Box, Flex } from "@chakra-ui/react";
 
 interface ModalWrapperProps {
   isOpen: boolean;
@@ -17,42 +18,67 @@ function ModalWrapper({ children, isOpen, onClose }: ModalWrapperProps) {
   };
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+    <Flex
+      className="bg-opacity-50"
+      position="fixed"
+      inset="0"
+      zIndex="50"
+      alignItems="center"
+      justifyContent="center"
       onClick={onClose}
     >
-      <div
-        className="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full"
+      <Box
+        className="transform transition-all sm:max-w-lg sm:w-full"
+        bgColor="white"
+        borderRadius="lg"
+        overflow="hidden"
+        boxShadow="xl"
         onClick={handleOverlayClick}
       >
         {children}
-      </div>
-    </div>
+      </Box>
+    </Flex>
   );
 }
 
 function ModalContent({ children }: { children: ReactNode }) {
   return (
-    <div className="px-4 pb-8 w-full">
-      <div className="sm:flex sm:items-start w-full">
-        <div className="mt-3 text-center sm:mt-0 sm:text-left w-full">
-          <div className="mt-2 w-full">{children}</div>
-        </div>
-      </div>
-    </div>
+    <Box px="4" pb="8" width="100%">
+      <Flex className="sm:flex sm:items-start" width="100%">
+        <Box
+          className="sm:mt-0 sm:text-left "
+          width="100%"
+          mt="3"
+          textAlign="center"
+        >
+          <Box mt="2" width="100%">
+            {children}
+          </Box>
+        </Box>
+      </Flex>
+    </Box>
   );
 }
 
 function ModalFooter({ children }: { children: ReactNode }) {
   return (
-    <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+    <Flex
+      className="sm:px-6 sm:flex sm:flex-row-reverse"
+      bgColor="gray.50"
+      px="4"
+      py="3"
+    >
       {children}
-    </div>
+    </Flex>
   );
 }
 
 function ModalHeader({ children }: { children: ReactNode }) {
-  return <div className="bg-gray-50 px-4 py-4 sm:px-6 sm:flex">{children}</div>;
+  return (
+    <Flex className=" sm:px-6 sm:flex" bgColor="gray.50" px="4" py="4">
+      {children}
+    </Flex>
+  );
 }
 
 export const Modal = {

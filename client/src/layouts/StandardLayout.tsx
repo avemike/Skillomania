@@ -1,14 +1,25 @@
 import { ReactNode } from "react";
 import { Navbar } from "../components/Navbar";
+import { Box, Flex } from "@chakra-ui/react";
 
 /**
  * Renders a standard layout.
  */
 export function StandardLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-screen w-screen bg-[url('./assets/welcome_website.svg')] bg-center bg-cover flex-col">
+    <Flex
+      className=" bg-[url('./assets/welcome_website.svg')] "
+      minHeight="100%"
+      width="100%"
+      bgPosition="center"
+      bgSize="cover"
+      direction="column"
+    >
       <Navbar />
-      <div className="container mx-auto">{children}</div>;
-    </div>
+      <Box width="100%" mx="auto">
+        {children}
+      </Box>
+      ;
+    </Flex>
   );
 }
