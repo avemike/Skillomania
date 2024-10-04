@@ -28,8 +28,8 @@ export function WelcomePage() {
 
   return (
     <>
-      <Box>
-        <Flex py="250" alignItems="start" direction="column">
+      <Box w="calc(100vw)" h="calc(100vh)" overflow="clip">
+        <Flex py="250" pl="200" alignItems="start" direction="column">
           <Text fontSize="6xl" as="b">
             {t("home.welcome")}
           </Text>
@@ -48,8 +48,8 @@ export function WelcomePage() {
             {t("home.checkUsOut")}
           </Button>
         </Flex>
-        <Box borderTopWidth="2px" borderColor="gray.200">
-          <Text fontSize="sm" color="gray.200" maxW="sm">
+        <Box borderTopWidth="2px" borderColor="gray.200" width="94%" ml="3%">
+          <Text fontSize="sm" color="gray.300" maxW="sm" pl="10%">
             Skillomania
           </Text>
         </Box>

@@ -9,8 +9,8 @@ export function Error() {
     <>
       {" "}
       <Flex
-        width="80vw"
-        height="85vh"
+        w="calc(100vw)"
+        h="calc(100vh)"
         alignContent="center"
         justifyContent="center"
       >

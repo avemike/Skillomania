@@ -7,8 +7,8 @@ import { Box, Text, Center, Flex, Link } from "@chakra-ui/react";
 export function About() {
   return (
     <Flex
-      width={"80vw"}
-      height={"85vh"}
+      w="calc(100vw)"
+      h="calc(100vh)"
       alignContent={"center"}
       justifyContent={"center"}
     >
