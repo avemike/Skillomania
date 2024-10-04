@@ -8,6 +8,7 @@ import { HomeLayout } from "./layouts/HomeLayout";
 import { WelcomePage } from "./pages/WelcomePage";
 import { About } from "./pages/About";
 import { Error as ErrorPage } from "./pages/Error";
+import { AccountPage } from "./pages/AccountPage";
 import { ReactNode } from "react";
 import { Register } from "./pages/Register";
 import { Contacts } from "./pages/Contacts";
@@ -50,6 +51,7 @@ const router = createBrowserRouter([
   createStandardRoute("/contacts", <Contacts />),
   createStandardRoute("/home", <Home />),
   createHomeRoute("/challenges", <ChallengeSeriesPage />),
+  createHomeRoute("/account", <AccountPage />),
 ]);
 
 const { Button } = chakraTheme.components;
