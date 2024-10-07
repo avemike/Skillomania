@@ -5,6 +5,13 @@ import {
   Avatar,
   ListItem,
   UnorderedList,
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  SimpleGrid,
+  Heading,
+  Button,
 } from "@chakra-ui/react";
 
 /**
@@ -14,7 +21,14 @@ import {
  */
 export function AccountPage() {
   return (
-    <Box bgColor="white" w="calc(100vw)" h="calc(100vh)">
+    <Box
+      w="calc(100vw)"
+      h="calc(100vh)"
+      className="bg-[url('./assets/bg_account.svg')]"
+      bgColor="white"
+      bgPosition="center"
+      bgSize="cover"
+    >
       <Flex direction="row">
         <Flex
           direction="column"
@@ -93,7 +107,77 @@ export function AccountPage() {
             <Avatar name="h g" h="10" w="10"></Avatar>
           </Flex>
 
-          <Flex
+          <SimpleGrid
+            spacing={2}
+            templateColumns="repeat(2, 20%)"
+            templateRows="repeat(2, 80%)"
+          >
+            <Card
+              bgColor="gray.800"
+              p="5"
+              m="2"
+              color="white"
+              borderRadius="lg"
+              gridArea="1/1/3/2"
+            >
+              <CardHeader>
+                <Heading size="lg" as="b">
+                  {" "}
+                  My challenges
+                </Heading>
+              </CardHeader>
+              <CardBody>
+                <Text>...</Text>
+              </CardBody>
+              <CardFooter>
+                <Button mt="2">View here</Button>
+              </CardFooter>
+            </Card>
+            <Card
+              bgColor="gray.800"
+              p="5"
+              m="2"
+              color="white"
+              borderRadius="lg"
+              gridArea="1/2/2/3"
+            >
+              <CardHeader>
+                <Heading size="lg" as="b">
+                  {" "}
+                  Tasks completed
+                </Heading>
+              </CardHeader>
+              <CardBody>
+                <Text>...</Text>
+              </CardBody>
+              <CardFooter>
+                <Button mt="2">View here</Button>
+              </CardFooter>
+            </Card>
+            <Card
+              bgColor="gray.800"
+              p="5"
+              m="2"
+              color="white"
+              borderRadius="lg"
+              gridArea="2/2/3/3"
+            >
+              <CardHeader>
+                <Heading size="lg" as="b">
+                  {" "}
+                  Recommended for you
+                </Heading>
+              </CardHeader>
+              <CardBody>
+                <Text>...</Text>
+              </CardBody>
+              <CardFooter>
+                <Button mt="2">View here</Button>
+              </CardFooter>
+            </Card>
+          </SimpleGrid>
+
+          {/* <Flex
             height="calc(90vh)"
             width="80%"
             direction="row"
@@ -108,17 +192,17 @@ export function AccountPage() {
               borderRadius="lg"
               boxShadow="md"
             >
-              <Text
-                borderBottom="1px"
-                borderColor="gray.500"
-                py="3"
-                mx="10"
-                color="white"
-                fontSize="lg"
-              >
-                My challenges
-              </Text>
-            </Box>
+                <Text
+                  borderBottom="1px"
+                  borderColor="gray.500"
+                  py="3"
+                  mx="10"
+                  color="white"
+                  fontSize="lg"
+                >
+                  My challenges
+                </Text>
+              </Box>
             <Flex
               direction="column"
               height="100%"
@@ -165,7 +249,7 @@ export function AccountPage() {
                 </Text>
               </Box>
             </Flex>
-          </Flex>
+          </Flex> */}
         </Flex>
       </Flex>
     </Box>
