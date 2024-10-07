@@ -30,12 +30,12 @@ export function AccountPage() {
               Skillomania
             </Text>
           </Box>
-          <Box borderBottom="1px" borderColor="gray.400" pb="3">
+          <Box borderBottom="1px" borderColor="gray.500" pb="3">
             <Text color="gray.200" ml="4" fontSize="lg" as="b">
               Dashboard
             </Text>
           </Box>
-          <Box borderBottom="1px" borderColor="gray.400" pb="3">
+          <Box borderBottom="1px" borderColor="gray.500" pb="3">
             <Text color="gray.200" ml="4" mt="3" mb="3">
               Catalog
             </Text>
@@ -51,7 +51,7 @@ export function AccountPage() {
               </ListItem>
             </UnorderedList>
           </Box>
-          <Box borderBottom="1px" borderColor="gray.400" pb="3">
+          <Box borderBottom="1px" borderColor="gray.500" pb="3">
             <Text color="gray.200" ml="4">
               My challenges
             </Text>
@@ -95,16 +95,22 @@ export function AccountPage() {
 
           <Flex
             height="calc(90vh)"
-            width="100%"
+            width="80%"
             direction="row"
-            ml="24%"
+            ml="18%"
             alignItems="center"
             justifyContent="center"
           >
-            <Box bgColor="gray.900" width="30%" height="70%">
+            <Box
+              bgColor="gray.900"
+              width="30%"
+              height="70%"
+              borderRadius="lg"
+              boxShadow="md"
+            >
               <Text
                 borderBottom="1px"
-                borderColor="gray.400"
+                borderColor="gray.500"
                 py="3"
                 mx="10"
                 color="white"
@@ -116,16 +122,22 @@ export function AccountPage() {
             <Flex
               direction="column"
               height="100%"
-              width="100%"
+              width="50%"
               alignItems="start"
               justifyContent="center"
               gap="5%"
-              ml="5%"
+              ml="2%"
             >
-              <Box bgColor="gray.900" width="30%" height="30%">
+              <Box
+                bgColor="gray.900"
+                width="40%"
+                height="30%"
+                borderRadius="lg"
+                boxShadow="md"
+              >
                 <Text
                   borderBottom="1px"
-                  borderColor="gray.400"
+                  borderColor="gray.500"
                   py="3"
                   mx="10"
                   color="white"
@@ -134,10 +146,16 @@ export function AccountPage() {
                   Tasks completed
                 </Text>
               </Box>
-              <Box bgColor="gray.900" width="30%" height="30%">
+              <Box
+                bgColor="gray.900"
+                width="40%"
+                height="30%"
+                borderRadius="lg"
+                boxShadow="md"
+              >
                 <Text
                   borderBottom="1px"
-                  borderColor="gray.400"
+                  borderColor="gray.500"
                   py="3"
                   mx="10"
                   color="white"
