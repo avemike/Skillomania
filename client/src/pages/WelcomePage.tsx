@@ -1,18 +1,50 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+
+import { Button, Text, Box } from "@chakra-ui/react";
 import { LoginModal } from "../components/LoginModal";
 
 export function WelcomePage() {
   const [isPanelHidden, setIsPanelHidden] = useState<boolean>(true);
-
+  const { t } = useTranslation();
   const toggle = () => {
     setIsPanelHidden((previousPanelHidden) => !previousPanelHidden);
   };
 
   return (
     <>
-      <div className="grow w-full flex items-center pb-24">
-        <PageContent toggle={toggle} />
+      <div className="h-dvh w-svw">
+        <div className="flex flex-col items-start absolute left-60 top-1/3">
+          <Text fontSize="6xl" as="b">
+            {t("home.welcome")}
+          </Text>
+
+          <Text fontSize="2xl">
+            {t("home.toThe")} <b> skillomania</b>{" "}
+          </Text>
+
+          <Text fontSize="md" color="gray.600" mt={2}>
+            {t("home.hereWeUpgradeSkills")}
+          </Text>
+          <Text fontSize="md" color="gray.600">
+            {t("home.ifYouAreInterested")}
+          </Text>
+          <Button colorScheme="blackAlpha" onClick={toggle} mt={5}>
+            {t("home.checkUsOut")}
+          </Button>
+        </div>
+        {/* ogolnie to to powinno byc na dole strony ale jeszcze nie wiem jak to zrobic */}
+        <Box borderTopWidth="2px" borderColor="gray.200">
+          <Text fontSize="sm" color="gray.200" maxW="sm">
+            Skillomania
+          </Text>
+        </Box>
+
+        {/* <div className="absolute flex bottom-16 left-20 border-t-gray-100 border-t-2 w-11/12">
+          <Text fontSize="sm" color="gray.200">
+            Skillomania
+          </Text>
+        </div> */}
       </div>
       <LoginModal isOpen={!isPanelHidden} onClose={toggle} />
     </>
