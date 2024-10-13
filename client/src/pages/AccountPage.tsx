@@ -5,6 +5,7 @@ import {
   Avatar,
   ListItem,
   UnorderedList,
+  OrderedList,
   Card,
   CardHeader,
   CardBody,
@@ -12,6 +13,16 @@ import {
   SimpleGrid,
   Heading,
   Button,
+  Input,
+  Stat,
+  StatLabel,
+  StatNumber,
+  StatGroup,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
 } from "@chakra-ui/react";
 
 /**
@@ -72,9 +83,9 @@ export function AccountPage() {
             <Box
               height={10}
               width={10}
-              borderRadius="full"
+              borderRadius="lg"
               borderWidth="10"
-              bgColor="gray.300"
+              bgColor="gray.200"
               margin="2"
               alignContent="center"
               textAlign="center"
@@ -82,7 +93,7 @@ export function AccountPage() {
               my="4"
               color="gray.900"
             >
-              3
+              4
             </Box>
           </Box>
           <Box>
@@ -102,6 +113,12 @@ export function AccountPage() {
             width="100%"
             height="20%"
           >
+            <Input
+              placeholder="Search something!"
+              size="sm"
+              focusBorderColor="black"
+              px="2"
+            />
             <Box h="10" w="10" bgColor="gray.600" borderRadius="full"></Box>
             <Box h="10" w="10" bgColor="gray.600" borderRadius="full"></Box>
             <Avatar name="h g" h="10" w="10"></Avatar>
@@ -109,8 +126,9 @@ export function AccountPage() {
 
           <SimpleGrid
             spacing={2}
-            templateColumns="repeat(2, 20%)"
-            templateRows="repeat(2, 80%)"
+            templateColumns="repeat(5, 20%)"
+            templateRows="repeat(5, 45%)"
+            mt="4%"
           >
             <Card
               bgColor="gray.800"
@@ -118,13 +136,19 @@ export function AccountPage() {
               m="2"
               color="white"
               borderRadius="lg"
-              gridArea="1/1/3/2"
+              gridArea="1 / 1 / 4 / 2"
             >
               <CardHeader>
                 <Heading size="lg" as="b">
                   {" "}
                   My challenges
                 </Heading>
+                <OrderedList>
+                  <ListItem></ListItem>
+                  <ListItem></ListItem>
+                  <ListItem></ListItem>
+                  <ListItem></ListItem>
+                </OrderedList>
               </CardHeader>
               <CardBody>
                 <Text>...</Text>
@@ -139,13 +163,24 @@ export function AccountPage() {
               m="2"
               color="white"
               borderRadius="lg"
-              gridArea="1/2/2/3"
+              gridArea="1 / 2 / 2 / 3"
             >
               <CardHeader>
                 <Heading size="lg" as="b">
                   {" "}
                   Tasks completed
                 </Heading>
+                <StatGroup pt="2">
+                  <Stat>
+                    <StatLabel>Completed</StatLabel>
+                    <StatNumber>4</StatNumber>
+                  </Stat>
+
+                  <Stat>
+                    <StatLabel>In progress</StatLabel>
+                    <StatNumber>2</StatNumber>
+                  </Stat>
+                </StatGroup>
               </CardHeader>
               <CardBody>
                 <Text>...</Text>
@@ -160,13 +195,42 @@ export function AccountPage() {
               m="2"
               color="white"
               borderRadius="lg"
-              gridArea="2/2/3/3"
+              gridArea="2 / 2 / 4 / 3"
             >
               <CardHeader>
                 <Heading size="lg" as="b">
                   {" "}
                   Recommended for you
                 </Heading>
+                <Accordion>
+                  <AccordionItem>
+                    <h2>
+                      <AccordionButton>
+                        <Box as="span" flex="1" textAlign="left">
+                          Do your first pushup
+                        </Box>
+                        <AccordionIcon />
+                      </AccordionButton>
+                    </h2>
+                    <AccordionPanel pb={4}>
+                      No need for equipment just piece of the floor...
+                    </AccordionPanel>
+                  </AccordionItem>
+
+                  <AccordionItem>
+                    <h2>
+                      <AccordionButton>
+                        <Box as="span" flex="1" textAlign="left">
+                          Bake your first cake!
+                        </Box>
+                        <AccordionIcon />
+                      </AccordionButton>
+                    </h2>
+                    <AccordionPanel pb={4}>
+                      You will need no more than 8 ingredients...
+                    </AccordionPanel>
+                  </AccordionItem>
+                </Accordion>
               </CardHeader>
               <CardBody>
                 <Text>...</Text>
