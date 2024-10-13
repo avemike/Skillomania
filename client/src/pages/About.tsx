@@ -11,6 +11,7 @@ export function About() {
       h="calc(100vh)"
       alignContent={"center"}
       justifyContent={"center"}
+      overflow="hidden"
     >
       <Center>
         <Box

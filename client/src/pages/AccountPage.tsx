@@ -23,7 +23,17 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverHeader,
+  PopoverBody,
+  PopoverFooter,
+  PopoverArrow,
+  PopoverCloseButton,
+  PopoverAnchor,
 } from "@chakra-ui/react";
+import React, { useState } from "react";
 
 /**
  * Renders the Home component.
@@ -31,6 +41,7 @@ import {
  * WIP: Currently function as a placeholder for the homepage.
  */
 export function AccountPage() {
+  const [nickname, setNickname] = useState("");
   return (
     <Box
       w="calc(100vw)"
@@ -66,13 +77,13 @@ export function AccountPage() {
             </Text>
             <UnorderedList>
               <ListItem color="gray.200" ml="4" fontSize="sm">
-                Quick challenge
+                <a href=""> Quick challenge</a>
               </ListItem>
               <ListItem color="gray.200" ml="4" fontSize="sm">
-                Challenge paths
+                <a href=""> Challenge paths</a>
               </ListItem>
               <ListItem color="gray.200" ml="4" fontSize="sm">
-                Lists
+                <a href="">Lists</a>
               </ListItem>
             </UnorderedList>
           </Box>
@@ -114,14 +125,68 @@ export function AccountPage() {
             height="20%"
           >
             <Input
-              placeholder="Search something!"
+              placeholder="Search for something!"
               size="sm"
-              focusBorderColor="black"
+              focusBorderColor="gray.800"
               px="2"
             />
             <Box h="10" w="10" bgColor="gray.600" borderRadius="full"></Box>
             <Box h="10" w="10" bgColor="gray.600" borderRadius="full"></Box>
-            <Avatar name="h g" h="10" w="10"></Avatar>
+            {/* <Avatar name="h g" h="10" w="10"></Avatar> */}
+            <Popover placement="bottom-end">
+              <PopoverTrigger>
+                <Button
+                  border="none"
+                  p="0"
+                  borderRadius="full"
+                  bgColor="gray.100"
+                >
+                  <Avatar name={nickname} h="10" w="10"></Avatar>
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent
+                color="white"
+                bg="gray.800"
+                borderColor="gray.800"
+                borderRadius="lg"
+                m="2"
+                p="2"
+              >
+                <Flex justifyContent="space-between">
+                  <PopoverHeader fontWeight="semibold">
+                    Change your profile picture
+                  </PopoverHeader>
+                  <PopoverCloseButton />
+                </Flex>
+                <PopoverArrow />
+
+                <PopoverBody pt="2" px="2">
+                  <Text px="1"> Write your nickname:</Text>
+                  <Input
+                    value={nickname}
+                    onChange={(e) => setNickname(e.target.value)}
+                    placeholder="Your nickname"
+                    size="sm"
+                    focusBorderColor="gray.800"
+                    color="white"
+                    bgColor="gray.600"
+                    borderRadius="lg"
+                    px="2"
+                    mt="1"
+                  />
+
+                  <Text px="1">or </Text>
+                  <Text px="1">Upload your own image:</Text>
+                  <Box
+                    bgColor="gray.600"
+                    width="60"
+                    height="150"
+                    borderRadius="lg"
+                    my="2"
+                  ></Box>
+                </PopoverBody>
+              </PopoverContent>
+            </Popover>
           </Flex>
 
           <SimpleGrid
@@ -236,7 +301,7 @@ export function AccountPage() {
                 <Text>...</Text>
               </CardBody>
               <CardFooter>
-                <Button mt="2">View here</Button>
+                <Button mt="2">Show all</Button>
               </CardFooter>
             </Card>
           </SimpleGrid>
