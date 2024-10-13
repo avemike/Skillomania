@@ -1,8 +1,8 @@
 import { OAuth2Client } from "google-auth-library";
 import { Body, Post, Route, Controller } from "tsoa";
-import { sessionsService } from "../sessions/sessions.service";
 import { usersRepository } from "../users/users.repository";
 import { BadRequestError } from "../../errors/publicErrors";
+import { SessionsService } from "../sessions/sessions.service";
 
 interface IGoogleAuthRequestBody {
   credential: string;
@@ -11,8 +11,10 @@ interface IGoogleAuthRequestBody {
 
 @Route("google-auth")
 export class GoogleAuthController extends Controller {
+  private sessionsService = new SessionsService();
   private googleOauthClient = new OAuth2Client(
-    process.env.GOOGLE_OAUTH_CLIENT_ID
+    process.env.GOOGLE_OAUTH_CLIENT_ID,
+    process.env.GOOGLE_OAUTH_CLIENT_SECRET
   );
 
   @Post()
@@ -48,13 +50,11 @@ export class GoogleAuthController extends Controller {
       throw new Error("Something went wrong");
     }
 
-    const session = await sessionsService.createSession({ user });
-
-    this.setHeader("Set-Cookie", `token=${session.token}`);
+    const { token } = await this.sessionsService.createSession({ user });
 
     return {
-      payload,
       user,
+      token,
     };
   }
 }

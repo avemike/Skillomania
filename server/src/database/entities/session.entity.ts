@@ -2,10 +2,10 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  ManyToOne,
   CreateDateColumn,
   UpdateDateColumn,
   JoinColumn,
+  ManyToOne,
 } from "typeorm";
 import { User } from "./user.entity";
 
@@ -21,12 +21,16 @@ export class Session {
   @Column()
   token: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn({
+    name: "created_at",
+  })
   created_at: Date;
 
-  @UpdateDateColumn()
-  updated_at: Date;
+  @UpdateDateColumn({
+    name: "updated_at",
+  })
+  updatedAt: Date;
 
-  @Column({ nullable: true })
-  expires_at: Date;
+  @Column({ nullable: true, name: "expires_at" })
+  expiresAt: Date;
 }

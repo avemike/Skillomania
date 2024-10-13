@@ -1,6 +1,6 @@
 import { ElementType, ComponentPropsWithoutRef, forwardRef, Ref } from "react";
 
-interface BaseInputProps<T extends ElementType = "input"> {
+export interface BaseInputProps<T extends ElementType = "input"> {
   as?: T;
 }
 

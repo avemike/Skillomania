@@ -23,13 +23,13 @@ export async function loginViaGoogle(credentialResponse: CredentialResponse) {
     return;
   }
 
-  const { user, payload } = response.data ?? {};
+  const { user, token } = response.data ?? {};
 
-  if (!payload || !user) {
+  if (!user || !token) {
     throw new Error("Invalid response from server");
   }
 
-  localStorage.setItem("token", credentialResponse.credential);
+  localStorage.setItem("token", `${token}`);
   localStorage.setItem("firstName", user.firstName);
   localStorage.setItem("lastName", user.lastName);
   localStorage.setItem("email", user.email);

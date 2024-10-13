@@ -6,6 +6,198 @@ export const $AuthSource = {
     nullable: false
 } as const;
 
+export const $IChallenge = {
+    properties: {
+        id: {
+            type: 'number',
+            format: 'double'
+        },
+        title: {
+            type: 'string'
+        },
+        effortLevel: {
+            type: 'number',
+            enum: [1, 2, 3, 4, 5]
+        },
+        requiredExpertise: {
+            type: 'number',
+            enum: [0, 1, 2, 3]
+        },
+        estimatedTime: {
+            type: 'string',
+            nullable: true
+        },
+        author: {
+            '$ref': '#/components/schemas/IUser'
+        },
+        owners: {
+            items: {
+                '$ref': '#/components/schemas/IUser'
+            },
+            type: 'array'
+        },
+        series: {
+            items: {
+                '$ref': '#/components/schemas/IChallengeSeries'
+            },
+            type: 'array'
+        },
+        category: {
+            '$ref': '#/components/schemas/ICategory'
+        },
+        version: {
+            type: 'number',
+            format: 'double'
+        },
+        versionCreatedAt: {
+            type: 'string',
+            format: 'date-time'
+        },
+        versionAuthor: {
+            '$ref': '#/components/schemas/IUser'
+        },
+        createdAt: {
+            type: 'string',
+            format: 'date-time'
+        },
+        updatedAt: {
+            type: 'string',
+            format: 'date-time'
+        },
+        deletedAt: {
+            type: 'string',
+            format: 'date-time',
+            nullable: true
+        },
+        description: {
+            type: 'string',
+            nullable: true
+        },
+        difficultyExplanation: {
+            type: 'string',
+            nullable: true
+        }
+    },
+    required: ['id', 'title', 'effortLevel', 'requiredExpertise', 'author', 'owners', 'series', 'category', 'version', 'versionCreatedAt', 'versionAuthor', 'createdAt', 'updatedAt'],
+    type: 'object',
+    additionalProperties: false
+} as const;
+
+export const $ICategory = {
+    properties: {
+        id: {
+            type: 'number',
+            format: 'double'
+        },
+        name: {
+            type: 'string'
+        },
+        parentCategory: {
+            allOf: [
+                {
+                    '$ref': '#/components/schemas/ICategory'
+                }
+            ],
+            nullable: true
+        },
+        challenges: {
+            items: {
+                '$ref': '#/components/schemas/IChallenge'
+            },
+            type: 'array'
+        },
+        challengeSeries: {
+            items: {
+                '$ref': '#/components/schemas/IChallengeSeries'
+            },
+            type: 'array'
+        },
+        childrenCategories: {
+            items: {
+                '$ref': '#/components/schemas/ICategory'
+            },
+            type: 'array'
+        },
+        createdAt: {
+            type: 'string',
+            format: 'date-time'
+        },
+        updatedAt: {
+            type: 'string',
+            format: 'date-time'
+        }
+    },
+    required: ['id', 'name', 'parentCategory', 'challenges', 'challengeSeries', 'childrenCategories', 'createdAt', 'updatedAt'],
+    type: 'object',
+    additionalProperties: false
+} as const;
+
+export const $IChallengeSeries = {
+    properties: {
+        id: {
+            type: 'number',
+            format: 'double'
+        },
+        title: {
+            type: 'string'
+        },
+        description: {
+            type: 'string'
+        },
+        effortLevel: {
+            type: 'number',
+            enum: [1, 2, 3, 4, 5]
+        },
+        requiredExpertise: {
+            type: 'number',
+            enum: [0, 1, 2, 3]
+        },
+        difficultyExplanation: {
+            type: 'string'
+        },
+        challenges: {
+            items: {
+                '$ref': '#/components/schemas/IChallenge'
+            },
+            type: 'array'
+        },
+        category: {
+            '$ref': '#/components/schemas/ICategory'
+        },
+        author: {
+            '$ref': '#/components/schemas/IUser'
+        },
+        owners: {
+            items: {
+                '$ref': '#/components/schemas/IUser'
+            },
+            type: 'array'
+        },
+        version: {
+            type: 'number',
+            format: 'double'
+        },
+        versionCreatedAt: {
+            type: 'string',
+            format: 'date-time'
+        },
+        versionAuthor: {
+            '$ref': '#/components/schemas/IUser'
+        },
+        createdAt: {
+            type: 'string',
+            format: 'date-time'
+        },
+        updatedAt: {
+            type: 'string',
+            format: 'date-time'
+        }
+    },
+    required: ['id', 'title', 'description', 'effortLevel', 'requiredExpertise', 'difficultyExplanation', 'challenges', 'category', 'author', 'owners', 'version', 'versionCreatedAt', 'versionAuthor', 'createdAt', 'updatedAt'],
+    type: 'object',
+    additionalProperties: false
+} as const;
+
 export const $IUser = {
     properties: {
         id: {
@@ -23,70 +215,6 @@ export const $IUser = {
         },
         authSource: {
             '$ref': '#/components/schemas/AuthSource'
-        }
-    },
-    required: ['id', 'email', 'firstName', 'lastName', 'authSource'],
-    type: 'object',
-    additionalProperties: false
-} as const;
-
-export const $IChallenge = {
-    properties: {
-        id: {
-            type: 'number',
-            format: 'double'
-        },
-        title: {
-            type: 'string'
-        },
-        description: {
-            type: 'string'
-        },
-        author: {
-            '$ref': '#/components/schemas/IUser'
-        },
-        series: {
-            items: {
-                '$ref': '#/components/schemas/IChallengeSeries'
-            },
-            type: 'array'
-        },
-        version: {
-            type: 'number',
-            format: 'double'
-        },
-        versionCreatedAt: {
-            type: 'string',
-            format: 'date-time'
-        },
-        versionAuthor: {
-            '$ref': '#/components/schemas/IUser'
-        },
-        createdAt: {
-            type: 'string',
-            format: 'date-time'
-        },
-        updatedAt: {
-            type: 'string',
-            format: 'date-time'
-        }
-    },
-    required: ['id', 'title', 'description', 'author', 'series', 'version', 'versionCreatedAt', 'versionAuthor', 'createdAt', 'updatedAt'],
-    type: 'object',
-    additionalProperties: false
-} as const;
-
-export const $IChallengeSeries = {
-    properties: {
-        id: {
-            type: 'number',
-            format: 'double'
-        },
-        title: {
-            type: 'string'
-        },
-        description: {
-            type: 'string'
         },
         challenges: {
             items: {
@@ -94,148 +222,76 @@ export const $IChallengeSeries = {
             },
             type: 'array'
         },
-        author: {
-            '$ref': '#/components/schemas/IUser'
-        },
-        version: {
-            type: 'number',
-            format: 'double'
-        },
-        versionCreatedAt: {
-            type: 'string',
-            format: 'date-time'
-        },
-        versionAuthor: {
-            '$ref': '#/components/schemas/IUser'
-        },
-        createdAt: {
-            type: 'string',
-            format: 'date-time'
-        },
-        updatedAt: {
-            type: 'string',
-            format: 'date-time'
+        challengeSeries: {
+            items: {
+                '$ref': '#/components/schemas/IChallengeSeries'
+            },
+            type: 'array'
         }
     },
-    required: ['id', 'title', 'description', 'challenges', 'author', 'version', 'versionCreatedAt', 'versionAuthor', 'createdAt', 'updatedAt'],
+    required: ['id', 'email', 'firstName', 'lastName', 'authSource', 'challenges', 'challengeSeries'],
     type: 'object',
     additionalProperties: false
 } as const;
 
-export const $TokenPayload = {
+export const $CreateChallengeValidationSchema = {
     properties: {
-        iss: {
-            type: 'string',
-            description: `The Issuer Identifier for the Issuer of the response. Always
-https://accounts.google.com or accounts.google.com for Google ID tokens.`
+        title: {
+            type: 'string'
         },
-        at_hash: {
-            type: 'string',
-            description: `Access token hash. Provides validation that the access token is tied to the
-identity token. If the ID token is issued with an access token in the
-server flow, this is always included. This can be used as an alternate
-mechanism to protect against cross-site request forgery attacks, but if you
-follow Step 1 and Step 3 it is not necessary to verify the access token.`
+        description: {
+            type: 'string'
         },
-        email_verified: {
-            type: 'boolean',
-            description: "True if the user's e-mail address has been verified; otherwise false."
-        },
-        sub: {
-            type: 'string',
-            description: `An identifier for the user, unique among all Google accounts and never
-reused. A Google account can have multiple emails at different points in
-time, but the sub value is never changed. Use sub within your application
-as the unique-identifier key for the user.`
-        },
-        azp: {
-            type: 'string',
-            description: `The client_id of the authorized presenter. This claim is only needed when
-the party requesting the ID token is not the same as the audience of the ID
-token. This may be the case at Google for hybrid apps where a web
-application and Android app have a different client_id but share the same
-project.`
-        },
-        email: {
-            type: 'string',
-            description: `The user's email address. This may not be unique and is not suitable for
-use as a primary key. Provided only if your scope included the string
-"email".`
-        },
-        profile: {
-            type: 'string',
-            description: `The URL of the user's profile page. Might be provided when:
-- The request scope included the string "profile"
-- The ID token is returned from a token refresh
-- When profile claims are present, you can use them to update your app's
-user records. Note that this claim is never guaranteed to be present.`
-        },
-        picture: {
-            type: 'string',
-            description: `The URL of the user's profile picture. Might be provided when:
-- The request scope included the string "profile"
-- The ID token is returned from a token refresh
-- When picture claims are present, you can use them to update your app's
-user records. Note that this claim is never guaranteed to be present.`
-        },
-        name: {
-            type: 'string',
-            description: `The user's full name, in a displayable form. Might be provided when:
-- The request scope included the string "profile"
-- The ID token is returned from a token refresh
-- When name claims are present, you can use them to update your app's user
-records. Note that this claim is never guaranteed to be present.`
-        },
-        given_name: {
-            type: 'string',
-            description: `The user's given name, in a displayable form. Might be provided when:
-- The request scope included the string "profile"
-- The ID token is returned from a token refresh
-- When name claims are present, you can use them to update your app's user
-records. Note that this claim is never guaranteed to be present.`
-        },
-        family_name: {
-            type: 'string',
-            description: `The user's family name, in a displayable form. Might be provided when:
-- The request scope included the string "profile"
-- The ID token is returned from a token refresh
-- When name claims are present, you can use them to update your app's user
-records. Note that this claim is never guaranteed to be present.`
-        },
-        aud: {
-            type: 'string',
-            description: `Identifies the audience that this ID token is intended for. It must be one
-of the OAuth 2.0 client IDs of your application.`
-        },
-        iat: {
+        seriesId: {
             type: 'number',
-            format: 'double',
-            description: `The time the ID token was issued, represented in Unix time (integer
-seconds).`
+            format: 'double'
         },
-        exp: {
+        categoryId: {
             type: 'number',
-            format: 'double',
-            description: 'The time the ID token expires, represented in Unix time (integer seconds).'
+            format: 'double'
         },
-        nonce: {
-            type: 'string',
-            description: `The value of the nonce supplied by your app in the authentication request.
-You should enforce protection against replay attacks by ensuring it is
-presented only once.`
+        effortLevel: {
+            type: 'number',
+            enum: [1, 2, 3, 4, 5]
         },
-        hd: {
-            type: 'string',
-            description: `The hosted G Suite domain of the user. Provided only if the user belongs to
-a hosted domain.`
+        requiredExpertise: {
+            type: 'number',
+            enum: [0, 1, 2, 3]
         },
-        locale: {
-            type: 'string',
-            description: `The user's locale, represented by a BCP 47 language tag.
-Might be provided when a name claim is present.`
+        difficultyExplanation: {
+            type: 'string'
         }
     },
-    required: ['iss', 'sub', 'aud', 'iat', 'exp'],
+    required: ['title', 'description', 'categoryId', 'effortLevel', 'requiredExpertise'],
+    type: 'object',
+    additionalProperties: false
+} as const;
+
+export const $CreateChallengeSeriesValidationSchema = {
+    properties: {
+        title: {
+            type: 'string'
+        },
+        description: {
+            type: 'string'
+        },
+        categoryId: {
+            type: 'number',
+            format: 'double'
+        },
+        effortLevel: {
+            type: 'number',
+            enum: [1, 2, 3, 4, 5]
+        },
+        requiredExpertise: {
+            type: 'number',
+            enum: [0, 1, 2, 3]
+        },
+        difficultyExplanation: {
+            type: 'string'
+        }
+    },
+    required: ['title', 'description', 'categoryId', 'effortLevel', 'requiredExpertise'],
     type: 'object',
     additionalProperties: false
 } as const;
@@ -315,17 +371,34 @@ export const $Challenge = {
         title: {
             type: 'string'
         },
-        description: {
+        effortLevel: {
+            type: 'number',
+            enum: [1, 2, 3, 4, 5]
+        },
+        requiredExpertise: {
+            type: 'number',
+            enum: [0, 1, 2, 3]
+        },
+        estimatedTime: {
             type: 'string'
         },
         author: {
             '$ref': '#/components/schemas/User'
+        },
+        owners: {
+            items: {
+                '$ref': '#/components/schemas/User'
+            },
+            type: 'array'
         },
         series: {
             items: {
                 '$ref': '#/components/schemas/ChallengeSeries'
             },
             type: 'array'
+        },
+        category: {
+            '$ref': '#/components/schemas/Category'
         },
         version: {
             type: 'number',
@@ -349,9 +422,64 @@ export const $Challenge = {
         deletedAt: {
             type: 'string',
             format: 'date-time'
+        },
+        description: {
+            type: 'string'
+        },
+        difficultyExplanation: {
+            type: 'string'
         }
     },
-    required: ['id', 'title', 'description', 'author', 'series', 'version', 'versionCreatedAt', 'versionAuthor', 'createdAt', 'updatedAt', 'deletedAt'],
+    required: ['id', 'title', 'effortLevel', 'requiredExpertise', 'author', 'owners', 'series', 'category', 'version', 'versionCreatedAt', 'versionAuthor', 'createdAt', 'updatedAt', 'description', 'estimatedTime', 'difficultyExplanation', 'deletedAt'],
+    type: 'object',
+    additionalProperties: false
+} as const;
+
+export const $Category = {
+    properties: {
+        id: {
+            type: 'number',
+            format: 'double'
+        },
+        name: {
+            type: 'string'
+        },
+        parentCategory: {
+            allOf: [
+                {
+                    '$ref': '#/components/schemas/Category'
+                }
+            ],
+            nullable: true
+        },
+        challenges: {
+            items: {
+                '$ref': '#/components/schemas/Challenge'
+            },
+            type: 'array'
+        },
+        challengeSeries: {
+            items: {
+                '$ref': '#/components/schemas/ChallengeSeries'
+            },
+            type: 'array'
+        },
+        childrenCategories: {
+            items: {
+                '$ref': '#/components/schemas/Category'
+            },
+            type: 'array'
+        },
+        createdAt: {
+            type: 'string',
+            format: 'date-time'
+        },
+        updatedAt: {
+            type: 'string',
+            format: 'date-time'
+        }
+    },
+    required: ['id', 'name', 'parentCategory', 'challenges', 'challengeSeries', 'childrenCategories', 'createdAt', 'updatedAt'],
     type: 'object',
     additionalProperties: false
 } as const;
@@ -368,14 +496,34 @@ export const $ChallengeSeries = {
         description: {
             type: 'string'
         },
+        effortLevel: {
+            type: 'number',
+            enum: [1, 2, 3, 4, 5]
+        },
+        requiredExpertise: {
+            type: 'number',
+            enum: [0, 1, 2, 3]
+        },
+        difficultyExplanation: {
+            type: 'string'
+        },
         challenges: {
             items: {
                 '$ref': '#/components/schemas/Challenge'
             },
             type: 'array'
         },
+        category: {
+            '$ref': '#/components/schemas/Category'
+        },
         author: {
             '$ref': '#/components/schemas/User'
+        },
+        owners: {
+            items: {
+                '$ref': '#/components/schemas/User'
+            },
+            type: 'array'
         },
         version: {
             type: 'number',
@@ -396,12 +544,15 @@ export const $ChallengeSeries = {
             type: 'string',
             format: 'date-time'
         },
+        estimatedTime: {
+            type: 'string'
+        },
         deletedAt: {
             type: 'string',
             format: 'date-time'
         }
     },
-    required: ['id', 'title', 'description', 'challenges', 'author', 'version', 'versionCreatedAt', 'versionAuthor', 'createdAt', 'updatedAt', 'deletedAt'],
+    required: ['id', 'title', 'description', 'effortLevel', 'requiredExpertise', 'difficultyExplanation', 'challenges', 'category', 'author', 'owners', 'version', 'versionCreatedAt', 'versionAuthor', 'createdAt', 'updatedAt', 'estimatedTime', 'deletedAt'],
     type: 'object',
     additionalProperties: false
 } as const;
@@ -422,16 +573,16 @@ export const $Session = {
             type: 'string',
             format: 'date-time'
         },
-        updated_at: {
+        updatedAt: {
             type: 'string',
             format: 'date-time'
         },
-        expires_at: {
+        expiresAt: {
             type: 'string',
             format: 'date-time'
         }
     },
-    required: ['id', 'user', 'token', 'created_at', 'updated_at', 'expires_at'],
+    required: ['id', 'user', 'token', 'created_at', 'updatedAt', 'expiresAt'],
     type: 'object',
     additionalProperties: false
 } as const;

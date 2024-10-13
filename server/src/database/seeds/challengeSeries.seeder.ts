@@ -2,64 +2,48 @@ import { DataSource } from "typeorm";
 import { ChallengeSeries } from "../entities/challengeSeries.entity";
 import {
   cookingChallengeSeries,
-  instrumentsCategory,
-  othersCategory,
   playingGuitarChallengeSeries,
   playingUkuleleChallengeSeries,
   readingChallengeSeries,
   runningChallengeSeries,
-  sportsCategory,
-  userGuitarMaster,
-  userRunningGuru,
-  userYourMama,
 } from "./seeds";
+import { IChallengeSeries } from "../../models/IChallengeSeries";
+
+/** We need to convert IChallengeSeries (challengeSeries model) to new ChallengeSeries (challengeSeries entity instance) */
+function convertToChallengeSeries(
+  data: Partial<IChallengeSeries>
+): ChallengeSeries {
+  const challengeSeries = new ChallengeSeries();
+
+  Object.assign(challengeSeries, data);
+
+  return challengeSeries;
+}
 
 export const ChallengeSeriesSeeder = {
   run: async (dataSource: DataSource): Promise<any> => {
     console.log("ChallengeSeriesSeeder is running...");
-    const challengeSeriesRepository = dataSource.getRepository(ChallengeSeries);
+    const repository = dataSource.getRepository(ChallengeSeries);
 
-    const playingGuitarChallengeSeriesEntity =
-      await challengeSeriesRepository.save({
-        ...playingGuitarChallengeSeries,
-        author: userGuitarMaster,
-        owners: [userGuitarMaster],
-        versionAuthor: userGuitarMaster,
-        category: instrumentsCategory,
-      });
+    const playingGuitarChallengeSeriesEntity = await repository.save(
+      convertToChallengeSeries(playingGuitarChallengeSeries)
+    );
 
-    const runningChallengeSeriesEntity = await challengeSeriesRepository.save({
-      ...runningChallengeSeries,
-      author: userRunningGuru,
-      owners: [userRunningGuru],
-      versionAuthor: userRunningGuru,
-      category: sportsCategory,
-    });
+    const runningChallengeSeriesEntity = await repository.save(
+      convertToChallengeSeries(runningChallengeSeries)
+    );
 
-    const readingChallengeSeriesEntity = await challengeSeriesRepository.save({
-      ...readingChallengeSeries,
-      author: userRunningGuru,
-      owners: [userRunningGuru],
-      versionAuthor: userRunningGuru,
-      category: sportsCategory,
-    });
+    const readingChallengeSeriesEntity = await repository.save(
+      convertToChallengeSeries(readingChallengeSeries)
+    );
 
-    const cookingChallengeSeriesEntity = await challengeSeriesRepository.save({
-      ...cookingChallengeSeries,
-      author: userYourMama,
-      owners: [userYourMama],
-      versionAuthor: userYourMama,
-      category: othersCategory,
-    });
+    const cookingChallengeSeriesEntity = await repository.save(
+      convertToChallengeSeries(cookingChallengeSeries)
+    );
 
-    const playingUkuleleChallengeSeriesEntity =
-      await challengeSeriesRepository.save({
-        ...playingUkuleleChallengeSeries,
-        author: userRunningGuru,
-        owners: [userRunningGuru],
-        versionAuthor: userRunningGuru,
-        category: sportsCategory,
-      });
+    const playingUkuleleChallengeSeriesEntity = await repository.save(
+      convertToChallengeSeries(playingUkuleleChallengeSeries)
+    );
 
     Object.assign(
       playingGuitarChallengeSeries,
