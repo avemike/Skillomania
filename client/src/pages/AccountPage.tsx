@@ -40,6 +40,7 @@ import React, { useState } from "react";
  */
 export function AccountPage() {
   const [nickname, setNickname] = useState("");
+
   return (
     <Box
       w="calc(100vw)"
@@ -128,8 +129,63 @@ export function AccountPage() {
               focusBorderColor="gray.800"
               px="2"
             />
-            <Box h="10" w="10" bgColor="gray.600" borderRadius="full"></Box>
-            <Box h="10" w="10" bgColor="gray.600" borderRadius="full"></Box>
+
+            <Flex
+              h="10"
+              w="10"
+              backdropFilter="auto"
+              backdropBlur="8px"
+              borderRadius="full"
+              borderColor="red"
+              alignItems="center"
+              justifyContent="center"
+              textAlign="center"
+              fontSize="2xl"
+              color="gray.800"
+              pb="1"
+            >
+              {" "}
+              +{" "}
+            </Flex>
+
+            {/* <Box h="10" w="10" bgColor="gray.600" borderRadius="full"></Box> */}
+            <Popover placement="bottom-end">
+              <PopoverTrigger>
+                <Button
+                  border="none"
+                  p="0"
+                  borderRadius="full"
+                  bgColor="gray.100"
+                >
+                  <Box
+                    h="10"
+                    w="10"
+                    bgColor="gray.600"
+                    borderRadius="full"
+                  ></Box>
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent
+                color="white"
+                bg="gray.800"
+                borderColor="gray.800"
+                borderRadius="lg"
+                m="2"
+                p="2"
+              >
+                <Flex justifyContent="space-between">
+                  <PopoverHeader fontWeight="semibold">
+                    No new notifications
+                  </PopoverHeader>
+                  <PopoverCloseButton ml="2" />
+                </Flex>
+                <PopoverArrow />
+
+                <PopoverBody pt="2" px="2">
+                  <Button mb="2">See previous</Button>
+                </PopoverBody>
+              </PopoverContent>
+            </Popover>
             {/* <Avatar name="h g" h="10" w="10"></Avatar> */}
             <Popover placement="bottom-end">
               <PopoverTrigger>
