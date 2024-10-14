@@ -28,10 +28,8 @@ import {
   PopoverContent,
   PopoverHeader,
   PopoverBody,
-  PopoverFooter,
   PopoverArrow,
   PopoverCloseButton,
-  PopoverAnchor,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 
@@ -62,19 +60,19 @@ export function AccountPage() {
           boxShadow="md"
         >
           <Box pb="10">
-            <Text color="gray.200" ml="4" fontSize="lg" as="b">
+            <Heading color="gray.200" ml="4" fontSize="lg" as="b">
               Skillomania
-            </Text>
+            </Heading>
           </Box>
           <Box borderBottom="1px" borderColor="gray.500" pb="3">
-            <Text color="gray.200" ml="4" fontSize="lg" as="b">
+            <Heading color="gray.200" ml="4" fontSize="lg" as="b">
               Dashboard
-            </Text>
+            </Heading>
           </Box>
           <Box borderBottom="1px" borderColor="gray.500" pb="3">
-            <Text color="gray.200" ml="4" mt="3" mb="3">
+            <Heading color="gray.200" ml="4" mt="3" mb="3">
               Catalog
-            </Text>
+            </Heading>
             <UnorderedList>
               <ListItem color="gray.200" ml="4" fontSize="sm">
                 <a href=""> Quick challenge</a>
@@ -88,9 +86,9 @@ export function AccountPage() {
             </UnorderedList>
           </Box>
           <Box borderBottom="1px" borderColor="gray.500" pb="3">
-            <Text color="gray.200" ml="4">
+            <Heading color="gray.200" ml="4">
               My challenges
-            </Text>
+            </Heading>
             <Box
               height={10}
               width={10}
@@ -109,9 +107,9 @@ export function AccountPage() {
           </Box>
           <Box>
             {" "}
-            <Text color="gray.200" ml="4">
+            <Heading color="gray.200" ml="4">
               Challenge manager
-            </Text>
+            </Heading>
           </Box>
         </Flex>
         <Flex direction="column" width="100%" height="100%">
