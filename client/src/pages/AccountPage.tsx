@@ -30,6 +30,8 @@ import {
   PopoverBody,
   PopoverArrow,
   PopoverCloseButton,
+  Link,
+  Highlight,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 
@@ -54,64 +56,86 @@ export function AccountPage() {
         <Flex
           direction="column"
           width="12%"
-          bgColor="gray.900"
+          backdropFilter="auto"
+          backdropBlur="8px"
           h="calc(100vh)"
           pt="5"
           gap="5"
           boxShadow="md"
         >
           <Box pb="10">
-            <Heading color="gray.200" ml="4" fontSize="lg" as="b">
+            <Heading color="gray.900" ml="4" fontSize="lg" as="b">
               Skillomania
             </Heading>
           </Box>
+          <Flex
+            borderBottom="1px"
+            borderColor="gray.500"
+            pb="10"
+            direction="column"
+            gap="5"
+          >
+            <Link href="/home" color="gray.900" ml="4" fontSize="sm">
+              Home page
+            </Link>
+            <Link href="/challenges" color="gray.900" ml="4" fontSize="sm">
+              My challenges
+            </Link>
+            <Link href="/randomChallenge" color="gray.900" ml="4" fontSize="sm">
+              Surprise me
+            </Link>
+          </Flex>
           <Box borderBottom="1px" borderColor="gray.500" pb="3">
-            <Heading color="gray.200" ml="4" fontSize="lg" as="b">
+            <Heading color="gray.900" ml="4" fontSize="lg" as="b">
               Dashboard
             </Heading>
           </Box>
           <Box borderBottom="1px" borderColor="gray.500" pb="3">
-            <Heading color="gray.200" ml="4" mt="3" mb="3">
+            <Heading color="gray.900" ml="4" mt="3" mb="3">
               Catalog
             </Heading>
             <UnorderedList>
-              <ListItem color="gray.200" ml="4" fontSize="sm">
+              <ListItem color="gray.900" ml="4" fontSize="sm">
                 <a href=""> Quick challenge</a>
               </ListItem>
-              <ListItem color="gray.200" ml="4" fontSize="sm">
+              <ListItem color="gray.900" ml="4" fontSize="sm">
                 <a href=""> Challenge paths</a>
               </ListItem>
-              <ListItem color="gray.200" ml="4" fontSize="sm">
+              <ListItem color="gray.900" ml="4" fontSize="sm">
                 <a href="">Lists</a>
               </ListItem>
             </UnorderedList>
           </Box>
           <Box borderBottom="1px" borderColor="gray.500" pb="3">
-            <Heading color="gray.200" ml="4">
+            <Heading color="gray.900" ml="4">
               My challenges
             </Heading>
-            <Box
-              height={10}
-              width={10}
-              borderRadius="lg"
-              borderWidth="10"
-              bgColor="gray.200"
-              margin="2"
-              alignContent="center"
-              textAlign="center"
-              ml="25%"
-              my="4"
-              color="gray.900"
-            >
-              4
-            </Box>
+            <Heading lineHeight="tall" textAlign="center" my="5">
+              <Highlight
+                query="4"
+                styles={{ px: "4", py: "2", rounded: "full", bg: "red.100" }}
+              >
+                4
+              </Highlight>
+            </Heading>
           </Box>
           <Box>
             {" "}
-            <Heading color="gray.200" ml="4">
+            <Heading color="gray.900" ml="4">
               Challenge manager
             </Heading>
           </Box>
+          <Flex
+            borderTop="1px"
+            borderColor="gray.500"
+            pt="10"
+            direction="column"
+            gap="5"
+          >
+            <Link href="/home" color="gray.900" ml="4" fontSize="sm">
+              Log out
+            </Link>
+          </Flex>
         </Flex>
         <Flex direction="column" width="100%" height="100%">
           <Flex
@@ -243,122 +267,124 @@ export function AccountPage() {
             </Popover>
           </Flex>
 
-          <SimpleGrid
-            spacing={2}
-            templateColumns="repeat(5, 20%)"
-            templateRows="repeat(5, 45%)"
-            mt="4%"
-          >
-            <Card
-              bgColor="gray.800"
-              p="5"
-              m="2"
-              color="white"
-              borderRadius="lg"
-              gridArea="1 / 1 / 4 / 2"
+          <Flex alignItems="center" justifyContent="center">
+            <SimpleGrid
+              spacing={2}
+              templateColumns="repeat(5, 80%)"
+              templateRows="repeat(5, 45%)"
+              mt="4%"
             >
-              <CardHeader>
-                <Heading size="lg" as="b">
-                  {" "}
-                  My challenges
-                </Heading>
-                <OrderedList>
-                  <ListItem></ListItem>
-                  <ListItem></ListItem>
-                  <ListItem></ListItem>
-                  <ListItem></ListItem>
-                </OrderedList>
-              </CardHeader>
-              <CardBody>
-                <Text>...</Text>
-              </CardBody>
-              <CardFooter>
-                <Button mt="2">View here</Button>
-              </CardFooter>
-            </Card>
-            <Card
-              bgColor="gray.800"
-              p="5"
-              m="2"
-              color="white"
-              borderRadius="lg"
-              gridArea="1 / 2 / 2 / 3"
-            >
-              <CardHeader>
-                <Heading size="lg" as="b">
-                  {" "}
-                  Tasks completed
-                </Heading>
-                <StatGroup pt="2">
-                  <Stat>
-                    <StatLabel>Completed</StatLabel>
-                    <StatNumber>4</StatNumber>
-                  </Stat>
+              <Card
+                bgColor="gray.800"
+                p="5"
+                m="2"
+                color="white"
+                borderRadius="lg"
+                gridArea="1 / 1 / 4 / 2"
+              >
+                <CardHeader>
+                  <Heading size="lg" as="b">
+                    {" "}
+                    My challenges
+                  </Heading>
+                  <OrderedList>
+                    <ListItem></ListItem>
+                    <ListItem></ListItem>
+                    <ListItem></ListItem>
+                    <ListItem></ListItem>
+                  </OrderedList>
+                </CardHeader>
+                <CardBody>
+                  <Text>...</Text>
+                </CardBody>
+                <CardFooter>
+                  <Button mt="2">View here</Button>
+                </CardFooter>
+              </Card>
+              <Card
+                bgColor="gray.800"
+                p="5"
+                m="2"
+                color="white"
+                borderRadius="lg"
+                gridArea="1 / 2 / 2 / 3"
+              >
+                <CardHeader>
+                  <Heading size="lg" as="b">
+                    {" "}
+                    Tasks completed
+                  </Heading>
+                  <StatGroup pt="2">
+                    <Stat>
+                      <StatLabel>Completed</StatLabel>
+                      <StatNumber>4</StatNumber>
+                    </Stat>
 
-                  <Stat>
-                    <StatLabel>In progress</StatLabel>
-                    <StatNumber>2</StatNumber>
-                  </Stat>
-                </StatGroup>
-              </CardHeader>
-              <CardBody>
-                <Text>...</Text>
-              </CardBody>
-              <CardFooter>
-                <Button mt="2">View here</Button>
-              </CardFooter>
-            </Card>
-            <Card
-              bgColor="gray.800"
-              p="5"
-              m="2"
-              color="white"
-              borderRadius="lg"
-              gridArea="2 / 2 / 4 / 3"
-            >
-              <CardHeader>
-                <Heading size="lg" as="b">
-                  {" "}
-                  Recommended for you
-                </Heading>
-                <Accordion>
-                  <AccordionItem>
-                    <h2>
-                      <AccordionButton>
-                        <Box as="span" flex="1" textAlign="left">
-                          Do your first pushup
-                        </Box>
-                        <AccordionIcon />
-                      </AccordionButton>
-                    </h2>
-                    <AccordionPanel pb={4}>
-                      No need for equipment just piece of the floor...
-                    </AccordionPanel>
-                  </AccordionItem>
+                    <Stat>
+                      <StatLabel>In progress</StatLabel>
+                      <StatNumber>2</StatNumber>
+                    </Stat>
+                  </StatGroup>
+                </CardHeader>
+                <CardBody>
+                  <Text>...</Text>
+                </CardBody>
+                <CardFooter>
+                  <Button mt="2">View here</Button>
+                </CardFooter>
+              </Card>
+              <Card
+                bgColor="gray.800"
+                p="5"
+                m="2"
+                color="white"
+                borderRadius="lg"
+                gridArea="2 / 2 / 4 / 3"
+              >
+                <CardHeader>
+                  <Heading size="lg" as="b">
+                    {" "}
+                    Recommended for you
+                  </Heading>
+                  <Accordion>
+                    <AccordionItem>
+                      <h2>
+                        <AccordionButton>
+                          <Box as="span" flex="1" textAlign="left">
+                            Do your first pushup
+                          </Box>
+                          <AccordionIcon />
+                        </AccordionButton>
+                      </h2>
+                      <AccordionPanel pb={4}>
+                        No need for equipment just piece of the floor...
+                      </AccordionPanel>
+                    </AccordionItem>
 
-                  <AccordionItem>
-                    <h2>
-                      <AccordionButton>
-                        <Box as="span" flex="1" textAlign="left">
-                          Bake your first cake!
-                        </Box>
-                        <AccordionIcon />
-                      </AccordionButton>
-                    </h2>
-                    <AccordionPanel pb={4}>
-                      You will need no more than 8 ingredients...
-                    </AccordionPanel>
-                  </AccordionItem>
-                </Accordion>
-              </CardHeader>
-              <CardBody>
-                <Text>...</Text>
-              </CardBody>
-              <CardFooter>
-                <Button mt="2">Show all</Button>
-              </CardFooter>
-            </Card>
-          </SimpleGrid>
+                    <AccordionItem>
+                      <h2>
+                        <AccordionButton>
+                          <Box as="span" flex="1" textAlign="left">
+                            Bake your first cake!
+                          </Box>
+                          <AccordionIcon />
+                        </AccordionButton>
+                      </h2>
+                      <AccordionPanel pb={4}>
+                        You will need no more than 8 ingredients...
+                      </AccordionPanel>
+                    </AccordionItem>
+                  </Accordion>
+                </CardHeader>
+                <CardBody>
+                  <Text>...</Text>
+                </CardBody>
+                <CardFooter>
+                  <Button mt="2">Show all</Button>
+                </CardFooter>
+              </Card>
+            </SimpleGrid>
+          </Flex>
 
           {/* <Flex
             height="calc(90vh)"
