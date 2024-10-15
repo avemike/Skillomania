@@ -11,16 +11,15 @@ export function About() {
       h="calc(100vh)"
       alignContent={"center"}
       justifyContent={"center"}
-      overflow="hidden"
     >
       <Center>
         <Box
-          bg="pink.100"
+          backdropFilter="auto"
+          backdropBlur="8px"
           w="100%"
           p={4}
           color="black"
           maxW="lg"
-          borderWidth="1px"
           borderRadius="lg"
           overflow="hidden"
         >

@@ -10,8 +10,8 @@ export function Contacts() {
     <>
       {" "}
       <Flex
-        width="100%"
-        height="100%"
+        width="100vw"
+        height="100vh"
         justifyContent="center"
         bgColor="pink.300"
         alignItems="center"

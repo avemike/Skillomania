@@ -16,22 +16,25 @@ export function Error() {
       >
         <Center>
           <Box
-            bg="blue.200"
+            backdropFilter="auto"
+            backdropBlur="8px"
             w="100%"
             p={4}
             color="black"
             maxW="sm"
-            borderWidth="1px"
             borderRadius="lg"
             overflow="hidden"
+            textAlign="center"
           >
             <Text fontSize="lg" as="b">
               Error
             </Text>
             <Text fontSize="md">
-              Sorry, something must have gone wrong! <br />
-              Maybe refreshing page would help?
+              An error occurred on the website and your page could not be
+              served. You can try refreshing the page, maybe it's just a minor
+              inconvenience
             </Text>
+            <a href="/">Click on me to go back to the main page</a>
           </Box>
         </Center>
       </Flex>
