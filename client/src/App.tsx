@@ -12,6 +12,7 @@ import { AccountPage } from "./pages/AccountPage";
 import { ReactNode } from "react";
 import { Register } from "./pages/Register";
 import { Contacts } from "./pages/Contacts";
+import { Random } from "./pages/Randomizer";
 import { Home } from "./pages/Home";
 import { ChallengeSeriesPage } from "./pages/ChallengeSeriesPage";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -50,6 +51,7 @@ const router = createBrowserRouter([
   createStandardRoute("/register", <Register />),
   createStandardRoute("/contacts", <Contacts />),
   createStandardRoute("/home", <Home />),
+  createHomeRoute("/random", <Random />),
   createHomeRoute("/challenges", <ChallengeSeriesPage />),
   createHomeRoute("/account", <AccountPage />),
 ]);
