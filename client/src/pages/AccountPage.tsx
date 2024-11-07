@@ -33,6 +33,7 @@ import {
   Link,
   Highlight,
 } from "@chakra-ui/react";
+
 import { useState } from "react";
 
 /**
@@ -42,6 +43,12 @@ import { useState } from "react";
  */
 export function AccountPage() {
   const [nickname, setNickname] = useState("");
+
+  const [isMenuHidden, setIsMenuHidden] = useState<boolean>(true);
+
+  const toggle = () => {
+    setIsMenuHidden((previousMenuHidden) => !previousMenuHidden);
+  };
 
   return (
     <Box
@@ -53,90 +60,99 @@ export function AccountPage() {
       bgSize="cover"
     >
       <Flex direction="row">
-        <Flex
-          direction="column"
-          width="12%"
-          backdropFilter="auto"
-          backdropBlur="8px"
-          h="calc(100vh)"
-          pt="5"
-          gap="5"
-          boxShadow="md"
-        >
-          <Box pb="10">
-            <Heading color="gray.900" ml="4" fontSize="lg" as="b">
-              Skillomania
-            </Heading>
-          </Box>
+        {isMenuHidden ? (
           <Flex
-            borderBottom="1px"
-            borderColor="gray.500"
-            pb="10"
             direction="column"
+            width="12%"
+            backdropFilter="auto"
+            backdropBlur="8px"
+            h="calc(100vh)"
+            pt="5"
             gap="5"
+            boxShadow="md"
           >
-            <Link href="/home" color="gray.900" ml="4" fontSize="sm">
-              Home page
-            </Link>
-            <Link href="/challenges" color="gray.900" ml="4" fontSize="sm">
-              My challenges
-            </Link>
-            <Link href="/randomChallenge" color="gray.900" ml="4" fontSize="sm">
-              Surprise me
-            </Link>
-          </Flex>
-          <Box borderBottom="1px" borderColor="gray.500" pb="3">
-            <Heading color="gray.900" ml="4" fontSize="lg" as="b">
-              Dashboard
-            </Heading>
-          </Box>
-          <Box borderBottom="1px" borderColor="gray.500" pb="3">
-            <Heading color="gray.900" ml="4" mt="3" mb="3">
-              Catalog
-            </Heading>
-            <UnorderedList>
-              <ListItem color="gray.900" ml="4" fontSize="sm">
-                <a href=""> Quick challenge</a>
-              </ListItem>
-              <ListItem color="gray.900" ml="4" fontSize="sm">
-                <a href=""> Challenge paths</a>
-              </ListItem>
-              <ListItem color="gray.900" ml="4" fontSize="sm">
-                <a href="">Lists</a>
-              </ListItem>
-            </UnorderedList>
-          </Box>
-          <Box borderBottom="1px" borderColor="gray.500" pb="3">
-            <Heading color="gray.900" ml="4">
-              My challenges
-            </Heading>
-            <Heading lineHeight="tall" textAlign="center" my="5">
-              <Highlight
-                query="4"
-                styles={{ px: "4", py: "2", rounded: "full", bg: "red.100" }}
+            <Box pb="10">
+              <Heading color="gray.900" ml="4" fontSize="lg" as="b">
+                Skillomania
+              </Heading>
+            </Box>
+            <Flex
+              borderBottom="1px"
+              borderColor="gray.500"
+              pb="10"
+              direction="column"
+              gap="5"
+            >
+              <Link href="/home" color="gray.900" ml="4" fontSize="sm">
+                Home page
+              </Link>
+              <Link href="/challenges" color="gray.900" ml="4" fontSize="sm">
+                My challenges
+              </Link>
+              <Link
+                href="/randomChallenge"
+                color="gray.900"
+                ml="4"
+                fontSize="sm"
               >
-                4
-              </Highlight>
-            </Heading>
-          </Box>
-          <Box>
-            {" "}
-            <Heading color="gray.900" ml="4">
-              Challenge manager
-            </Heading>
-          </Box>
-          <Flex
-            borderTop="1px"
-            borderColor="gray.500"
-            pt="10"
-            direction="column"
-            gap="5"
-          >
-            <Link href="/home" color="gray.900" ml="4" fontSize="sm">
-              Log out
-            </Link>
+                Surprise me
+              </Link>
+            </Flex>
+            <Box borderBottom="1px" borderColor="gray.500" pb="3">
+              <Heading color="gray.900" ml="4" fontSize="lg" as="b">
+                Dashboard
+              </Heading>
+            </Box>
+            <Box borderBottom="1px" borderColor="gray.500" pb="3">
+              <Heading color="gray.900" ml="4" mt="3" mb="3">
+                Catalog
+              </Heading>
+              <UnorderedList>
+                <ListItem color="gray.900" ml="4" fontSize="sm">
+                  <a href=""> Quick challenge</a>
+                </ListItem>
+                <ListItem color="gray.900" ml="4" fontSize="sm">
+                  <a href=""> Challenge paths</a>
+                </ListItem>
+                <ListItem color="gray.900" ml="4" fontSize="sm">
+                  <a href="">Lists</a>
+                </ListItem>
+              </UnorderedList>
+            </Box>
+            <Box borderBottom="1px" borderColor="gray.500" pb="3">
+              <Heading color="gray.900" ml="4">
+                My challenges
+              </Heading>
+              <Heading lineHeight="tall" textAlign="center" my="5">
+                <Highlight
+                  query="4"
+                  styles={{ px: "4", py: "2", rounded: "full", bg: "red.100" }}
+                >
+                  4
+                </Highlight>
+              </Heading>
+            </Box>
+            <Box>
+              {" "}
+              <Heading color="gray.900" ml="4">
+                Challenge manager
+              </Heading>
+            </Box>
+            <Flex
+              borderTop="1px"
+              borderColor="gray.500"
+              pt="10"
+              direction="column"
+              gap="5"
+            >
+              <Link href="/home" color="gray.900" ml="4" fontSize="sm">
+                Log out
+              </Link>
+            </Flex>
           </Flex>
-        </Flex>
+        ) : (
+          <Box></Box>
+        )}
         <Flex direction="column" width="100%" height="100%">
           <Flex
             direction="row"
@@ -461,6 +477,24 @@ export function AccountPage() {
           </Flex> */}
         </Flex>
       </Flex>
+      <Button
+        position="absolute"
+        bottom="5"
+        left="5"
+        h="6"
+        w="6"
+        backdropFilter="auto"
+        backdropBlur="8px"
+        boxShadow="md"
+        borderRadius="full"
+        alignItems="center"
+        justifyContent="center"
+        textAlign="center"
+        fontSize="md"
+        onClick={toggle}
+      >
+        X
+      </Button>
     </Box>
   );
 }
