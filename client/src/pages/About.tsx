@@ -27,7 +27,7 @@ export function About() {
             This is skillomania, a page on which we learn or upgrade our skills!
           </Text>
           <Text fontSize="md">
-            It's really easy, just register or log in (if you have an accout).
+            It's really easy, just register or log in (if you have an account).
             <br />
             If you're feeling lost that's okay click the link bellow for a
             tutorial. <br />

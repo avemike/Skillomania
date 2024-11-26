@@ -33,6 +33,10 @@ import {
   Link,
   Highlight,
 } from "@chakra-ui/react";
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { useRef } from "react";
+
 
 import { useState } from "react";
 
@@ -48,7 +52,11 @@ export function AccountPage() {
 
   const toggle = () => {
     setIsMenuHidden((previousMenuHidden) => !previousMenuHidden);
-  };
+
+    useGSAP(() => {
+      gsap.to(box.current, {x:360});
+    });
+
 
   return (
     <Box
@@ -61,7 +69,8 @@ export function AccountPage() {
     >
       <Flex direction="row">
         {isMenuHidden ? (
-          <Flex
+          <Flex 
+            animation="enter-sidebar"
             direction="column"
             width="12%"
             backdropFilter="auto"
